@@ -79,18 +79,21 @@ namespace sm_nav2_test_2 {
 class StAcquireSensors;
 class StInitialMove;
 class StInitialMoveStop;
+class StSpiralPattern;
 class StSwitchYard;
 class StRecoveryNav2;
 class StSpinRight1;
 class StSpinLeft1;
+class StSpinLeft2;
 class StNavigateWarehouseWaypointsX;
 class StPauseSlam;
 class StFinalState;
-class StFinalReturnBackToOrigin;
+class StFinalReturnToOrigin;
 class StNavigateToWaypoint1;
 class StNavigateToWaypoint2;
 class StNavigateToWaypoint3;
 class StNavigateToWaypoint4;
+class StNavigateToWaypoint5;
 class StLoadingWayPointsFile;
 class StBackup1;
 
@@ -162,9 +165,11 @@ struct SmNav2Test2
 #include <sm_nav2_test_2/states/st_recovery_nav2.hpp>
 #include <sm_nav2_test_2/states/st_initial_move.hpp>
 #include <sm_nav2_test_2/states/st_initial_move_stop.hpp>
+#include <sm_nav2_test_2/states/st_spiral_pattern.hpp>
 #include <sm_nav2_test_2/states/st_switch_yard.hpp>
 #include <sm_nav2_test_2/states/st_final_state.hpp>
 #include <sm_nav2_test_2/states/st_spin_left_1.hpp>
+#include <sm_nav2_test_2/states/st_spin_left_2.hpp>
 #include <sm_nav2_test_2/states/st_spin_right_1.hpp> 
 #include <sm_nav2_test_2/states/st_navigate_warehouse_waypoints.x.hpp>
 #include <sm_nav2_test_2/states/st_pause_slam.hpp>
@@ -172,6 +177,7 @@ struct SmNav2Test2
 #include <sm_nav2_test_2/states/st_navigate_to_waypoint_2.hpp>
 #include <sm_nav2_test_2/states/st_navigate_to_waypoint_3.hpp>
 #include <sm_nav2_test_2/states/st_navigate_to_waypoint_4.hpp>
+#include <sm_nav2_test_2/states/st_navigate_to_waypoint_5.hpp>
 #include <sm_nav2_test_2/states/st_loading_waypoints_file.hpp>
-#include <sm_nav2_test_2/states/st_final_return_back_to_origin.hpp>
+#include <sm_nav2_test_2/states/st_final_return_to_origin.hpp>
 #include <sm_nav2_test_2/states/st_backup_1.hpp>
