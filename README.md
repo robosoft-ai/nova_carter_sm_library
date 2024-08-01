@@ -12,6 +12,8 @@ Once inside, you'll need to fing the NOVA_Carter_ROS_nvblox_setup Folder.
 For caster_wheel_left and caster_wheel_right, set the Max Angular Velocity to 500.
 Then set the Mass to 10.0 for each one.
 
+Then find the wheel_left, wheel_right and change the Max Angular Velocity to 500.
+
 Then, find the chassis_link Mass and change it to 30.0
 Find wheel_material and set Dynamic Friction to 2.0, and Static Friction to 2.0.
 

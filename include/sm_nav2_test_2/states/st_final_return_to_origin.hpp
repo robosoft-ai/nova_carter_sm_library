@@ -31,14 +31,14 @@ using smacc2::client_behaviors::CbSleepFor;
 using smacc2::client_behaviors::CbRosStop2;
 
 // STATE DECLARATION
-struct StFinalReturnBackToOrigin
-    : smacc2::SmaccState<StFinalReturnBackToOrigin, MsNav2Test1RunMode> 
+struct StFinalReturnToOrigin
+    : smacc2::SmaccState<StFinalReturnToOrigin, MsNav2Test1RunMode> 
 {
   using SmaccState::SmaccState;
 
   // TRANSITION TABLE
   typedef mpl::list<
-      Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StFinalState, SUCCESS>
+      Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StSpinLeft2, SUCCESS>
       // Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StFinalMapSaving, SUCCESS>
       // Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, SS2::SsRadialPattern2, SUCCESS>
       >
