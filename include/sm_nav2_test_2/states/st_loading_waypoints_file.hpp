@@ -44,19 +44,7 @@ struct StLoadingWayPointsFile
   // TRANSITION TABLE
   typedef mpl::list<
       Transition<EvCbSuccess<CbLoadWaypointsFile, OrNavigation>, StNavigateWarehouseWaypointsX, TRANSITION_1>,
-      // cl_nav2z::EvWaypointFinal, StFinalState, SUCCESS>,
-      // Transition<EvWaypoint3<ClNav2Z, OrNavigation>, SS5::SsSPattern1,
-      // SUCCESS>, Transition<EvWaypoint11<ClNav2Z, OrNavigation>,
-      // SS4::SsFPattern1, SUCCESS>, Transition<EvWaypoint1<ClNav2Z,
-      // OrNavigation>, SS1::SsRadialPattern1, SUCCESS>,
-      // Transition<EvCbSuccess<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, SUCCESS>,
-      // Transition<EvCbFailure<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
-      // Transition<EvActionAborted<ClNav2Z, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
-      // Transition<EvWaypoint2<ClNav2Z, OrNavigation>, SS2::SsRadialPattern2,
-      // TRANSITION_4> Transition<EvWaypoint5<ClNav2Z, OrNavigation>,
-      // StStartStaticLocalization, SUCCESS>
-
-      
+ 
       //Keyboard events    
       Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateWarehouseWaypointsX, NEXT>,
       Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, PREVIOUS>
@@ -65,7 +53,6 @@ struct StLoadingWayPointsFile
 
   // STATE FUNCTIONS
   static void staticConfigure() {
-    // configure_orthogonal<OrNavigation, CbPositionControlFreeSpace>();
     configure_orthogonal<OrNavigation, CbLoadWaypointsFile>("waypoints_file", "sm_nav2_test_2");
   }
 
