@@ -85,6 +85,8 @@ class StRecoveryNav2;
 class StSpinRight1;
 class StSpinLeft1;
 class StSpinLeft2;
+class StWaypointSpinLeft;
+class StWaypointSpinRight;
 class StNavigateWarehouseWaypointsX;
 class StPauseSlam;
 class StFinalState;
@@ -171,6 +173,8 @@ struct SmNav2Test2
 #include <sm_nav2_test_2/states/st_spin_left_1.hpp>
 #include <sm_nav2_test_2/states/st_spin_left_2.hpp>
 #include <sm_nav2_test_2/states/st_spin_right_1.hpp> 
+#include <sm_nav2_test_2/states/st_waypoint_spin_left.hpp>
+#include <sm_nav2_test_2/states/st_waypoint_spin_right.hpp>
 #include <sm_nav2_test_2/states/st_navigate_warehouse_waypoints.x.hpp>
 #include <sm_nav2_test_2/states/st_pause_slam.hpp>
 #include <sm_nav2_test_2/states/st_navigate_to_waypoint_1.hpp>
