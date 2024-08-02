@@ -38,6 +38,7 @@ struct StNavigateWarehouseWaypointsX
   struct TRANSITION_4 : SUCCESS {};
   struct TRANSITION_5 : SUCCESS {};
   struct TRANSITION_6 : SUCCESS {};
+  struct TRANSITION_7 : SUCCESS {};
   struct NEXT : SUCCESS{};
   struct PREVIOUS : ABORT{};
 
@@ -56,7 +57,7 @@ struct StNavigateWarehouseWaypointsX
       // StStartStaticLocalization, SUCCESS>
 
       //Keyboard events    
-      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, SS1::SsRadialPattern1, NEXT>,
+      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint2, NEXT>,
       Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, PREVIOUS>
       >
       reactions;
