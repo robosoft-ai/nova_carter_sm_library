@@ -183,12 +183,16 @@ These should already be installed but if you just want to make sure..
 
 ## Assemble the Workspace
 
-### Clone the Application Repos...  
+### Clone the Application Reposinto the src folder...  
  ```
 git clone https://github.com/robosoft-ai/SMACC2.git  
-git clone https://github.com/robosoft-ai/sm_isaac_perceptor_1.git  
-git clone https://github.com/robosoft-ai/rrt_exploration.git  
+git clone https://github.com/robosoft-ai/sm_nav2_test_2.git  
  ```
+
+### Get a Nav2 release into the workspace src folder...
+I like to work from Nav2 releases. Download and unzip, then drop into the src folder of your local workspace. This is currently 1.1.16
+ https://github.com/ros-navigation/navigation2/releases/tag/1.1.16  
+
 ### Workspace Operations
 
 Create a file called .isaac_ros_common-config with the following context:
