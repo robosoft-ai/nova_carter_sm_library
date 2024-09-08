@@ -38,25 +38,37 @@ struct StNavigateWarehouseWaypointsX
   struct TRANSITION_4 : SUCCESS {};
   struct TRANSITION_5 : SUCCESS {};
   struct TRANSITION_6 : SUCCESS {};
+  struct TRANSITION_7 : SUCCESS {};
+  struct TRANSITION_8 : SUCCESS {};
+  struct TRANSITION_9 : SUCCESS {};
+  struct TRANSITION_10 : SUCCESS {};
+  struct TRANSITION_11 : SUCCESS {};
   struct NEXT : SUCCESS{};
   struct PREVIOUS : ABORT{};
 
   // TRANSITION TABLE
   typedef mpl::list<
-      Transition<cl_nav2z::EvWaypointFinal, StNavigateToWaypoint2, SUCCESS>,
-      // Transition<EvWaypoint3<ClNav2Z, OrNavigation>, SS5::SsSPattern1,
-      // SUCCESS>, Transition<EvWaypoint11<ClNav2Z, OrNavigation>,
-      // SS4::SsFPattern1, SUCCESS>, Transition<EvWaypoint1<ClNav2Z,
-      // OrNavigation>, SS1::SsRadialPattern1, SUCCESS>,
-      Transition<EvCbSuccess<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, SUCCESS>,
-      Transition<EvCbFailure<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
-      Transition<EvActionAborted<ClNav2Z, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
-      // Transition<EvWaypoint2<ClNav2Z, OrNavigation>, SS2::SsRadialPattern2,
-      // TRANSITION_4> Transition<EvWaypoint5<ClNav2Z, OrNavigation>,
-      // StStartStaticLocalization, SUCCESS>
+      Transition<EvWaypoint0<ClNav2Z, OrNavigation>, StWaypointSpinLeft, TRANSITION_1>,
+      Transition<EvWaypoint1<ClNav2Z, OrNavigation>, StWaypointSpinRight, TRANSITION_2>,
+      Transition<EvWaypoint2<ClNav2Z, OrNavigation>, StWaypointSpinLeft, TRANSITION_3>,
+      Transition<EvWaypoint3<ClNav2Z, OrNavigation>, StWaypointSpinRight, TRANSITION_4>,
+      Transition<EvWaypoint4<ClNav2Z, OrNavigation>, StWaypointSpinLeft, TRANSITION_5>,
+      Transition<EvWaypoint5<ClNav2Z, OrNavigation>, StWaypointSpinRight, TRANSITION_6>,
+      Transition<EvWaypoint6<ClNav2Z, OrNavigation>, StWaypointSpinLeft, TRANSITION_7>,
+      Transition<EvWaypoint7<ClNav2Z, OrNavigation>, StWaypointSpinRight, TRANSITION_8>,
+      Transition<EvWaypoint8<ClNav2Z, OrNavigation>, StWaypointSpinLeft, TRANSITION_9>,
+      Transition<EvWaypoint9<ClNav2Z, OrNavigation>, StWaypointSpinRight, TRANSITION_10>,
+      Transition<EvWaypoint10<ClNav2Z, OrNavigation>, StNavigateToWaypoint2, TRANSITION_11>,
+      
+    //  Transition<cl_nav2z::EvWaypointFinal, StNavigateToWaypoint2, SUCCESS>,
+ 
+    //  Transition<EvCbSuccess<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, SUCCESS>,
+    //  Transition<EvCbFailure<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
+    //  Transition<EvActionAborted<ClNav2Z, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
+
 
       //Keyboard events    
-      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, SS1::SsRadialPattern1, NEXT>,
+      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint2, NEXT>,
       Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, PREVIOUS>
       >
       reactions;

@@ -24,6 +24,7 @@ namespace sm_nav2_test_2 {
 namespace SS1 {
 namespace sm_nav2_test_2 {
 namespace radial_motion_states {
+
 // FORWARD DECLARATION OF INNER STATES
 class StiRadialRotate;
 class StiRadialReturn;
@@ -33,6 +34,7 @@ class StiRadialLoopStart;
 } // namespace radial_motion_states
 } // namespace sm_nav2_test_2
 using namespace sm_nav2_test_2::radial_motion_states;
+using namespace cl_keyboard;
 
 // STATE DECLARATION
 struct SsRadialPattern1
@@ -43,7 +45,8 @@ public:
 
   // TRANSITION TABLE
   typedef mpl::list<
-      Transition<EvLoopEnd<StiRadialLoopStart>, StSpiralPattern, ENDLOOP> //,
+      Transition<EvKeyPressE<CbDefaultKeyboardBehavior, OrKeyboard>, StPreSpiralPattern, ENDLOOP>,
+      Transition<EvLoopEnd<StiRadialLoopStart>, StPreSpiralPattern, ENDLOOP> //,
 
       // Transition<EvLoopEnd<StiRadialLoopStart>, StRotateDegrees1, ENDLOOP>
       // Transition<EvLoopEnd<StiRadialLoopStart>, StNavigateReverse1, ENDLOOP>
@@ -51,16 +54,18 @@ public:
       >
       reactions;
 
-  static constexpr int total_iterations() { return 4; }
+  static constexpr int total_iterations() { return 36; }
   static constexpr float ray_angle_increment_degree() {
     return 360.0 / total_iterations();
   }
-  static constexpr float ray_length_meters() { return 11.0; }
+  static constexpr float ray_length_meters() { return 12.0; }
 
   int iteration_count = 0;
 
   // STATE FUNCTIONS
-  static void staticConfigure() {}
+  static void staticConfigure() {
+    configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+  }
 
   void runtimeConfigure() {}
 };

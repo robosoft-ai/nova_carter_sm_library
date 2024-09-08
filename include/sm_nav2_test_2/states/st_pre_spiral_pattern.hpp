@@ -14,8 +14,8 @@ using namespace cl_ros_timer;
 
 
 // STATE DECLARATION
-struct StSpiralPattern
-    : smacc2::SmaccState<StSpiralPattern, MsNav2Test1RunMode> {
+struct StPreSpiralPattern
+    : smacc2::SmaccState<StPreSpiralPattern, MsNav2Test1RunMode> {
   using SmaccState::SmaccState;
 
   // DECLARE CUSTOM OBJECT TAGS
@@ -25,9 +25,9 @@ struct StSpiralPattern
 
   // TRANSITION TABLE
   typedef mpl::list<
-    Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StNavigateToWaypoint3, SUCCESS>,
+    Transition<EvCbSuccess<CbAbortNavigation, OrNavigation>, StSpiralPattern, SUCCESS>,
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint3, NEXT>
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StSpiralPattern, NEXT>
   > reactions;
 
 //   CpTopicPublisher<geometry_msgs::msg::Twist> *pub;
@@ -35,20 +35,12 @@ struct StSpiralPattern
   // STATE FUNCTIONS
   static void staticConfigure() {
     //configure_orthogonal<OrTimer, CbTimerCountdownOnce>(10s); I would like to use the CLtimer instead
-    configure_orthogonal<OrNavigation, CbSleepFor>(580s);
+    configure_orthogonal<OrNavigation, CbAbortNavigation>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
   void runtimeConfigure() {}
 
-  void onEntry() {
-    cl_nav2z::ClNav2Z* clNav;
-    this->requiresClient(clNav);
-    auto pub = clNav->getComponent<smacc2::components::CpTopicPublisher<geometry_msgs::msg::Twist>>();
-    auto twist_msg = std::make_shared<geometry_msgs::msg::Twist>();
-    twist_msg->linear.x = 0.5; 
-    twist_msg->angular.z = 0.3; 
-    pub->publish(*twist_msg);
-  }
+  void onEntry() {}
 };
 } 
