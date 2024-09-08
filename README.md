@@ -1,9 +1,9 @@
  # State Machine Diagram
 
- ![sm_nav2_test_2](docs/SmNav2Test2_2024-9-7_203018.svg)
+ ![sm_nav2_test_2](docs/SmNav2Test2_2024-9-7_222225.svg)
 
  ## Description 
- A completely minimal state machine example.
+ A state machine application for the NOVA Carter using Nav2 and the SMACC nav2z Client Behavior Library.
 
 
 # Workflow
@@ -13,7 +13,7 @@
 [https://nvidia-isaac-ros.github.io/robots/nova_carter/getting_started.html#nova-carter-dev-setup](https://nvidia-isaac-ros.github.io/robots/nova_carter/getting_started.html#nova-carter-dev-setup)  
 
 ## Simulation Environment
-For simulation, we'll be using IsaacSim 4.0.
+For simulation, we'll be using IsaacSim 4.1.
 Under the IsaacAssets tab go to SAMPLES/NVBLOX/nvblox_sample_scene.
 
 Once inside, you'll need to fing the NOVA_Carter_ROS_nvblox_setup Folder.
