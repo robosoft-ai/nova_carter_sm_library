@@ -43,10 +43,10 @@ struct StNavigateToWaypoint2 : smacc2::SmaccState<StNavigateToWaypoint2, MsNav2T
   // TRANSITION TABLE
   typedef mpl::list<
 
-    Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StSpinLeft1, SUCCESS>,
+    Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, SS1::SsRadialPattern1, SUCCESS>,
 
     //Keyboard events
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StSpinLeft1, NEXT>
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, SS1::SsRadialPattern1, NEXT>
     >reactions;
 
   // STATE FUNCTIONS
