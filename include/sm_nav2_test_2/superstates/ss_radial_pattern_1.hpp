@@ -45,8 +45,8 @@ public:
 
   // TRANSITION TABLE
   typedef mpl::list<
-      Transition<EvKeyPressE<CbDefaultKeyboardBehavior, OrKeyboard>, StPreSpiralPattern, ENDLOOP>,
-      Transition<EvLoopEnd<StiRadialLoopStart>, StPreSpiralPattern, ENDLOOP> //,
+      Transition<EvKeyPressE<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint3, ENDLOOP>,
+      Transition<EvLoopEnd<StiRadialLoopStart>, StNavigateToWaypoint3, ENDLOOP> //,
 
       // Transition<EvLoopEnd<StiRadialLoopStart>, StRotateDegrees1, ENDLOOP>
       // Transition<EvLoopEnd<StiRadialLoopStart>, StNavigateReverse1, ENDLOOP>
