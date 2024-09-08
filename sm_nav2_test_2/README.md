@@ -3,7 +3,7 @@
  ![sm_nav2_test_2](docs/SmNav2Test2_2024-9-7_222225.svg)
 
  ## Description 
- A state machine application for the NOVA Carter using Nav2 and the SMACC nav2z Client Behavior Library.
+ A state machine application for the NOVA Carter using Nav2 and the SMACC nav2z Client Behavior Library. This variant uses a lidar compiler node found in the scripts folder.
 
 
 # Workflow
