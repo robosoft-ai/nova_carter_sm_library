@@ -26,8 +26,8 @@ namespace sm_nav2_test_2 {
 using namespace cl_keyboard;
 
 // STATE DECLARATION
-struct StLoadingWayPointsFile
-    : smacc2::SmaccState<StLoadingWayPointsFile,
+struct StLoadingWaypointsFile
+    : smacc2::SmaccState<StLoadingWaypointsFile,
                          MsNav2Test1RunMode> {
   using SmaccState::SmaccState;
 

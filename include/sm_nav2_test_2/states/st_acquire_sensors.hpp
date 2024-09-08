@@ -50,7 +50,7 @@ struct StAcquireSensors
   // TRANSITION TABLE
   typedef mpl::list<
 
-      Transition<EvAllGo<SrAllEventsGo, SrAcquireSensors>, StInitialMove,
+      Transition<EvAllGo<SrAllEventsGo, SrAcquireSensors>, StPauseToSetupVideo,
                  ON_SENSORS_AVAILABLE>,
 
       Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoveryNav2, ABORT>,
@@ -58,7 +58,7 @@ struct StAcquireSensors
       Transition<EvGlobalError, MsNav2Test1RecoveryMode>,    
 
       //Keyboard events
-      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMove, NEXT>  
+      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StPauseToSetupVideo, NEXT>  
       >
       reactions;
 
