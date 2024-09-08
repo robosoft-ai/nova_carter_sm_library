@@ -1,3 +1,11 @@
+ # State Machine Diagram
+
+ ![sm_nav2_test_2](docs/SmNav2Test2_2024-9-7_203018.svg)
+
+ ## Description 
+ A completely minimal state machine example.
+
+
 # Workflow
 ## Setting up an IsaacROSDev Container
 [https://nvidia-isaac-ros.github.io/concepts/docker_devenv/index.html#development-environment](https://nvidia-isaac-ros.github.io/concepts/docker_devenv/index.html#development-environment)  
