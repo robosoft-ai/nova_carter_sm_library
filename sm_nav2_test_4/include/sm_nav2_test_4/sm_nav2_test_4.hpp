@@ -100,11 +100,16 @@ class StNavigateToWaypoint4;
 class StNavigateToWaypoint5;
 class StLoadingWaypointsFile;
 class StBackup1;
+class StRecoverStep1;
+class StRecoverStep2;
+class StRecoverStep3;
+class StRecoverStep4;
 
 // SUPERSTATE FORWARD DECLARATIONS
 // MODE STATES FORWARD DECLARATIONS
 class MsNav2Test1RunMode;
 class MsNav2Test1RecoveryMode;
+class MsRecover;
 
 namespace SS1 {
 class SsRadialPattern1;
@@ -116,6 +121,10 @@ class SsSPattern1;
 
 namespace SS3 {
 class SsFPattern1;
+}
+
+namespace SS4 {
+class SsDockingSequence1;
 }
 
 // custom sm_nav2_test_4 event
@@ -158,6 +167,7 @@ struct SmNav2Test4
 #include <sm_nav2_test_4/modestates/ms_nav2_test_4_run_mode.hpp>
 
 #include <sm_nav2_test_4/modestates/ms_nav2_test_4_recovery_mode.hpp>
+#include <sm_nav2_test_4/modestates/ms_recover.hpp>
 
 // SUPERSTATES
 #include <sm_nav2_test_4/superstates/ss_f_pattern_1.hpp>
@@ -189,3 +199,9 @@ struct SmNav2Test4
 #include <sm_nav2_test_4/states/st_loading_waypoints_file.hpp>
 #include <sm_nav2_test_4/states/st_final_return_to_origin.hpp>
 #include <sm_nav2_test_4/states/st_backup_1.hpp>
+
+
+#include <sm_nav2_test_4/states/docking_sequence_states/st_recover_step_1.hpp>
+#include <sm_nav2_test_4/states/docking_sequence_states/st_recover_step_2.hpp>
+#include <sm_nav2_test_4/states/docking_sequence_states/st_recover_step_3.hpp>
+#include <sm_nav2_test_4/states/docking_sequence_states/st_recover_step_4.hpp>
