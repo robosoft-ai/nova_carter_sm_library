@@ -14,7 +14,14 @@
 
 namespace sm_nav2_test_4
 {
-// STATE DECLARATION
+using namespace smacc2::default_events;
+using smacc2::client_behaviors::CbSleepFor;
+using cl_nav2z::CbNavigateGlobalPosition;
+using namespace std::chrono_literals;
+using namespace cl_nav2z;
+using namespace cl_keyboard;
+
+// STATE DECLARATION - Navigate to Staging
 struct StRecoverStep1 : smacc2::SmaccState<StRecoverStep1, MsRecover>
 {
   using SmaccState::SmaccState;
@@ -27,21 +34,16 @@ struct StRecoverStep1 : smacc2::SmaccState<StRecoverStep1, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-    // Transition<EvTimer<CbTimerCountdownOnce, OrTimer>, StRecoverStep2, TIMEOUT>,
-    // Transition<smacc2::EvTopicMessage<CbWatchdogSubscriberBehavior, OrSubscriber>, SsACycle>,
-    // Keyboard events
+    Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep2, SUCCESS>,
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep2, SUCCESS>
-    // Transition<EvKeyPressB<CbDefaultKeyboardBehavior, OrKeyboard>, SsBCycle, BUILD>,
-    // Transition<EvKeyPressC<CbDefaultKeyboardBehavior, OrKeyboard>, SsCCycle, ATTACK>
 
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-   // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
-   // configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
-  //  configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
+    configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(11.5, -2.25, 0.0);
+    configure_orthogonal<OrNavigation, CbResumeSlam>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 

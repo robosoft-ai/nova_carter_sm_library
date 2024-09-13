@@ -14,7 +14,7 @@
 
 namespace sm_nav2_test_4
 {
-// STATE DECLARATION
+// STATE DECLARATION - Dock
 struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
 {
   using SmaccState::SmaccState;
@@ -28,21 +28,12 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
   typedef mpl::list<
 
      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep4, SUCCESS>
-    //    Transition<EvTimer<CbTimerCountdownOnce, OrTimer>, StRecoverStep4, SUCCESS>
-    // Transition<smacc2::EvTopicMessage<CbWatchdogSubscriberBehavior, OrSubscriber>, SsACycle>,
-    // Keyboard events
-    // Transition<EvKeyPressA<CbDefaultKeyboardBehavior, OrKeyboard>, SsACycle, MOVE>,
-    // Transition<EvKeyPressB<CbDefaultKeyboardBehavior, OrKeyboard>, SsBCycle, BUILD>,
-    // Transition<EvKeyPressC<CbDefaultKeyboardBehavior, OrKeyboard>, SsCCycle, ATTACK>
-
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
    // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
-   // configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
-   // configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 

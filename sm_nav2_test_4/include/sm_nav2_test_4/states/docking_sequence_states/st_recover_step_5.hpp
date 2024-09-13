@@ -14,8 +14,8 @@
 
 namespace sm_nav2_test_4
 {
-// STATE DECLARATION - Calculate Final Pose from Apriltags
-struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
+// STATE DECLARATION - Prepare to Undock
+struct StRecoverStep5 : smacc2::SmaccState<StRecoverStep5, MsRecover>
 {
   using SmaccState::SmaccState;
 
@@ -27,16 +27,13 @@ struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep3, SUCCESS>
-  
+     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep6, SUCCESS>
+
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-  //  configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
-  //  configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
-  //  configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 

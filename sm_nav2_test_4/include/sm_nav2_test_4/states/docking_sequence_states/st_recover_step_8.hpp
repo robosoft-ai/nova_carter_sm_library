@@ -14,8 +14,14 @@
 
 namespace sm_nav2_test_4
 {
-// STATE DECLARATION - Calculate Final Pose from Apriltags
-struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
+using namespace smacc2::default_events;
+using smacc2::client_behaviors::CbSleepFor;
+using namespace std::chrono_literals;
+using namespace cl_nav2z;
+using namespace cl_keyboard;
+
+// STATE DECLARATION - Go back to previous task
+struct StRecoverStep8 : smacc2::SmaccState<StRecoverStep8, MsRecover>
 {
   using SmaccState::SmaccState;
 
@@ -27,16 +33,15 @@ struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep3, SUCCESS>
-  
+    Transition<EvCbSuccess<CbSleepFor, OrNavigation>, smacc2::deep_history<MsNav2Test1RunMode::LastDeepState>, SUCCESS>,
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, smacc2::deep_history<MsNav2Test1RunMode::LastDeepState>, SUCCESS>
+
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-  //  configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
-  //  configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
-  //  configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
+    configure_orthogonal<OrNavigation, CbSleepFor>(.5s);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 

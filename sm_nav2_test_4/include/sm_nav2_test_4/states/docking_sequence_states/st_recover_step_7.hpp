@@ -14,30 +14,33 @@
 
 namespace sm_nav2_test_4
 {
-// STATE DECLARATION - Calculate Final Pose from Apriltags
-struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
+using namespace cl_nav2z;  
+using namespace cl_keyboard;
+
+// STATE DECLARATION - Turn Around
+struct StRecoverStep7 : smacc2::SmaccState<StRecoverStep7, MsRecover>
 {
   using SmaccState::SmaccState;
 
   // DECLARE CUSTOM OBJECT TAGS
-  struct TIMEOUT : ABORT{};
   struct NEXT : SUCCESS{};
   struct PREVIOUS : ABORT{};
 
   // TRANSITION TABLE
   typedef mpl::list<
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep3, SUCCESS>
-  
+    Transition<EvCbSuccess<CbPureSpinning, OrNavigation>, StRecoverStep8>,
+    Transition<EvCbFailure<CbPureSpinning, OrNavigation>, StRecoverStep8>,
+
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep8, NEXT>
+
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-  //  configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
-  //  configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
-  //  configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
-    configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrNavigation, CbPureSpinning>(-1*M_PI, 1.0 /*rad_s*/);
+    configure_orthogonal<OrNavigation, CbResumeSlam>();
   }
 
   void runtimeConfigure() {}

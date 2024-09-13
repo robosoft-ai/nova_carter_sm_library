@@ -14,29 +14,35 @@
 
 namespace sm_nav2_test_4
 {
-// STATE DECLARATION - Calculate Final Pose from Apriltags
-struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
+using namespace cl_nav2z;  
+using namespace cl_keyboard;
+
+// STATE DECLARATION - Undock
+struct StRecoverStep6 : smacc2::SmaccState<StRecoverStep6, MsRecover>
 {
   using SmaccState::SmaccState;
 
   // DECLARE CUSTOM OBJECT TAGS
-  struct TIMEOUT : ABORT{};
   struct NEXT : SUCCESS{};
   struct PREVIOUS : ABORT{};
 
   // TRANSITION TABLE
   typedef mpl::list<
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep3, SUCCESS>
-  
-    >reactions;
+      Transition<EvCbSuccess<CbNavigateBackwards, OrNavigation>, StRecoverStep7,
+                 SUCCESS>,
+     
+      // Keyboard events  
+      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep7, NEXT>
+      >
+      reactions;
 
   // STATE FUNCTIONS
-  static void staticConfigure()
-  {
-  //  configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
-  //  configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
-  //  configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
+  static void staticConfigure() {
+    // RCLCPP_INFO(getLogger(),"ssr radial end point, distance in meters: %lf",
+    // SS::ray_length_meters());
+    configure_orthogonal<OrNavigation, CbNavigateBackwards>(1.0);
+    //configure_orthogonal<OrNavigation, CbPauseSlam>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
