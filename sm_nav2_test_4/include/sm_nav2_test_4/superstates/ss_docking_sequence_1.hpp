@@ -20,7 +20,7 @@
 
 #include <smacc2/smacc.hpp>
 
-namespace sm_nav2_test_3 {
+namespace sm_nav2_test_4 {
 namespace f_pattern_states {
 enum class TDirection { LEFT, RIGHT };
 
@@ -33,14 +33,14 @@ template <typename SS> class StiFPatternForward2;
 template <typename SS> class StiFPatternStartLoop;
 
 } // namespace f_pattern_states
-} // namespace sm_nav2_test_3
-namespace sm_nav2_test_3 {
-namespace SS3 {
+} // namespace sm_nav2_test_4
+namespace sm_nav2_test_4 {
+namespace SS4 {
 using namespace f_pattern_states;
 
 // STATE DECLARATION
-struct SsFPattern1 : smacc2::SmaccState<SsFPattern1, MsNav2Test1RunMode,
-                                        StiFPatternStartLoop<SsFPattern1>> {
+struct SsDockingSequence1 : smacc2::SmaccState<SsFPattern1, MsNav2Test1RunMode,
+                                        StiFPatternStartLoop<SsDockingSequence1>> {
 public:
   using SmaccState::SmaccState;
 
@@ -57,7 +57,7 @@ public:
   // superstate parameters
   static constexpr float ray_lenght_meters() { return 3.5; }
   static constexpr float pitch_lenght_meters() { return 1.0; }
-  static constexpr int total_iterations() { return 4.0; }
+  static constexpr int total_iterations() { return 32.0; }
   static constexpr TDirection direction() { return TDirection::RIGHT; }
 
   // superstate state variables
@@ -74,11 +74,11 @@ public:
 // FORWARD DECLARATION FOR THE SUPERSTATE
 
 } // namespace SS4
-} // namespace sm_nav2_test_3
+} // namespace sm_nav2_test_4
 
-#include <sm_nav2_test_3/states/f_pattern_states/sti_fpattern_forward_1.hpp>
-#include <sm_nav2_test_3/states/f_pattern_states/sti_fpattern_forward_2.hpp>
-#include <sm_nav2_test_3/states/f_pattern_states/sti_fpattern_loop_start.hpp>
-#include <sm_nav2_test_3/states/f_pattern_states/sti_fpattern_return_1.hpp>
-#include <sm_nav2_test_3/states/f_pattern_states/sti_fpattern_rotate_1.hpp>
-#include <sm_nav2_test_3/states/f_pattern_states/sti_fpattern_rotate_2.hpp>
+#include <sm_nav2_test_4/states/f_pattern_states/sti_fpattern_forward_1.hpp>
+#include <sm_nav2_test_4/states/f_pattern_states/sti_fpattern_forward_2.hpp>
+#include <sm_nav2_test_4/states/f_pattern_states/sti_fpattern_loop_start.hpp>
+#include <sm_nav2_test_4/states/f_pattern_states/sti_fpattern_return_1.hpp>
+#include <sm_nav2_test_4/states/f_pattern_states/sti_fpattern_rotate_1.hpp>
+#include <sm_nav2_test_4/states/f_pattern_states/sti_fpattern_rotate_2.hpp>
