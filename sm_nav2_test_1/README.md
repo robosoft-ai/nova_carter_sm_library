@@ -191,8 +191,7 @@ These should already be installed but if you just want to make sure..
 ### Clone the Application Repos...  
  ```
 git clone https://github.com/robosoft-ai/SMACC2.git  
-git clone https://github.com/robosoft-ai/sm_isaac_perceptor_1.git  
-git clone https://github.com/robosoft-ai/rrt_exploration.git  
+git clone https://github.com/robosoft-ai/nova_carter_sm_library
  ```
 ### Workspace Operations
 
