@@ -194,7 +194,7 @@ These should already be installed but if you just want to make sure..
 ### Clone the Application Reposinto the src folder...  
  ```
 git clone https://github.com/robosoft-ai/SMACC2.git  
-git clone https://github.com/robosoft-ai/sm_nav2_test_3.git  
+git clone https://github.com/robosoft-ai/nova_carter_sm_library 
  ```
 
 ### Get a Nav2 release into the workspace src folder...
