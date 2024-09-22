@@ -77,6 +77,7 @@ using namespace smacc2::state_reactors;
 namespace sm_nav2_test_4 {
 // STATE FORWARD DECLARATIONS
 class StAcquireSensors;
+class StLaunchVisionPipeline;
 class StPauseToSetupVideo;
 class StInitialMove;
 class StInitialMoveStop;
@@ -180,6 +181,7 @@ struct SmNav2Test4
 
 // STATES
 #include <sm_nav2_test_4/states/st_acquire_sensors.hpp>
+#include <sm_nav2_test_4/states/st_launch_vision_pipeline.hpp>
 #include <sm_nav2_test_4/states/st_recovery_nav2.hpp>
 #include <sm_nav2_test_4/states/st_pause_to_setup_video.hpp>
 #include <sm_nav2_test_4/states/st_initial_move.hpp>

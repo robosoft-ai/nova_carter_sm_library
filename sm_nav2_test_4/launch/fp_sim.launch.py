@@ -46,14 +46,14 @@ def generate_launch_description():
             'namespace',
             default_value='',
             description='Namespace for ROS nodes in this launch script'),
-        DeclareLaunchArgument(
-            'use_namespace',
-            default_value='False',
-            description='Whether to apply a namespace to the navigation stack'),
-        DeclareLaunchArgument(
-            'use_composition',
-            default_value='False',
-            description='Whether to use composed Nav2 bringup'),
+  #      DeclareLaunchArgument(
+  #          'use_namespace',
+  #          default_value='False',
+  #          description='Whether to apply a namespace to the navigation stack'),
+  #      DeclareLaunchArgument(
+  #          'use_composition',
+  #          default_value='False',
+  #          description='Whether to use composed Nav2 bringup'),
         DeclareLaunchArgument(
             'use_sim_time',
             default_value='True',
@@ -70,26 +70,26 @@ def generate_launch_description():
             'init_pose_yaw',
             default_value='0.0',
             description='Initial yaw orientation'),
-        DeclareLaunchArgument(
-            'map',
-            default_value=os.path.join(
-                get_package_share_directory(
-                    'isaac_ros_vda5050_nav2_client_bringup'),
-                'maps', 'carter_warehouse_navigation.yaml'
-            ),
-            description='Full path to map file to load'),
-        DeclareLaunchArgument(
-            'nav_params_file',
-            default_value=os.path.join(
-                get_package_share_directory(
-                    'isaac_ros_vda5050_nav2_client_bringup'),
-                'config', 'carter_navigation_params.yaml'
-            ),
-            description='Full path to navigation param file to load'),
-        DeclareLaunchArgument(
-            'launch_rviz',
-            default_value='True',
-            description='Launch RViz if set to True'),
+  #      DeclareLaunchArgument(
+  #          'map',
+  #          default_value=os.path.join(
+  #              get_package_share_directory(
+  #                  'isaac_ros_vda5050_nav2_client_bringup'),
+  #              'maps', 'carter_warehouse_navigation.yaml'
+  #          ),
+  #          description='Full path to map file to load'),
+  #      DeclareLaunchArgument(
+  #          'nav_params_file',
+  #          default_value=os.path.join(
+  #              get_package_share_directory(
+  #                  'isaac_ros_vda5050_nav2_client_bringup'),
+  #              'config', 'carter_navigation_params.yaml'
+  #          ),
+#         description='Full path to navigation param file to load'),
+#        DeclareLaunchArgument(
+ #           'launch_rviz',
+ #           default_value='True',
+ #           description='Launch RViz if set to True'),
         DeclareLaunchArgument(
             'mesh_file_path',
             default_value=MESH_OBJ_PATH,
@@ -104,15 +104,15 @@ def generate_launch_description():
             description='The absolute file path to the RT-DETR TensorRT engine file'),
     ]
     namespace = LaunchConfiguration('namespace')
-    use_namespace = LaunchConfiguration('use_namespace')
-    use_composition = LaunchConfiguration('use_composition')
+ #   use_namespace = LaunchConfiguration('use_namespace')
+ #   use_composition = LaunchConfiguration('use_composition')
     use_sim_time = LaunchConfiguration('use_sim_time')
     init_pose_x = LaunchConfiguration('init_pose_x', default=0.0)
     init_pose_y = LaunchConfiguration('init_pose_y', default=0.0)
     init_pose_yaw = LaunchConfiguration('init_pose_yaw', default=0.0)
-    map_dir = LaunchConfiguration('map')
-    nav_params_file = LaunchConfiguration('nav_params_file',)
-    launch_rviz = LaunchConfiguration('launch_rviz')
+ #   map_dir = LaunchConfiguration('map')
+ #   nav_params_file = LaunchConfiguration('nav_params_file',)
+ #   launch_rviz = LaunchConfiguration('launch_rviz')
     mesh_file_path = LaunchConfiguration('mesh_file_path')
     texture_path = LaunchConfiguration('texture_path')
     rt_detr_engine_file_path = LaunchConfiguration('rt_detr_engine_file_path')
@@ -130,13 +130,13 @@ def generate_launch_description():
 
     foundationpose_launch_dir = os.path.join(
         get_package_share_directory('isaac_ros_foundationpose'), 'launch')
-    nova_carter_dock_params_dir = os.path.join(
-        get_package_share_directory('nova_carter_docking'), 'params')
-    nav2_bringup_launch_dir = os.path.join(
-        get_package_share_directory('nav2_bringup'), 'launch')
+  #  nova_carter_dock_params_dir = os.path.join(
+  #      get_package_share_directory('nova_carter_docking'), 'params')
+  #  nav2_bringup_launch_dir = os.path.join(
+  #      get_package_share_directory('nav2_bringup'), 'launch')
 
-    params_file = os.path.join(
-        nova_carter_dock_params_dir, 'nova_carter_docking_fp.yaml')
+  #  params_file = os.path.join(
+  #      nova_carter_dock_params_dir, 'nova_carter_docking_fp.yaml')
 
     foundationpose_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([foundationpose_launch_dir,
@@ -148,45 +148,45 @@ def generate_launch_description():
     )
 
     fp_dock_pose_publisher = Node(
-        package='nova_carter_docking',
+        package='sm_nav2_test_4',
         executable='fp_dock_pose_publisher.py',
         name='fp_dock_pose_publisher'
     )
 
-    docking_server = Node(
-        package='opennav_docking',
-        executable='opennav_docking',
-        name='docking_server',
-        output='screen',
-        parameters=[params_file,
-                    {'use_sim_time': use_sim_time}],
-    )
+  #  docking_server = Node(
+  #      package='opennav_docking',
+  #      executable='opennav_docking',
+  #      name='docking_server',
+  #      output='screen',
+  #      parameters=[params_file,
+  #                  {'use_sim_time': use_sim_time}],
+  #  )
 
-    lifecycle_manager = Node(
-        package='nav2_lifecycle_manager',
-        executable='lifecycle_manager',
-        name='lifecycle_manager_docking',
-        output='screen',
-        parameters=[{'autostart': True}, {'node_names': ['docking_server']}],
-    )
+   # lifecycle_manager = Node(
+   #     package='nav2_lifecycle_manager',
+   #     executable='lifecycle_manager',
+   #     name='lifecycle_manager_docking',
+   #     output='screen',
+   #     parameters=[{'autostart': True}, {'node_names': ['docking_server']}],
+   # )
 
-    nav2_bringup_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            [nav2_bringup_launch_dir, '/bringup_launch.py']),
-        launch_arguments={
-            'namespace': namespace,
-            'use_namespace': use_namespace,
-            'use_composition': use_composition,
-            'map': map_dir,
-            'use_sim_time': use_sim_time,
-            'params_file': configured_params,
-        }.items(),
-    )
+   # nav2_bringup_launch = IncludeLaunchDescription(
+   #     PythonLaunchDescriptionSource(
+   #         [nav2_bringup_launch_dir, '/bringup_launch.py']),
+   #     launch_arguments={
+   #         'namespace': namespace,
+   #         'use_namespace': use_namespace,
+   #         'use_composition': use_composition,
+   #         'map': map_dir,
+   #         'use_sim_time': use_sim_time,
+   #         'params_file': configured_params,
+   #     }.items(),
+   # )
 
     return launch.LaunchDescription(launch_args + [
         foundationpose_launch,
         fp_dock_pose_publisher,
-        nav2_bringup_launch,
-        docking_server,
-        lifecycle_manager
+     #   nav2_bringup_launch,
+      #  docking_server,
+       # lifecycle_manager
     ])
