@@ -53,11 +53,17 @@ struct StAcquireSensors
       Transition<EvAllGo<SrAllEventsGo, SrAcquireSensors>, StPauseToSetupVideo,
                  ON_SENSORS_AVAILABLE>,
 
+      // Transition<EvAllGo<SrAllEventsGo, SrAcquireSensors>, StLaunchVisionPipeline,
+      //           ON_SENSORS_AVAILABLE>,
+
       Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoveryNav2, ABORT>,
 
       Transition<EvGlobalError, MsNav2Test1RecoveryMode>,    
 
       //Keyboard events
+      // Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StLaunchVisionPipeline, NEXT>  
+      // >
+
       Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StPauseToSetupVideo, NEXT>  
       >
       reactions;
