@@ -37,8 +37,8 @@ using cl_nav2z::CbWaitNav2Nodes;
 using smacc2::client_behaviors::CbRosLaunch2;
 
 // STATE DECLARATION
-struct StAcquireSensors
-    : smacc2::SmaccState<StAcquireSensors, MsNav2Test1RunMode> {
+struct StLaunchVisionPipeline
+    : smacc2::SmaccState<StLaunchVisionPipeline, MsNav2Test1RunMode> {
   using SmaccState::SmaccState;
 
   // DECLARE CUSTOM OBJECT AND TRANSITION TAGS
@@ -53,17 +53,11 @@ struct StAcquireSensors
       Transition<EvAllGo<SrAllEventsGo, SrAcquireSensors>, StPauseToSetupVideo,
                  ON_SENSORS_AVAILABLE>,
 
-      // Transition<EvAllGo<SrAllEventsGo, SrAcquireSensors>, StLaunchVisionPipeline,
-      //           ON_SENSORS_AVAILABLE>,
-
       Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoveryNav2, ABORT>,
 
       Transition<EvGlobalError, MsNav2Test1RecoveryMode>,    
 
       //Keyboard events
-      // Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StLaunchVisionPipeline, NEXT>  
-      // >
-
       Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StPauseToSetupVideo, NEXT>  
       >
       reactions;
@@ -72,8 +66,7 @@ struct StAcquireSensors
   static void staticConfigure() 
   {
     configure_orthogonal<OrNavigation, CbActiveStop>();
-    configure_orthogonal<OrSlam, CbRosLaunch2>("sm_nav2_test_4", "slam_launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
-    configure_orthogonal<OrNavigation, CbRosLaunch2>("sm_nav2_test_4", "carter_navigation_rtx.launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
+    configure_orthogonal<OrPerception, CbRosLaunch2>("sm_nav2_test_4", "fp_sim.launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
     configure_orthogonal<OrNavigation, CbWaitActionServer>(10s);
     //configure_orthogonal<OrAssigner, CbWaitNav2Nodes>();
     configure_orthogonal<OrNavigation, CbSleepFor>(12s);

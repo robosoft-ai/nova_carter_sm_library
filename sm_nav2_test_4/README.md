@@ -231,7 +231,7 @@ rosdep update
 rosdep install --ignore-src --from-paths src -y -r
  ```
  ```
-colcon build --symlink-install
+colcon build --symlink-install --cmake-args -DBUILD_TESTING=OFF
  ```
 
 ## Launch Application
