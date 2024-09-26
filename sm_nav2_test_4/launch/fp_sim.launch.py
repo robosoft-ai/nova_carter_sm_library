@@ -123,10 +123,10 @@ def generate_launch_description():
         'yaw': init_pose_yaw
     }
 
-    configured_params = RewrittenYaml(
-        source_file=nav_params_file,
-        param_rewrites=param_substitutions,
-        convert_types=True)
+  #  configured_params = RewrittenYaml(
+  #      source_file=nav_params_file,
+  #      param_rewrites=param_substitutions,
+  #      convert_types=True)
 
     foundationpose_launch_dir = os.path.join(
         get_package_share_directory('isaac_ros_foundationpose'), 'launch')
@@ -141,7 +141,8 @@ def generate_launch_description():
     foundationpose_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([foundationpose_launch_dir,
                                        '/isaac_ros_foundationpose_isaac_sim_tracking.launch.py']),
-        launch_arguments={'launch_rviz': launch_rviz,
+        launch_arguments={
+                          #'launch_rviz': launch_rviz,
                           'mesh_file_path': mesh_file_path,
                           'texture_path': texture_path,
                           'rt_detr_engine_file_path': rt_detr_engine_file_path}.items(),

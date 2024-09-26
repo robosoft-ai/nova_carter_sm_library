@@ -36,6 +36,7 @@ We begin by cloning isaac_ros_common and nova_carter repos to the src folder of 
  ```
 git clone https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_common.git
 git clone https://github.com/NVIDIA-ISAAC-ROS/nova_carter.git  
+git clone https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_pose_estimation.git
  ```
 ## Start the IsaacROSDev Container (from the workspace...)
  ```
@@ -163,16 +164,32 @@ mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
     tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
     rm ${NGC_FILENAME}
  ```
-Now download the Nvidia SyntheitcaDETR model...
+Now download the Nvidia SyntheitcaDETR models...
  ```
 mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
 cd ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
    wget 'https://api.ngc.nvidia.com/v2/models/nvidia/isaac/synthetica_detr/versions/1.0.0/files/sdetr_grasp.etlt'
 ```
+ ```
+mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
+cd ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
+   wget 'https://api.ngc.nvidia.com/v2/models/nvidia/isaac/synthetica_detr/versions/1.0.0/files/sdetr_amr.etlt'
+```
 Then we'll convert the encrypted model (.etlt) to a TensorRT engine plan and drop it in the isaac_ros_assets/models/synthetica_detr folder...
 ```
 /opt/nvidia/tao/tao-converter -k sdetr -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_grasp.plan -p images,1x3x640x640,2x3x640x640,4x3x640x640 -p orig_target_sizes,1x2,2x2,4x2 ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_grasp.etlt
 ```
+```
+/opt/nvidia/tao/tao-converter -k sdetr -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_amr.plan -p images,1x3x640x640,2x3x640x640,4x3x640x640 -p orig_target_sizes,1x2,2x2,4x2 ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_amr.etlt
+```
+Then we'll convert the encrypted models (.etlt) for the isaac_ros_foundationpose package to TensorRT engine plans and drop it in the isaac_ros_assets/models/isaac_ros_foundationpose folder...
+```
+/opt/nvidia/tao/tao-converter -k foundationpose -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/refine_trt_engine.plan -p input1,1x160x160x6,1x160x160x6,252x160x160x6 -p input2,1x160x160x6,1x160x160x6,252x160x160x6 -o output1,output2 ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/refine_model.etlt
+```
+```   
+/opt/nvidia/tao/tao-converter -k foundationpose -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/score_trt_engine.plan -p input1,1x160x160x6,1x160x160x6,252x160x160x6 -p input2,1x160x160x6,1x160x160x6,252x160x160x6 -o output1 ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/score_model.etlt
+```   
+
 Then get back to the workspace...  
 ```
 cd /workspaces/isaac_ros-dev/
