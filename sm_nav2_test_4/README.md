@@ -27,6 +27,10 @@ Find wheel_material and set Dynamic Friction to 2.0, and Static Friction to 2.0.
 
 Deactivate the Dynamics Xform.
 
+Go to PROPS/NVIDIA and frag the charger into the scene.
+Set the position to... z= 0.00917, y= 0.59935, x=5.27575
+Be sure to disable gravity and lock position or it will fall through the floor.
+
 ## Let's Get Started
 We begin by cloning isaac_ros_common and nova_carter repos to the src folder of our local workspace. My local workspace is ~/workspace/humble_ws
  ```
