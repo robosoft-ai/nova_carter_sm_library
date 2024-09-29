@@ -36,7 +36,6 @@ We begin by cloning isaac_ros_common and nova_carter repos to the src folder of 
  ```
 git clone https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_common.git
 git clone https://github.com/NVIDIA-ISAAC-ROS/nova_carter.git  
-git clone https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_pose_estimation.git
  ```
 ## Start the IsaacROSDev Container (from the workspace...)
  ```
@@ -56,7 +55,7 @@ rosdep update
  ```
 We'll need curl too to for later when we download assets into the isaac_ros_assets folder...
  ```
-sudo apt-get install -y curl tar
+sudo apt-get install -y curl jq tar
  ```
 ### Install LTTng-UST...
 We'll need this for SMACC later...  
@@ -182,6 +181,60 @@ Then we'll convert the encrypted model (.etlt) to a TensorRT engine plan and dro
 ```
 /opt/nvidia/tao/tao-converter -k sdetr -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_amr.plan -p images,1x3x640x640,2x3x640x640,4x3x640x640 -p orig_target_sizes,1x2,2x2,4x2 ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_amr.etlt
 ```
+
+and install this package so you can test your vision pipeline later...  
+```
+sudo apt-get install -y ros-humble-isaac-ros-examples
+```
+
+#### Install isaac_ros_foundation_pose
+
+```
+sudo apt-get install -y ros-humble-isaac-ros-foundationpose
+```
+Then download the assets from NGC...
+```
+NGC_ORG="nvidia"
+NGC_TEAM="isaac"
+PACKAGE_NAME="isaac_ros_foundationpose"
+NGC_RESOURCE="isaac_ros_foundationpose_assets"
+NGC_FILENAME="quickstart.tar.gz"
+MAJOR_VERSION=3
+MINOR_VERSION=1
+VERSION_REQ_URL="https://catalog.ngc.nvidia.com/api/resources/versions?orgName=$NGC_ORG&teamName=$NGC_TEAM&name=$NGC_RESOURCE&isPublic=true&pageNumber=0&pageSize=100&sortOrder=CREATED_DATE_DESC"
+AVAILABLE_VERSIONS=$(curl -s \
+    -H "Accept: application/json" "$VERSION_REQ_URL")
+LATEST_VERSION_ID=$(echo $AVAILABLE_VERSIONS | jq -r "
+    .recipeVersions[]
+    | .versionId as \$v
+    | \$v | select(test(\"^\\\\d+\\\\.\\\\d+\\\\.\\\\d+$\"))
+    | split(\".\") | {major: .[0]|tonumber, minor: .[1]|tonumber, patch: .[2]|tonumber}
+    | select(.major == $MAJOR_VERSION and .minor <= $MINOR_VERSION)
+    | \$v
+    " | sort -V | tail -n 1
+)
+if [ -z "$LATEST_VERSION_ID" ]; then
+    echo "No corresponding version found for Isaac ROS $MAJOR_VERSION.$MINOR_VERSION"
+    echo "Found versions:"
+    echo $AVAILABLE_VERSIONS | jq -r '.recipeVersions[].versionId'
+else
+    mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets && \
+    FILE_REQ_URL="https://api.ngc.nvidia.com/v2/resources/$NGC_ORG/$NGC_TEAM/$NGC_RESOURCE/\
+versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
+    curl -LO --request GET "${FILE_REQ_URL}" && \
+    tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets && \
+    rm ${NGC_FILENAME}
+fi
+```
+Download the pre-trained FoundationPose models from NGC...
+```
+wget --content-disposition https://api.ngc.nvidia.com/v2/models/nvidia/isaac/foundationpose/versions/1.0.0/zip -O foundationpose_1.0.0.zip
+```
+Copy the models to the required directory...
+```
+mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose && \
+   unzip foundationpose_1.0.0.zip -d ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose
+```
 Then we'll convert the encrypted models (.etlt) for the isaac_ros_foundationpose package to TensorRT engine plans and drop it in the isaac_ros_assets/models/isaac_ros_foundationpose folder...
 ```
 /opt/nvidia/tao/tao-converter -k foundationpose -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/refine_trt_engine.plan -p input1,1x160x160x6,1x160x160x6,252x160x160x6 -p input2,1x160x160x6,1x160x160x6,252x160x160x6 -o output1,output2 ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/refine_model.etlt
@@ -193,10 +246,6 @@ Then we'll convert the encrypted models (.etlt) for the isaac_ros_foundationpose
 Then get back to the workspace...  
 ```
 cd /workspaces/isaac_ros-dev/
-```
-and install this package so you can test your vision pipeline later...  
-```
-sudo apt-get install -y ros-humble-isaac-ros-examples
 ```
 #### Install isaac_ros_image_pipeline
  ```
