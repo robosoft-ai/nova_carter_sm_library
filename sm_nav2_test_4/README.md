@@ -185,11 +185,11 @@ mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
     tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
     rm ${NGC_FILENAME}
  ```
-#### Install isaac_ros_rtdetr
+#### Install isaac_ros_rtdetr  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_rtdetr/index.html#build-package-name)
  ```
 sudo apt-get install -y ros-humble-isaac-ros-rtdetr
  ```
-#### Download the isaac_ros_rtdetr assets
+#### Download the isaac_ros_rtdetr assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_rtdetr/index.html#download-quickstart-assets)
 
 Set variables for isaac_ros_assets workspace folder...
  ```
