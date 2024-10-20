@@ -249,7 +249,7 @@ sudo apt-get install -y ros-humble-isaac-ros-examples
 sudo apt-get install -y ros-humble-isaac-ros-ess && \
    sudo apt-get install -y ros-humble-isaac-ros-ess-models-install
 ```
-#### Download the isaac_ros_rtdetr assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#download-quickstart-assets)
+#### Download the isaac_ros_ess assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#download-quickstart-assets)
 
 Run these commands to download the asset from NGC...
 ```
