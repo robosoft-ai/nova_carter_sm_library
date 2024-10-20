@@ -115,7 +115,10 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
 ```
-
+Set env variable so you don't have to manually accept every EULA...  
+```   
+export ISAAC_ROS_ACCEPT_EULA=1
+ ```
 Download and install the pre-trained ESS model files...
 ```
 ros2 run isaac_ros_ess_models_install install_ess_models.sh --eula
@@ -170,10 +173,6 @@ Source setup.bash since the packages are already installed...
 ```
 source /opt/ros/humble/setup.bash
 ```
-Set env variable so you don't have to manually accept every EULA...  
-```   
-export ISAAC_ROS_ACCEPT_EULA=1
- ```
 Run the shell scripts  
 ```   
 ros2 run isaac_ros_ess_models_install install_ess_models.sh
