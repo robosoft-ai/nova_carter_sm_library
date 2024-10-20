@@ -163,6 +163,7 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
  ```
+To test this section, use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/scene_reconstruction/nvblox/tutorials/tutorial_isaac_sim.html)
 #### Download the isacc_ros_ess and isaac_ros_peoplesemsegnet models into the isaac_ros_assets folder (takes a while)
 Source setup.bash since the packages are already installed...   
 ```
