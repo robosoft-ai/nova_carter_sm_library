@@ -133,7 +133,7 @@ We'll start with pointcloud_to_laserscan...
  ```
 sudo apt-get install -y ros-humble-pointcloud-to-laserscan
  ```
-#### Install isaac_ros_detectnet  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_detectnet/index.html#build-package-name)
+### Install isaac_ros_detectnet  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_detectnet/index.html#build-package-name)
 Then we'll get into isaac_ros_object_detection, starting with required pkgs
  ```
 sudo apt-get install -y ros-humble-isaac-ros-dnn-image-encoder ros-humble-isaac-ros-triton
@@ -178,7 +178,7 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
  ```
-#### Install isaac_ros_rtdetr  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_rtdetr/index.html#build-package-name)
+### Install isaac_ros_rtdetr  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_rtdetr/index.html#build-package-name)
  ```
 sudo apt-get install -y ros-humble-isaac-ros-rtdetr
  ```
@@ -244,7 +244,12 @@ and install this package so you can test your vision pipeline later...
 ```
 sudo apt-get install -y ros-humble-isaac-ros-examples
 ```
-#### Install isaac_ros_ess
+#### Install isaac_ros_ess  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#build-package-name)
+```
+sudo apt-get install -y ros-humble-isaac-ros-ess && \
+   sudo apt-get install -y ros-humble-isaac-ros-ess-models-install
+```
+#### Download the isaac_ros_rtdetr assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#download-quickstart-assets)
 
 Run these commands to download the asset from NGC...
 ```
@@ -280,11 +285,7 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
 ```
-Install the prebuilt Debian package...
-```
-sudo apt-get install -y ros-humble-isaac-ros-ess && \
-   sudo apt-get install -y ros-humble-isaac-ros-ess-models-install
-```
+
 Download and install the pre-trained ESS model files...
 ```
 ros2 run isaac_ros_ess_models_install install_ess_models.sh --eula
