@@ -64,7 +64,7 @@ sudo apt-get install -y lttng-tools
 sudo apt-get install -y lttng-modules-dkms  
 sudo apt-get install -y liblttng-ust-dev  
  ```
-### Install Jetson Stats
+### Install Jetson Stats  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_jetson/isaac_ros_jetson_stats/index.html)
  ```
 sudo apt-get install -y ros-humble-isaac-ros-jetson-stats
  ```
