@@ -163,7 +163,6 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
  ```
-To test this section, use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/scene_reconstruction/nvblox/tutorials/tutorial_isaac_sim.html)
 #### Download the isacc_ros_ess and isaac_ros_peoplesemsegnet models into the isaac_ros_assets folder (takes a while)
 Source setup.bash since the packages are already installed...   
 ```
@@ -179,6 +178,8 @@ ros2 run isaac_ros_ess_models_install install_ess_models.sh
 ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemsegnet_vanilla.sh
 ros2 run isaac_ros_peoplesemseg_models_install install_peoplesemsegnet_shuffleseg.sh
  ```
+To test this section, use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/scene_reconstruction/nvblox/tutorials/tutorial_isaac_sim.html)
+
 ### Install isaac_ros_object_detection and other perception packages from Debian... (optional)
 We'll start with pointcloud_to_laserscan...  
  ```
