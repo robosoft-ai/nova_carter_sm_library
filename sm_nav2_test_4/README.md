@@ -244,6 +244,8 @@ and install this package so you can test your vision pipeline later...
 ```
 sudo apt-get install -y ros-humble-isaac-ros-examples
 ```
+To test this section use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/object_detection/rtdetr/tutorial_isaac_sim.html)
+
 #### Install isaac_ros_ess  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#build-package-name)
 ```
 sudo apt-get install -y ros-humble-isaac-ros-ess && \
