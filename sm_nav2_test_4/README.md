@@ -142,7 +142,7 @@ and then with detectnet...
  ```
 sudo apt-get install -y ros-humble-isaac-ros-detectnet
  ```
-#### Download the isaac_ros_detectnet assets
+#### Download the isaac_ros_detectnet assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_detectnet/index.html#download-quickstart-assets)
 
 Set variables for isaac_ros_assets workspace folder...
  ```
