@@ -133,7 +133,7 @@ We'll start with pointcloud_to_laserscan...
  ```
 sudo apt-get install -y ros-humble-pointcloud-to-laserscan
  ```
-#### Install isaac_ros_detectnet
+#### Install isaac_ros_detectnet  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_detectnet/index.html#build-package-name)
 Then we'll get into isaac_ros_object_detection, starting with required pkgs
  ```
 sudo apt-get install -y ros-humble-isaac-ros-dnn-image-encoder ros-humble-isaac-ros-triton
