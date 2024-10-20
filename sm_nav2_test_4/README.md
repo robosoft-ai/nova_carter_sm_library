@@ -72,13 +72,12 @@ sudo apt-get install -y ros-humble-isaac-ros-jetson-stats
  ```
 rosdep install -i -r --from-paths ${ISAAC_ROS_WS}/src/nova_carter/nova_carter_bringup/ --rosdistro humble -y
  ```
-### Install Nvblox From Debian... <p>[Source Link](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#set-up-package-name)</p>
+### Install Nvblox From Debian...<p align="right">[Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#set-up-package-name)</p>
  ```
 sudo apt-get install -y ros-humble-isaac-ros-nvblox && \
 rosdep install isaac_ros_nvblox
  ```
-#### Download the nvblox assets 
-[Source Link](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#download-quickstart-assets)
+#### Download the nvblox assets<p align="right">[Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#download-quickstart-assets)</p>
 
 Set variables for isaac_ros_assets workspace folder...
  ```
