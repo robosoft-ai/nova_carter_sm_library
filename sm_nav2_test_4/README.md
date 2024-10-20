@@ -218,7 +218,7 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
  ```
-Now download the Nvidia SyntheitcaDETR models...
+Now download the pre-trained Nvidia SyntheitcaDETR models...
  ```
 mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
 cd ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
