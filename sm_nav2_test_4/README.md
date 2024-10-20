@@ -70,8 +70,58 @@ sudo apt-get install -y ros-humble-isaac-ros-jetson-stats
  ```
 ### Use rosdep to install Nova Carter bringup dependencies...
  ```
-rosdep install -i -r --from-paths ${ISAAC_ROS_WS}/src/nova_carter/nova_carter_bringup/ --rosdistro humble -y  
+rosdep install -i -r --from-paths ${ISAAC_ROS_WS}/src/nova_carter/nova_carter_bringup/ --rosdistro humble -y
  ```
+#### Install isaac_ros_ess  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#build-package-name)
+```
+sudo apt-get install -y ros-humble-isaac-ros-ess && \
+   sudo apt-get install -y ros-humble-isaac-ros-ess-models-install
+```
+#### Download the isaac_ros_ess assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#download-quickstart-assets)
+
+Run these commands to download the asset from NGC...
+```
+NGC_ORG="nvidia"
+NGC_TEAM="isaac"
+PACKAGE_NAME="isaac_ros_ess"
+NGC_RESOURCE="isaac_ros_ess_assets"
+NGC_FILENAME="quickstart.tar.gz"
+MAJOR_VERSION=3
+MINOR_VERSION=1
+VERSION_REQ_URL="https://catalog.ngc.nvidia.com/api/resources/versions?orgName=$NGC_ORG&teamName=$NGC_TEAM&name=$NGC_RESOURCE&isPublic=true&pageNumber=0&pageSize=100&sortOrder=CREATED_DATE_DESC"
+AVAILABLE_VERSIONS=$(curl -s \
+    -H "Accept: application/json" "$VERSION_REQ_URL")
+LATEST_VERSION_ID=$(echo $AVAILABLE_VERSIONS | jq -r "
+    .recipeVersions[]
+    | .versionId as \$v
+    | \$v | select(test(\"^\\\\d+\\\\.\\\\d+\\\\.\\\\d+$\"))
+    | split(\".\") | {major: .[0]|tonumber, minor: .[1]|tonumber, patch: .[2]|tonumber}
+    | select(.major == $MAJOR_VERSION and .minor <= $MINOR_VERSION)
+    | \$v
+    " | sort -V | tail -n 1
+)
+if [ -z "$LATEST_VERSION_ID" ]; then
+    echo "No corresponding version found for Isaac ROS $MAJOR_VERSION.$MINOR_VERSION"
+    echo "Found versions:"
+    echo $AVAILABLE_VERSIONS | jq -r '.recipeVersions[].versionId'
+else
+    mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets && \
+    FILE_REQ_URL="https://api.ngc.nvidia.com/v2/resources/$NGC_ORG/$NGC_TEAM/$NGC_RESOURCE/\
+versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
+    curl -LO --request GET "${FILE_REQ_URL}" && \
+    tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets && \
+    rm ${NGC_FILENAME}
+fi
+```
+
+Download and install the pre-trained ESS model files...
+```
+ros2 run isaac_ros_ess_models_install install_ess_models.sh --eula
+```
+Then get back to the workspace...  
+```
+cd /workspaces/isaac_ros-dev/
+```
 ### Install Nvblox From Debian...  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#set-up-package-name)
  ```
 sudo apt-get install -y ros-humble-isaac-ros-nvblox && \
@@ -246,59 +296,7 @@ sudo apt-get install -y ros-humble-isaac-ros-examples
 ```
 To test this section use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/object_detection/rtdetr/tutorial_isaac_sim.html)
 
-#### Install isaac_ros_ess  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#build-package-name)
-```
-sudo apt-get install -y ros-humble-isaac-ros-ess && \
-   sudo apt-get install -y ros-humble-isaac-ros-ess-models-install
-```
-#### Download the isaac_ros_ess assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#download-quickstart-assets)
-
-Run these commands to download the asset from NGC...
-```
-NGC_ORG="nvidia"
-NGC_TEAM="isaac"
-PACKAGE_NAME="isaac_ros_ess"
-NGC_RESOURCE="isaac_ros_ess_assets"
-NGC_FILENAME="quickstart.tar.gz"
-MAJOR_VERSION=3
-MINOR_VERSION=1
-VERSION_REQ_URL="https://catalog.ngc.nvidia.com/api/resources/versions?orgName=$NGC_ORG&teamName=$NGC_TEAM&name=$NGC_RESOURCE&isPublic=true&pageNumber=0&pageSize=100&sortOrder=CREATED_DATE_DESC"
-AVAILABLE_VERSIONS=$(curl -s \
-    -H "Accept: application/json" "$VERSION_REQ_URL")
-LATEST_VERSION_ID=$(echo $AVAILABLE_VERSIONS | jq -r "
-    .recipeVersions[]
-    | .versionId as \$v
-    | \$v | select(test(\"^\\\\d+\\\\.\\\\d+\\\\.\\\\d+$\"))
-    | split(\".\") | {major: .[0]|tonumber, minor: .[1]|tonumber, patch: .[2]|tonumber}
-    | select(.major == $MAJOR_VERSION and .minor <= $MINOR_VERSION)
-    | \$v
-    " | sort -V | tail -n 1
-)
-if [ -z "$LATEST_VERSION_ID" ]; then
-    echo "No corresponding version found for Isaac ROS $MAJOR_VERSION.$MINOR_VERSION"
-    echo "Found versions:"
-    echo $AVAILABLE_VERSIONS | jq -r '.recipeVersions[].versionId'
-else
-    mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets && \
-    FILE_REQ_URL="https://api.ngc.nvidia.com/v2/resources/$NGC_ORG/$NGC_TEAM/$NGC_RESOURCE/\
-versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
-    curl -LO --request GET "${FILE_REQ_URL}" && \
-    tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets && \
-    rm ${NGC_FILENAME}
-fi
-```
-
-Download and install the pre-trained ESS model files...
-```
-ros2 run isaac_ros_ess_models_install install_ess_models.sh --eula
-```
-Then get back to the workspace...  
-```
-cd /workspaces/isaac_ros-dev/
-```
-
-#### Install isaac_ros_foundation_pose
-
+### Install isaac_ros_foundation_pose  |
 ```
 sudo apt-get install -y ros-humble-isaac-ros-foundationpose
 ```
@@ -336,7 +334,7 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
 ```
-Download the pre-trained FoundationPose models from NGC...
+#### Download the foundationpose assets | 
 ```
 wget --content-disposition https://api.ngc.nvidia.com/v2/models/nvidia/isaac/foundationpose/versions/1.0.0/zip -O foundationpose_1.0.0.zip
 ```
@@ -357,7 +355,7 @@ Then get back to the workspace...
 ```
 cd /workspaces/isaac_ros-dev/
 ```
-#### Install isaac_ros_image_pipeline
+### Install isaac_ros_image_pipeline
  ```
  sudo apt-get install -y ros-humble-isaac-ros-depth-image-proc
  sudo apt-get install -y ros-humble-isaac-ros-gxf-extensions
