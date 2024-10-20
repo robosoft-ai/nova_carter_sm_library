@@ -72,29 +72,46 @@ sudo apt-get install -y ros-humble-isaac-ros-jetson-stats
  ```
 rosdep install -i -r --from-paths ${ISAAC_ROS_WS}/src/nova_carter/nova_carter_bringup/ --rosdistro humble -y
  ```
-### Install Nvblox From Debian...
+### Install Nvblox From Debian... (https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#set-up-package-name)
  ```
 sudo apt-get install -y ros-humble-isaac-ros-nvblox && \
 rosdep install isaac_ros_nvblox
  ```
-#### Download the nvblox assets
+#### Download the nvblox assets (https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#download-quickstart-assets)
 
 Set variables for isaac_ros_assets workspace folder...
  ```
 NGC_ORG="nvidia"
 NGC_TEAM="isaac"
-NGC_RESOURCE="isaac_ros_assets"
-NGC_VERSION="isaac_ros_nvblox"
+PACKAGE_NAME="isaac_ros_nvblox"
+NGC_RESOURCE="isaac_ros_nvblox_assets"
 NGC_FILENAME="quickstart.tar.gz"
-
-REQ_URL="https://api.ngc.nvidia.com/v2/resources/$NGC_ORG/$NGC_TEAM/$NGC_RESOURCE/versions/$NGC_VERSION/files/$NGC_FILENAME"
- ```
-Create isaac_ros_assets workspace folder...
- ```
-mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
-    curl -LO --request GET "${REQ_URL}" && \
-    tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
+MAJOR_VERSION=3
+MINOR_VERSION=1
+VERSION_REQ_URL="https://catalog.ngc.nvidia.com/api/resources/versions?orgName=$NGC_ORG&teamName=$NGC_TEAM&name=$NGC_RESOURCE&isPublic=true&pageNumber=0&pageSize=100&sortOrder=CREATED_DATE_DESC"
+AVAILABLE_VERSIONS=$(curl -s \
+    -H "Accept: application/json" "$VERSION_REQ_URL")
+LATEST_VERSION_ID=$(echo $AVAILABLE_VERSIONS | jq -r "
+    .recipeVersions[]
+    | .versionId as \$v
+    | \$v | select(test(\"^\\\\d+\\\\.\\\\d+\\\\.\\\\d+$\"))
+    | split(\".\") | {major: .[0]|tonumber, minor: .[1]|tonumber, patch: .[2]|tonumber}
+    | select(.major == $MAJOR_VERSION and .minor <= $MINOR_VERSION)
+    | \$v
+    " | sort -V | tail -n 1
+)
+if [ -z "$LATEST_VERSION_ID" ]; then
+    echo "No corresponding version found for Isaac ROS $MAJOR_VERSION.$MINOR_VERSION"
+    echo "Found versions:"
+    echo $AVAILABLE_VERSIONS | jq -r '.recipeVersions[].versionId'
+else
+    mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets && \
+    FILE_REQ_URL="https://api.ngc.nvidia.com/v2/resources/$NGC_ORG/$NGC_TEAM/$NGC_RESOURCE/\
+versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
+    curl -LO --request GET "${FILE_REQ_URL}" && \
+    tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets && \
     rm ${NGC_FILENAME}
+fi
  ```
 #### Download the isacc_ros_ess and isaac_ros_peoplesemsegnet models into the isaac_ros_assets folder (takes a while)
 Source setup.bash since the packages are already installed...   
