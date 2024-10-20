@@ -77,8 +77,6 @@ rosdep install -i -r --from-paths ${ISAAC_ROS_WS}/src/nova_carter/nova_carter_br
 sudo apt-get install -y ros-humble-isaac-ros-nvblox && \
 rosdep install isaac_ros_nvblox
  ```
-[Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#set-up-package-name)
-
 #### Download the nvblox assets  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#download-quickstart-assets)
 
 Set variables for isaac_ros_assets workspace folder...
@@ -115,8 +113,6 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
  ```
-[Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#download-quickstart-assets)  
-
 #### Download the isacc_ros_ess and isaac_ros_peoplesemsegnet models into the isaac_ros_assets folder (takes a while)
 Source setup.bash since the packages are already installed...   
 ```
