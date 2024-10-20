@@ -297,7 +297,7 @@ sudo apt-get install -y ros-humble-isaac-ros-examples
 ```
 To test this section use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/object_detection/rtdetr/tutorial_isaac_sim.html)
 
-### Install isaac_ros_foundation_pose  |
+### Install isaac_ros_foundation_pose  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_pose_estimation/isaac_ros_foundationpose/index.html#build-package-name)  |
 ```
 sudo apt-get install -y ros-humble-isaac-ros-foundationpose
 ```
@@ -335,7 +335,7 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
 ```
-#### Download the foundationpose assets | 
+#### Download the foundationpose assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_pose_estimation/isaac_ros_foundationpose/index.html#download-quickstart-assets)
 ```
 wget --content-disposition https://api.ngc.nvidia.com/v2/models/nvidia/isaac/foundationpose/versions/1.0.0/zip -O foundationpose_1.0.0.zip
 ```
