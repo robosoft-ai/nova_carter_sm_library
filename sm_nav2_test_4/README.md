@@ -192,7 +192,7 @@ and then with detectnet...
  ```
 sudo apt-get install -y ros-humble-isaac-ros-detectnet
  ```
-#### Download the isaac_ros_detectnet assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_detectnet/index.html#download-quickstart-assets)
+#### Download the isaac_ros_detectnet assets  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_detectnet/index.html#download-quickstart-assets)
 
 Set variables for isaac_ros_assets workspace folder...
  ```
@@ -297,7 +297,7 @@ sudo apt-get install -y ros-humble-isaac-ros-examples
 ```
 To test this section use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/object_detection/rtdetr/tutorial_isaac_sim.html)
 
-### Install isaac_ros_foundation_pose  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_pose_estimation/isaac_ros_foundationpose/index.html#build-package-name)  |
+### Install isaac_ros_foundation_pose  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_pose_estimation/isaac_ros_foundationpose/index.html#build-package-name)
 ```
 sudo apt-get install -y ros-humble-isaac-ros-foundationpose
 ```
@@ -356,7 +356,9 @@ Then get back to the workspace...
 ```
 cd /workspaces/isaac_ros-dev/
 ```
-### Install isaac_ros_image_pipeline
+To test this section use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/pose_estimation/foundationpose/tutorial_isaac_sim.html)
+
+### Install isaac_ros_image_pipeline (deprecated?)
  ```
  sudo apt-get install -y ros-humble-isaac-ros-depth-image-proc
  sudo apt-get install -y ros-humble-isaac-ros-gxf-extensions
