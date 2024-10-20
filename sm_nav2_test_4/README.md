@@ -79,7 +79,7 @@ rosdep install isaac_ros_nvblox
  ```
 [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#set-up-package-name)
 
-#### Download the nvblox assets[Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#download-quickstart-assets)
+#### Download the nvblox assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_nvblox/isaac_ros_nvblox/index.html#download-quickstart-assets)
 
 Set variables for isaac_ros_assets workspace folder...
  ```
