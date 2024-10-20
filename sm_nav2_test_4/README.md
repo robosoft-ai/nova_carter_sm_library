@@ -35,6 +35,8 @@ Be sure to disable gravity and lock position or it will fall through the floor.
 We begin by cloning isaac_ros_common and nova_carter repos to the src folder of our local workspace. My local workspace is ~/workspace/humble_ws
  ```
 git clone https://github.com/NVIDIA-ISAAC-ROS/isaac_ros_common.git
+ ```
+ ```
 git clone https://github.com/NVIDIA-ISAAC-ROS/nova_carter.git  
  ```
 ## Start the IsaacROSDev Container (from the workspace...)
