@@ -178,13 +178,6 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
  ```
-Create isaac_ros_assets workspace folder...
- ```
-mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
-    curl -LO --request GET "${REQ_URL}" && \
-    tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
-    rm ${NGC_FILENAME}
- ```
 #### Install isaac_ros_rtdetr  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_rtdetr/index.html#build-package-name)
  ```
 sudo apt-get install -y ros-humble-isaac-ros-rtdetr
@@ -224,13 +217,6 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets && \
     rm ${NGC_FILENAME}
 fi
- ```
-Create isaac_ros_assets workspace folder...
- ```
-mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
-    curl -LO --request GET "${REQ_URL}" && \
-    tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets/${NGC_VERSION} && \
-    rm ${NGC_FILENAME}
  ```
 Now download the Nvidia SyntheitcaDETR models...
  ```
