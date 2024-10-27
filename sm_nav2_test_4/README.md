@@ -231,6 +231,11 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
  ```
+Then Run the setup script to download the PeopleNet Model from NVIDIA GPU Cloud(NGC) and convert it to a .etlt file
+ ```
+ ros2 run isaac_ros_detectnet setup_model.sh --height 720 --width 1280 --config-file isaac_sim_config.pbtxt
+ ```
+ 
 To test this section, use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/object_detection/detectnet/tutorial_isaac_sim.html)
 ### Install isaac_ros_rtdetr  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_rtdetr/index.html#build-package-name)
  ```
@@ -405,8 +410,21 @@ cd /workspaces/isaac_ros-dev
 vcs import --recursive src < src/nova_carter/nova_carter.repos
  ```
 A ton of beta ish dependencies are added in this step to make the original perceptor demo work.  
+This has now led to build problems involving building the following packages from source. So, after completing the previous vcs import command, remove the following packages form workspace/src
 
+ ```
+ REMOVE THESE PKGS FROM THE WORKSPACE/SRC FOLDER BEFORE COMPILING
+isaac_ros_nitros
+isaac_ros_image_segmentation
+isaac_ros_dnn_inference
+isaac_ros_image_pipeline
+isaac_ros_freespace_segmentation
+isaac_perceptor
+isaac_ros_depth_segmentation
+isaac_ros_dnn_stereo_depth
+ ```
 ## Build Workspace
+Ok, now you're ready to compile everything...
 ```
 source /opt/ros/humble/setup.bash
 ```

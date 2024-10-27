@@ -39,12 +39,11 @@
 
   <depend>isaac_ros_occupancy_grid_localizer</depend>
   <depend>isaac_ros_pointcloud_utils</depend>
-  <depend>isaac_ros_object_detection</depend>
+
   <depend>isaac_ros_visual_slam</depend>
   <depend>isaac_ros_image_pipeline</depend>
   <depend>isaac_ros_apriltag</depend>
-  <!-- <depend>carter_navigation</depend> -->
-   <!--<depend>rrt_exploration</depend> -->
+
   <depend>pointcloud_to_laserscan</depend>
   <depend>isaac_ros_apriltag_interfaces</depend>
   <depend>keyboard_client</depend>
