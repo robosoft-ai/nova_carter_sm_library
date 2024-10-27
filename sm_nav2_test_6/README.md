@@ -1,6 +1,6 @@
  # State Machine Diagram
 
- ![sm_nav2_test_4](docs/SmNav2Test4_2024-9-7_222225.svg)
+ ![sm_nav2_test_6](docs/SmNav2Test6_2024-9-7_222225.svg)
 
  ## Description 
  A state machine application for the NOVA Carter using Nav2 and the SMACC nav2z Client Behavior Library.
@@ -441,10 +441,10 @@ Source the workspace...
 source install/setup.bash
  ```
 ```
-ros2 run sm_nav2_test_4 lidar_completion.py --ros-args -r /scan_input:=/scan2 -r /scan_output:=/scan
+ros2 run sm_nav2_test_6 lidar_completion.py --ros-args -r /scan_input:=/scan2 -r /scan_output:=/scan
 ```
  ```
-ros2 launch sm_nav2_test_4 sm_nav2_test_4_launch.py 
+ros2 launch sm_nav2_test_6 sm_nav2_test_6_launch.py 
  ```
 
 
