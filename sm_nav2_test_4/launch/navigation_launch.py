@@ -39,7 +39,7 @@ def generate_launch_description():
     container_name_full = (namespace, "/", container_name)
     use_respawn = LaunchConfiguration("use_respawn")
     log_level = LaunchConfiguration("log_level")
-    default_nav_to_pose_bt_xml = LaunchConfiguration("default_nav_to_pose_bt_xml")
+   # default_nav_to_pose_bt_xml = LaunchConfiguration("default_nav_to_pose_bt_xml")
 
     lifecycle_nodes = [
         "controller_server",
@@ -51,12 +51,6 @@ def generate_launch_description():
         "velocity_smoother",
     ]
 
-    # Map fully qualified names to relative ones so the node's namespace can be prepended.
-    # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
-    # https://github.com/ros/geometry2/issues/32
-    # https://github.com/ros/robot_state_publisher/pull/30
-    # TODO(orduno) Substitute with `PushNodeRemapping`
-    #              https://github.com/ros2/launch_ros/issues/56
     remappings = [("/tf", "tf"), ("/tf_static", "tf_static")]
 
     # Create our own temporary YAML files that include substitutions
@@ -122,7 +116,7 @@ def generate_launch_description():
         "log_level", default_value="info", description="log level"
     )
 
-    bt_nav = Node(  # Sacado de grupo para pruebas
+    bt_nav = Node(  
         package="nav2_bt_navigator",
         executable="bt_navigator",
         name="bt_navigator",
@@ -134,7 +128,7 @@ def generate_launch_description():
         prefix="xterm -hold -e",
         remappings=remappings,
     )
-    control = Node(  # Sacado de grupo para pruebas
+    control = Node( 
         package="nav2_controller",
         executable="controller_server",
         output="screen",
@@ -145,7 +139,7 @@ def generate_launch_description():
         prefix="xterm -hold -e",
         remappings=remappings + [("cmd_vel", "cmd_vel_nav")],
     )
-    plan = Node(  # Sacado de grupo para pruebas
+    plan = Node(  
         package="nav2_planner",
         executable="planner_server",
         name="planner_server",
@@ -161,15 +155,7 @@ def generate_launch_description():
     load_nodes = GroupAction(
         condition=IfCondition(PythonExpression(["not ", use_composition])),
         actions=[
-            # Node( # Fuera de grupo
-            #     package='nav2_controller',
-            #     executable='controller_server',
-            #     output='screen',
-            #     respawn=use_respawn,
-            #     respawn_delay=2.0,
-            #     parameters=[configured_params],
-            #     arguments=['--ros-args', '--log-level', log_level],
-            #     remappings=remappings + [('cmd_vel', 'cmd_vel_nav')]),
+
             Node(
                 package="nav2_smoother",
                 executable="smoother_server",
@@ -181,16 +167,7 @@ def generate_launch_description():
                 arguments=["--ros-args", "--log-level", log_level],
                 remappings=remappings,
             ),
-            # Node( # Fuera de grupo
-            #     package='nav2_planner',
-            #     executable='planner_server',
-            #     name='planner_server',
-            #     output='screen',
-            #     respawn=use_respawn,
-            #     respawn_delay=2.0,
-            #     parameters=[configured_params],
-            #     arguments=['--ros-args', '--log-level', log_level],
-            #     remappings=remappings),
+
             Node(
                 package="nav2_behaviors",
                 executable="behavior_server",
@@ -202,17 +179,7 @@ def generate_launch_description():
                 arguments=["--ros-args", "--log-level", log_level],
                 remappings=remappings,
             ),
-            # Node( # Fuera de grupo
-            #     package='nav2_bt_navigator',
-            #     executable='bt_navigator',
-            #     name='bt_navigator',
-            #     output='screen',
-            #     respawn=use_respawn,
-            #     respawn_delay=2.0,
-            #     parameters=[configured_params],
-            #     arguments=['--ros-args', '--log-level', log_level],
-            #     prefix="xterm -hold -e",
-            #     remappings=remappings),
+
             Node(
                 package="nav2_waypoint_follower",
                 executable="waypoint_follower",
@@ -224,6 +191,7 @@ def generate_launch_description():
                 arguments=["--ros-args", "--log-level", log_level],
                 remappings=remappings,
             ),
+          
             Node(
                 package="nav2_velocity_smoother",
                 executable="velocity_smoother",
@@ -236,6 +204,7 @@ def generate_launch_description():
                 remappings=remappings
                 + [("cmd_vel", "cmd_vel_nav"), ("cmd_vel_smoothed", "cmd_vel")],
             ),
+        
             Node(
                 package="nav2_lifecycle_manager",
                 executable="lifecycle_manager",
@@ -255,6 +224,7 @@ def generate_launch_description():
         condition=IfCondition(use_composition),
         target_container=container_name_full,
         composable_node_descriptions=[
+           
             ComposableNode(
                 package="nav2_controller",
                 plugin="nav2_controller::ControllerServer",
@@ -262,6 +232,7 @@ def generate_launch_description():
                 parameters=[configured_params],
                 remappings=remappings + [("cmd_vel", "cmd_vel_nav")],
             ),
+          
             ComposableNode(
                 package="nav2_smoother",
                 plugin="nav2_smoother::SmootherServer",
@@ -269,6 +240,7 @@ def generate_launch_description():
                 parameters=[configured_params],
                 remappings=remappings,
             ),
+            
             ComposableNode(
                 package="nav2_planner",
                 plugin="nav2_planner::PlannerServer",
@@ -276,6 +248,7 @@ def generate_launch_description():
                 parameters=[configured_params],
                 remappings=remappings,
             ),
+          
             ComposableNode(
                 package="nav2_behaviors",
                 plugin="behavior_server::BehaviorServer",
@@ -283,6 +256,7 @@ def generate_launch_description():
                 parameters=[configured_params],
                 remappings=remappings,
             ),
+          
             ComposableNode(
                 package="nav2_bt_navigator",
                 plugin="nav2_bt_navigator::BtNavigator",
@@ -290,6 +264,7 @@ def generate_launch_description():
                 parameters=[configured_params],
                 remappings=remappings,
             ),
+           
             ComposableNode(
                 package="nav2_waypoint_follower",
                 plugin="nav2_waypoint_follower::WaypointFollower",
@@ -297,6 +272,7 @@ def generate_launch_description():
                 parameters=[configured_params],
                 remappings=remappings,
             ),
+           
             ComposableNode(
                 package="nav2_velocity_smoother",
                 plugin="nav2_velocity_smoother::VelocitySmoother",
@@ -305,6 +281,7 @@ def generate_launch_description():
                 remappings=remappings
                 + [("cmd_vel", "cmd_vel_nav"), ("cmd_vel_smoothed", "cmd_vel")],
             ),
+            
             ComposableNode(
                 package="nav2_lifecycle_manager",
                 plugin="nav2_lifecycle_manager::LifecycleManager",
@@ -335,10 +312,11 @@ def generate_launch_description():
     ld.add_action(declare_container_name_cmd)
     ld.add_action(declare_use_respawn_cmd)
     ld.add_action(declare_log_level_cmd)
+
     # Add the actions to launch all of the navigation nodes
-    ld.add_action(bt_nav)  # Añadido
-    ld.add_action(control)  # Añadido
-    ld.add_action(plan)  # Añadido
+    ld.add_action(bt_nav) 
+    ld.add_action(control)  
+    ld.add_action(plan) 
     ld.add_action(load_nodes)
     ld.add_action(load_composable_nodes)
 
