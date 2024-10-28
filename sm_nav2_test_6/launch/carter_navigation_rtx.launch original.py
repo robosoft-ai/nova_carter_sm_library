@@ -122,14 +122,6 @@ def generate_launch_description():
                 }.items(),
             ),
 
-            IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(
-                    [isaac_exploration_launch_dir, "/vision_pipeline_launch.py"]
-                ),
-                launch_arguments={
-                }.items(),
-            ),
-
             Node(
                 package="pointcloud_to_laserscan",
                 executable="pointcloud_to_laserscan_node",
