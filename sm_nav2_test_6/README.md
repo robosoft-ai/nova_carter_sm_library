@@ -185,57 +185,6 @@ We'll start with pointcloud_to_laserscan...
  ```
 sudo apt-get install -y ros-humble-pointcloud-to-laserscan
  ```
-### Install isaac_ros_detectnet  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_detectnet/index.html#build-package-name)
-Then we'll get into isaac_ros_object_detection, starting with required pkgs
- ```
-sudo apt-get install -y ros-humble-isaac-ros-dnn-image-encoder ros-humble-isaac-ros-triton
- ```
-and then with detectnet...
- ```
-sudo apt-get install -y ros-humble-isaac-ros-detectnet
- ```
-#### Download the isaac_ros_detectnet assets  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_detectnet/index.html#download-quickstart-assets)
-
-Set variables for isaac_ros_assets workspace folder...
- ```
-NGC_ORG="nvidia"
-NGC_TEAM="isaac"
-PACKAGE_NAME="isaac_ros_detectnet"
-NGC_RESOURCE="isaac_ros_detectnet_assets"
-NGC_FILENAME="quickstart.tar.gz"
-MAJOR_VERSION=3
-MINOR_VERSION=1
-VERSION_REQ_URL="https://catalog.ngc.nvidia.com/api/resources/versions?orgName=$NGC_ORG&teamName=$NGC_TEAM&name=$NGC_RESOURCE&isPublic=true&pageNumber=0&pageSize=100&sortOrder=CREATED_DATE_DESC"
-AVAILABLE_VERSIONS=$(curl -s \
-    -H "Accept: application/json" "$VERSION_REQ_URL")
-LATEST_VERSION_ID=$(echo $AVAILABLE_VERSIONS | jq -r "
-    .recipeVersions[]
-    | .versionId as \$v
-    | \$v | select(test(\"^\\\\d+\\\\.\\\\d+\\\\.\\\\d+$\"))
-    | split(\".\") | {major: .[0]|tonumber, minor: .[1]|tonumber, patch: .[2]|tonumber}
-    | select(.major == $MAJOR_VERSION and .minor <= $MINOR_VERSION)
-    | \$v
-    " | sort -V | tail -n 1
-)
-if [ -z "$LATEST_VERSION_ID" ]; then
-    echo "No corresponding version found for Isaac ROS $MAJOR_VERSION.$MINOR_VERSION"
-    echo "Found versions:"
-    echo $AVAILABLE_VERSIONS | jq -r '.recipeVersions[].versionId'
-else
-    mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets && \
-    FILE_REQ_URL="https://api.ngc.nvidia.com/v2/resources/$NGC_ORG/$NGC_TEAM/$NGC_RESOURCE/\
-versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
-    curl -LO --request GET "${FILE_REQ_URL}" && \
-    tar -xf ${NGC_FILENAME} -C ${ISAAC_ROS_WS}/isaac_ros_assets && \
-    rm ${NGC_FILENAME}
-fi
- ```
-Then Run the setup script to download the PeopleNet Model from NVIDIA GPU Cloud(NGC) and convert it to a .etlt file
- ```
- ros2 run isaac_ros_detectnet setup_model.sh --height 720 --width 1280 --config-file isaac_sim_config.pbtxt
- ```
- 
-To test this section, use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/object_detection/detectnet/tutorial_isaac_sim.html)
 ### Install isaac_ros_rtdetr  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_object_detection/isaac_ros_rtdetr/index.html#build-package-name)
  ```
 sudo apt-get install -y ros-humble-isaac-ros-rtdetr
@@ -365,17 +314,6 @@ cd /workspaces/isaac_ros-dev/
 ```
 To test this section use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/pose_estimation/foundationpose/tutorial_isaac_sim.html)
 
-### Install isaac_ros_image_pipeline (deprecated?)
- ```
- sudo apt-get install -y ros-humble-isaac-ros-depth-image-proc
- sudo apt-get install -y ros-humble-isaac-ros-gxf-extensions
- sudo apt-get install -y ros-humble-isaac-ros-image-pipeline
- ```
-These should already be installed but if you just want to make sure..  
- ```
- sudo apt-get install -y ros-humble-isaac-ros-image-proc
- sudo apt-get install -y ros-humble-isaac-ros-stereo-image-proc
- ```
 
 ## Assemble the Workspace
 

@@ -600,7 +600,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /front_3d_lidar/lidar_points
+        Value: /front_3d_lidar/point_cloud
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -616,7 +616,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /front_stereo_camera/left/image_rect_color
+        Value: /front_stereo_camera/left/image_raw
       Value: true
     - Class: rviz_default_plugins/Marker
       Enabled: true
