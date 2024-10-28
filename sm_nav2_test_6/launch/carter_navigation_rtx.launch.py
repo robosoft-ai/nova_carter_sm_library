@@ -126,7 +126,7 @@ def generate_launch_description():
                 package="pointcloud_to_laserscan",
                 executable="pointcloud_to_laserscan_node",
                 # remappings=[("cloud_in", ["/front_3d_lidar/point_cloud"]), ("scan", ["/scan"])],
-                remappings=[("cloud_in", ["/front_3d_lidar/point_cloud"]), ("scan", ["/scan2"])],
+                remappings=[("cloud_in", ["/front_3d_lidar/lidar_points"]), ("scan", ["/scan2"])],
                 parameters=[
                     {
                         "target_frame": "front_3d_lidar",
