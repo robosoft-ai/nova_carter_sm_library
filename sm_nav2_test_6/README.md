@@ -385,4 +385,8 @@ ros2 run sm_nav2_test_6 lidar_completion.py --ros-args -r /scan_input:=/scan2 -r
 ros2 launch sm_nav2_test_6 sm_nav2_test_6_launch.py 
  ```
 
+## Test Commands
+ ```
+ros2 topic echo /detections_output
 
+ ```
