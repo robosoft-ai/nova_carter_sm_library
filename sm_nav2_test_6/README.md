@@ -314,6 +314,26 @@ cd /workspaces/isaac_ros-dev/
 ```
 To test this section use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/pose_estimation/foundationpose/tutorial_isaac_sim.html)
 
+#### Install Postgres (Optional - experimental)
+
+First install quickstart pkgs [Source](https://wiki.postgresql.org/wiki/Apt)
+```
+sudo apt install -y postgresql-common
+sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+```
+Then install the version you want (in this case 17)
+```
+sudo apt install postgresql-17
+```
+Then install PostGIS and pgrouting [Source](https://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS3UbuntuPGSQLApt)
+```
+sudo apt install postgresql-17-postgis-3
+sudo apt install postgresql-17-pgrouting
+```
+Then pgvector [Source](https://github.com/pgvector/pgvector?tab=readme-ov-file#apt)
+```
+sudo apt install postgresql-17-pgvector
+```
 
 ## Assemble the Workspace
 
