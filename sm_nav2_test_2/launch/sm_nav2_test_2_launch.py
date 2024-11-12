@@ -48,21 +48,6 @@ def generate_launch_description():
     params_file = LaunchConfiguration("params_file")
     default_nav_to_pose_bt_xml = LaunchConfiguration("default_nav_to_pose_bt_xml")
     autostart = LaunchConfiguration("autostart")
-
-    # Launch configuration variables specific to simulation
-    # rviz_config_file = LaunchConfiguration("rviz_config_file")
-
-    # use_robot_state_pub = LaunchConfiguration("use_robot_state_pub")
-    # use_rviz = LaunchConfiguration("use_rviz")
-
-    # urdf = os.path.join(sm_nav2_test_2_dir, "urdf", "turtlebot3_waffle.urdf")
-
-    # Map fully qualified names to relative ones so the node's namespace can be prepended.
-    # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
-    # https://github.com/ros/geometry2/issues/32
-    # https://github.com/ros/robot_state_publisher/pull/30
-    # TODO(orduno) Substitute with `PushNodeRemapping`
-    #              https://github.com/ros2/launch_ros/issues/56
     remappings = [("/tf", "tf"), ("/tf_static", "tf_static")]
 
     # Declare the launch arguments
@@ -146,79 +131,7 @@ def generate_launch_description():
         description="Full path to map file to load",
     )
 
-    # start_robot_state_publisher_cmd = Node(
-    #     condition=IfCondition(use_robot_state_pub),
-    #     package="robot_state_publisher",
-    #     executable="robot_state_publisher",
-    #     name="robot_state_publisher",
-    #     namespace=namespace,
-    #     output="screen",
-    #     parameters=[{"use_sim_time": use_sim_time}],
-    #     remappings=remappings,
-    #     arguments=[urdf],
-    #     prefix=xtermprefix,
-    # )
-
-    # static_transform_publisher = Node(
-    #     package="sm_nav2_test_2",
-    #     executable="transform_publisher.py",
-    #     name="static_transform_publisherxx",
-    #     output="screen",
-    #     # arguments=["-0.064", "0", "0.122", "0", "0", "0", "base_scan", "base_link"],
-    #     prefix=xtermprefix,
-    #     parameters=[{"use_sim_time": use_sim_time}],
-    # )
-
-    # # static_transform_publisher_2 = Node(
-    # #     package="tf2_ros",
-    # #     executable="static_transform_publisher",
-    # #     name="static_transform_publisher",
-    # #     output="screen",
-    # #     arguments=["0", "0", "0", "0", "0", "0", "base_link", "base_footprint"],
-    # #     prefix=xtermprefix,
-    # # )
-
-    # rviz_cmd = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(os.path.join(sm_nav2_test_2_launch_dir, "rviz_launch.py")),
-    #     condition=IfCondition(use_rviz),
-    #     launch_arguments={
-    #         "namespace": "",
-    #         "use_namespace": "False",
-    #         "rviz_config": rviz_config_file,
-    #     }.items(),
-    # )
-
-    # bringup_cmd = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(os.path.join(sm_nav2_test_2_launch_dir, "bringup_launch.py")),
-    #     launch_arguments={
-    #         "namespace": namespace,
-    #         "use_namespace": use_namespace,
-    #         "autostart": autostart,
-    #         "params_file": params_file,
-    #         "slam": slam,
-    #         "map": map_yaml_file,
-    #         "use_sim_time": use_sim_time,
-    #         "default_nav_to_pose_bt_xml": default_nav_to_pose_bt_xml,
-    #     }.items(),
-    # )
-
-    # carter_cmd = IncludeLaunchDescription(
-    #     # PythonLaunchDescriptionSource(os.path.join(sm_nav2_test_2_launch_dir, "carter_navigation.launch.py")),
-    #     PythonLaunchDescriptionSource(
-    #         os.path.join(sm_nav2_test_2_launch_dir, "carter_navigation_rtx.launch.py")
-    #     ),
-    #     launch_arguments={
-    #         "namespace": namespace,
-    #         "use_namespace": use_namespace,
-    #         "autostart": autostart,
-    #         "params_file": params_file,
-    #         "slam": slam,
-    #         "active_slam_sel": active_slam_sel,
-    #         "map": map_yaml_file,
-    #         "use_sim_time": use_sim_time,
-    #         "default_nav_to_pose_bt_xml": default_nav_to_pose_bt_xml,
-    #     }.items(),
-    # )
+    # Specify the actions
 
     sm_nav2_test_2_node = Node(
         package="sm_nav2_test_2",
@@ -250,13 +163,6 @@ def generate_launch_description():
         arguments=["--ros-args", "--log-level", "INFO"],
     )
 
-    # gt_transform_publisher = Node(
-    #     package="sm_nav2_test_2",
-    #     executable="ue_navigation_frames_ground_truth_adapter.py",
-    #     output="screen",
-    #     prefix=xtermprefix,
-    #     parameters=[{"use_sim_time": use_sim_time}],
-    # )
 
     # Create the launch description and populate
     ld = LaunchDescription()
@@ -280,13 +186,6 @@ def generate_launch_description():
 
     ld.add_action(sm_nav2_test_2_node)
     ld.add_action(declare_active_slam_sel)
-    # ld.add_action(static_transform_publisher)
-    # ld.add_action(gt_transform_publisher)
-
-    # # # Add the actions to launch all of the navigation nodes
-    # ld.add_action(start_robot_state_publisher_cmd)
-    # ld.add_action(rviz_cmd)
-    # ld.add_action(carter_cmd)
     ld.add_action(keyboard_client_node)
 
     return ld
