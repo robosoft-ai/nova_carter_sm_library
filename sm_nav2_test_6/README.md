@@ -14,18 +14,16 @@
 
 ## Simulation Environment
 For simulation, we'll be using IsaacSim 4.2.
-Under the IsaacAssets tab go to SAMPLES/NVBLOX/nvblox_sample_scene.
+Under the IsaacAssets tab go to SAMPLES/ROS2/carter_warehouse_apriltags_worker and load it into the stage.
 
-Once inside, you'll need to fing the NOVA_Carter_ROS_nvblox_setup Folder.
+Once inside, you'll need to find the NOVA_Carter_ROS Folder.
 For caster_wheel_left and caster_wheel_right, set the Max Angular Velocity to 500.
-Then set the Mass to 10.0 for each one.
+Then set the Mass to 6.0 for each one.
 
 Then find the wheel_left, wheel_right and change the Max Angular Velocity to 500.
 
 Then, find the chassis_link Mass and change it to 30.0
 Find wheel_material and set Dynamic Friction to 2.0, and Static Friction to 2.0.
-
-Deactivate the Dynamics Xform.
 
 Go to PROPS/NVIDIA and frag the charger into the scene.
 Set the position to... z= 0.00917, y= 0.59935, x=5.27575
