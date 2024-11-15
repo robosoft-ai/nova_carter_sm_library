@@ -22,7 +22,7 @@ Then set the Mass to 6.0 for each one.
 
 Then find the wheel_left, wheel_right and change the Max Angular Velocity to 500.
 
-Then, find the chassis_link Mass and change it to 30.0
+Then, find the chassis_link Mass and change it to 20.0
 Find wheel_material and set Dynamic Friction to 2.0, and Static Friction to 2.0.
 
 Go to PROPS/NVIDIA and frag the charger into the scene.
