@@ -25,9 +25,13 @@ Then find the wheel_left, wheel_right and change the Max Angular Velocity to 500
 Then, find the chassis_link Mass and change it to 20.0
 Find wheel_material and set Dynamic Friction to 2.0, and Static Friction to 2.0.
 
-Go to PROPS/NVIDIA and frag the charger into the scene.
-Set the position to... z= 0.00917, y= 0.59935, x=5.27575
-Be sure to disable gravity and lock position or it will fall through the floor.
+In the stage menu, find the Forklift Xform in carter_warehouse_apriltags_worker/warehouse_with_forklifts/Forklift and deactivate it.
+
+Go to PROPS/NVIDIA and drag charging_station_galileo into the scene.
+In the Stage panel, select the charging_station_galileo Xform 
+Scroll down to Transform/Translate and set the position to... x= -10.0, y= 14.0, x= 0.01
+Scroll down to Transform/Rotate and set z= 180.0
+Scroll down to Physics/Rigid Body and check all the boxes for Disable Gravity, Locked Pos Axis & Locked Rot Axis or it will fall through the floor.
 
 ## Let's Get Started
 We begin by cloning isaac_ros_common and nova_carter repos to the src folder of our local workspace. My local workspace is ~/workspace/humble_ws
