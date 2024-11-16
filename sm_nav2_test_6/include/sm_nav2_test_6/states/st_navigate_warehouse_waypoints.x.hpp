@@ -43,6 +43,7 @@ struct StNavigateWarehouseWaypointsX
   struct TRANSITION_9 : SUCCESS {};
   struct TRANSITION_10 : SUCCESS {};
   struct TRANSITION_11 : SUCCESS {};
+  struct TRANSITION_12 : SUCCESS {};
   struct NEXT : SUCCESS{};
   struct PREVIOUS : ABORT{};
 
@@ -58,7 +59,8 @@ struct StNavigateWarehouseWaypointsX
       Transition<EvWaypoint7<ClNav2Z, OrNavigation>, StWaypointSpinRight, TRANSITION_8>,
       Transition<EvWaypoint8<ClNav2Z, OrNavigation>, StWaypointSpinLeft, TRANSITION_9>,
       Transition<EvWaypoint9<ClNav2Z, OrNavigation>, StWaypointSpinRight, TRANSITION_10>,
-      Transition<EvWaypoint10<ClNav2Z, OrNavigation>, StNavigateToWaypoint2, TRANSITION_11>,
+      Transition<EvWaypoint10<ClNav2Z, OrNavigation>, StWaypointSpinLeft, TRANSITION_11>,
+      Transition<EvWaypoint11<ClNav2Z, OrNavigation>, StNavigateToWaypoint2, TRANSITION_12>,
       
     //  Transition<cl_nav2z::EvWaypointFinal, StNavigateToWaypoint2, SUCCESS>,
  

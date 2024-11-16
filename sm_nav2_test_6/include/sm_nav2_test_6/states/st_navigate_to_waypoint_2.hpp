@@ -52,7 +52,7 @@ struct StNavigateToWaypoint2 : smacc2::SmaccState<StNavigateToWaypoint2, MsNav2T
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-    configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(-2.00, -7.00, 0.0); //(0.0, 0.0, 0.0)
+    configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(-2.00, -4.00, 0.0); //(0.0, 0.0, 0.0)
     configure_orthogonal<OrNavigation, CbResumeSlam>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
