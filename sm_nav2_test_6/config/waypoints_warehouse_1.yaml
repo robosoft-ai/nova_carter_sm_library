@@ -11,8 +11,8 @@ waypoints:
       w: 1.0
 # POINT R1
   - position:
-      x: -15.5
-      y: -23.5
+      x: -9.5
+      y: -16.5
       z: 0.0
     orientation:
       x: 0.0
@@ -21,8 +21,8 @@ waypoints:
       w: 0.7356076255135758
 # POINT R2
   - position:
-      x: 9.0
-      y: -23.5
+      x: 3.0
+      y: -16.5
       z: 0.0
     orientation:
       x: 0.0
@@ -31,8 +31,8 @@ waypoints:
       w: 0.6978084660880322
 # POINT R3
   - position:
-      x: 8.5
-      y: 24.0
+      x: 4.0
+      y: 9.0
       z: 0.0
     orientation:
       x: 0.0
@@ -42,7 +42,7 @@ waypoints:
 # POINT R4
   - position:
       x: -1.0
-      y: 11.0
+      y: 10.0
       z: 0.0
     orientation:
       x: 0.0
@@ -52,7 +52,7 @@ waypoints:
 # POINT R5
   - position:
       x: -6.5
-      y: 14.0
+      y: 8.0
       z: 0.0
     orientation:
       x: 0.0
@@ -61,8 +61,8 @@ waypoints:
       w: 0.0012119344836913665
 # POINT R6
   - position:
-      x: -16.5
-      y: 22.0
+      x: -9.5
+      y: 5.0
       z: 0.0
     orientation:
       x: 0.0
@@ -71,7 +71,7 @@ waypoints:
       w: 0.0012119344836913665
 # POINT R7
   - position:
-      x: -16.5
+      x: -9.5
       y: 6.0
       z: 0.0
     orientation:
@@ -82,7 +82,7 @@ waypoints:
 # POINT R8
   - position:
       x: -6.5
-      y: 22.0
+      y: 10.0
       z: 0.0
     orientation:
       x: 0.0
@@ -91,8 +91,8 @@ waypoints:
       w: 0.0012119344836913665
 # POINT R9
   - position:
-      x: 8.5
-      y: 24.0
+      x: 4.5
+      y: -16.0
       z: 0.0
     orientation:
       x: 0.0
@@ -101,7 +101,7 @@ waypoints:
       w: 0.0012119344836913665
 # POINT R10
   - position:
-      x: 8.5
+      x: 4.5
       y: 1.0
       z: 0.0
     orientation:
