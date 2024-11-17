@@ -346,8 +346,8 @@ git clone https://github.com/robosoft-ai/nova_carter_sm_library
  ```
 
 ### Get a Nav2 release into the workspace src folder...
-I like to work from Nav2 releases. Download and unzip, then drop into the src folder of your local workspace. This is currently 1.1.16
- https://github.com/ros-navigation/navigation2/releases/tag/1.1.16  
+I like to work from Nav2 releases. Download and unzip, then drop into the src folder of your local workspace. This is currently 1.1.17
+ https://github.com/ros-navigation/navigation2/releases/tag/1.1.17  
 
 ### Workspace Operations
 
@@ -381,6 +381,7 @@ isaac_ros_freespace_segmentation
 isaac_perceptor
 isaac_ros_depth_segmentation
 isaac_ros_dnn_stereo_depth
+isaac_ros_nova
  ```
 ## Build Workspace
 Ok, now you're ready to compile everything...
