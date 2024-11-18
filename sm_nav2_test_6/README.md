@@ -70,10 +70,7 @@ sudo apt-get install -y liblttng-ust-dev
  ```
 sudo apt-get install -y ros-humble-isaac-ros-jetson-stats
  ```
-### Use rosdep to install Nova Carter bringup dependencies...
- ```
-rosdep install -i -r --from-paths ${ISAAC_ROS_WS}/src/nova_carter/nova_carter_bringup/ --rosdistro humble -y
- ```
+
 ### Install isaac_ros_ess  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#build-package-name)
 ```
 sudo apt-get install -y ros-humble-isaac-ros-ess && \
@@ -381,7 +378,6 @@ isaac_ros_freespace_segmentation
 isaac_perceptor
 isaac_ros_depth_segmentation
 isaac_ros_dnn_stereo_depth
-isaac_ros_nova
  ```
 ## Build Workspace
 Ok, now you're ready to compile everything...
