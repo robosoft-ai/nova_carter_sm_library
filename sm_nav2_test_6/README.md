@@ -70,10 +70,7 @@ sudo apt-get install -y liblttng-ust-dev
  ```
 sudo apt-get install -y ros-humble-isaac-ros-jetson-stats
  ```
-### Use rosdep to install Nova Carter bringup dependencies...
- ```
-rosdep install -i -r --from-paths ${ISAAC_ROS_WS}/src/nova_carter/nova_carter_bringup/ --rosdistro humble -y
- ```
+
 ### Install isaac_ros_ess  | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_dnn_stereo_depth/isaac_ros_ess/index.html#build-package-name)
 ```
 sudo apt-get install -y ros-humble-isaac-ros-ess && \
@@ -346,8 +343,8 @@ git clone https://github.com/robosoft-ai/nova_carter_sm_library
  ```
 
 ### Get a Nav2 release into the workspace src folder...
-I like to work from Nav2 releases. Download and unzip, then drop into the src folder of your local workspace. This is currently 1.1.16
- https://github.com/ros-navigation/navigation2/releases/tag/1.1.16  
+I like to work from Nav2 releases. Download and unzip, then drop into the src folder of your local workspace. This is currently 1.1.17
+ https://github.com/ros-navigation/navigation2/releases/tag/1.1.17  
 
 ### Workspace Operations
 
