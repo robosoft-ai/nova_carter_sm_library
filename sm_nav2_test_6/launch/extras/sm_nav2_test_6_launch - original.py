@@ -106,14 +106,14 @@ def generate_launch_description():
         "params_file",
         # default_value=os.path.join(sm_nav2_test_6_dir, "config", "sm_nav2_test_6_navigation_params.yaml"),
         default_value=os.path.join(
-            sm_nav2_test_6_dir, "config", "rtx_carter_navigation_params.yaml"
+            sm_nav2_test_6_dir, "config", "nav2_config.yaml"
         ),
         description="Full path to the ROS2 parameters file to use for all launched nodes",
     )
 
     declare_bt_xml_cmd = DeclareLaunchArgument(
         "default_nav_to_pose_bt_xml",
-        default_value=os.path.join(sm_nav2_test_6_dir, "config", "navigation_tree.xml"),
+        default_value=os.path.join(sm_nav2_test_6_dir, "config", "default_nav_to_pose_bt.xml"),
         description="Full path to the behavior tree xml file to use",
     )
 
@@ -189,7 +189,7 @@ def generate_launch_description():
     # )
 
     # bringup_cmd = IncludeLaunchDescription(
-    #     PythonLaunchDescriptionSource(os.path.join(sm_nav2_test_6_launch_dir, "bringup_launch.py")),
+    #     PythonLaunchDescriptionSource(os.path.join(sm_nav2_test_6_launch_dir, "nav2_bringup_launch.py")),
     #     launch_arguments={
     #         "namespace": namespace,
     #         "use_namespace": use_namespace,
@@ -205,7 +205,7 @@ def generate_launch_description():
     # carter_cmd = IncludeLaunchDescription(
     #     # PythonLaunchDescriptionSource(os.path.join(sm_nav2_test_6_launch_dir, "carter_navigation.launch.py")),
     #     PythonLaunchDescriptionSource(
-    #         os.path.join(sm_nav2_test_6_launch_dir, "carter_navigation_rtx.launch.py")
+    #         os.path.join(sm_nav2_test_6_launch_dir, "nav2_stack_launch.py")
     #     ),
     #     launch_arguments={
     #         "namespace": namespace,

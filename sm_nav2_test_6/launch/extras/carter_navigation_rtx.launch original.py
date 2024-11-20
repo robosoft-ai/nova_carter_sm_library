@@ -45,19 +45,19 @@ def generate_launch_description():
         default=os.path.join(
             get_package_share_directory("sm_nav2_test_6"),
             "config",
-            "rtx_carter_navigation_params.yaml",
+            "nav2_config.yaml",
         ),
     )
 
     #Set Launch folder path
-    isaac_exploration_launch_dir = os.path.join(
+    launch_dir = os.path.join(
         get_package_share_directory("sm_nav2_test_6"), "launch"
         # nav2_bringup_launch_dir = os.path.join(get_package_share_directory("nav2_bringup"), "launch")
     )
 
     #Set rviz config path
     rviz_config_dir = os.path.join(
-        get_package_share_directory("sm_nav2_test_6"), "config", "rtx_rviz_conf.rviz"
+        get_package_share_directory("sm_nav2_test_6"), "config", "rviz_config.rviz"
         # rviz_config_dir = os.path.join(get_package_share_directory("carter_navigation"), "rviz2", "carter_navigation.rviz")
     )
 
@@ -91,7 +91,7 @@ def generate_launch_description():
                 default_value=os.path.join(
                     get_package_share_directory("sm_nav2_test_6"),
                     "config",
-                    "navigation_tree.xml",
+                    "default_nav_to_pose_bt.xml",
                 ),
 
                 description="Full path to the behavior tree xml file to use",
@@ -100,7 +100,7 @@ def generate_launch_description():
 
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
-                    os.path.join(isaac_exploration_launch_dir, "rviz_launch.py")
+                    os.path.join(launch_dir, "rviz_launch.py")
                 ),
                 launch_arguments={
                     "namespace": "",
@@ -111,7 +111,7 @@ def generate_launch_description():
 
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
-                    [isaac_exploration_launch_dir, "/bringup_launch.py"]
+                    [launch_dir, "/nav2_bringup_launch.py"]
                 ),
                 launch_arguments={
                     "map": map_dir,
@@ -119,14 +119,6 @@ def generate_launch_description():
                     "active_slam_sel": active_slam_sel,
                     "use_sim_time": use_sim_time,
                     "params_file": param_dir,
-                }.items(),
-            ),
-
-            IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(
-                    [isaac_exploration_launch_dir, "/vision_pipeline_launch.py"]
-                ),
-                launch_arguments={
                 }.items(),
             ),
 

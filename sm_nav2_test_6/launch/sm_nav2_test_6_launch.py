@@ -87,13 +87,13 @@ def generate_launch_description():
 
     declare_params_file_cmd = DeclareLaunchArgument(
         "params_file",
-        default_value=os.path.join(sm_nav2_test_6_dir, "config", "rtx_carter_navigation_params.yaml"),
+        default_value=os.path.join(sm_nav2_test_6_dir, "config", "nav2_config.yaml"),
         description="Full path to the ROS2 parameters file to use for all launched nodes",
     )
 
     declare_bt_xml_cmd = DeclareLaunchArgument(
         "default_nav_to_pose_bt_xml",
-        default_value=os.path.join(sm_nav2_test_6_dir, "config", "navigation_tree.xml"),
+        default_value=os.path.join(sm_nav2_test_6_dir, "config", "default_nav_to_pose_bt.xml"),
         description="Full path to the behavior tree xml file to use",
     )
 
