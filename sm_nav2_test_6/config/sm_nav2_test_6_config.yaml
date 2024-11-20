@@ -8,4 +8,4 @@ SmNav2Test6:
         record_point_distance_threshold: 0.1
         max_visited_points: 15 #50 
 
-        waypoints_file: $(pkg_share)/config/waypoints_warehouse_1.yaml
+        waypoints_file: $(pkg_share)/config/navigation_waypoints_1.yaml

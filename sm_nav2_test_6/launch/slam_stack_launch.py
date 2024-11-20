@@ -40,7 +40,7 @@ def generate_launch_description():
     # Getting directories and launch-files
     bringup_dir = get_package_share_directory("nav2_bringup")
     slam_toolbox_dir = get_package_share_directory("slam_toolbox")
-    slam_launch_file = os.path.join(slam_toolbox_dir, "launch", "online_sync_launch.py")
+    slam_launch_file = os.path.join(slam_toolbox_dir, "launch", "slam_toolbox_launch.py")
 
     ## LOCALES ##
     local_bringup_dir = get_package_share_directory("sm_nav2_test_6")
@@ -48,7 +48,7 @@ def generate_launch_description():
 
     local_slam_toolbox_dir = get_package_share_directory("sm_nav2_test_6")
     local_slam_launch_file = os.path.join(
-        local_slam_toolbox_dir, "launch", "online_sync_launch.py"
+        local_slam_toolbox_dir, "launch", "slam_toolbox_launch.py"
     )
 
     # Create our own temporary YAML files that include substitutions
@@ -70,7 +70,7 @@ def generate_launch_description():
         "params_file",
         # default_value=os.path.join(bringup_dir, 'params', 'nav2_params.yaml'),
         default_value=os.path.join(
-            local_bringup_dir, "config", "rtx_carter_navigation_params.yaml"
+            local_bringup_dir, "config", "nav2_config.yaml"
         ),
         description="Full path to the ROS2 parameters file to use for all launched nodes",
     )

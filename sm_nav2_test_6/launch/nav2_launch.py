@@ -57,7 +57,7 @@ def generate_launch_description():
     param_substitutions = {
         "use_sim_time": use_sim_time,
         "autostart": autostart,
-        "default_nav_to_pose_bt_xml": os.path.join(bringup_dir, "config", "navigation_tree.xml"),
+        "default_nav_to_pose_bt_xml": os.path.join(bringup_dir, "config", "default_nav_to_pose_bt.xml"),
     }
 
     configured_params = RewrittenYaml(
@@ -80,7 +80,7 @@ def generate_launch_description():
     default_nav_to_pose_bt_xml = DeclareLaunchArgument(
         "default_nav_to_pose_bt_xml",
         default_value=os.path.join(
-            get_package_share_directory("sm_nav2_test_6"), "config", "navigation_tree.xml"
+            get_package_share_directory("sm_nav2_test_6"), "config", "default_nav_to_pose_bt.xml"
         ),
         description="Full path to the behavior tree xml file to use",
     )
@@ -88,7 +88,7 @@ def generate_launch_description():
     declare_params_file_cmd = DeclareLaunchArgument(
         "params_file",
         # default_value=os.path.join(bringup_dir, 'params', 'nav2_params.yaml'),
-        default_value=os.path.join(bringup_dir, "config", "rtx_carter_navigation_params.yaml"),
+        default_value=os.path.join(bringup_dir, "config", "nav2_config.yaml"),
         description="Full path to the ROS2 parameters file to use for all launched nodes",
     )
 

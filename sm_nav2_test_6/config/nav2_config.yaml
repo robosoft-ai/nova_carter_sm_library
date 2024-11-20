@@ -61,9 +61,9 @@ bt_navigator:
     global_frame: map
     robot_base_frame: base_link
     odom_topic: /odom
-    bt_loop_duration: 20
+    bt_loop_duration: 20 #Try 100
     default_nav_to_pose_bt_xml: RUNTIMEFILL
-    default_server_timeout: 40
+    default_server_timeout: 40 #2000
     # 'default_nav_through_poses_bt_xml' and 'default_nav_to_pose_bt_xml' are use defaults:
     # nav2_bt_navigator/navigate_to_pose_w_replanning_and_recovery.xml
     # nav2_bt_navigator/navigate_through_poses_w_replanning_and_recovery.xml
@@ -243,74 +243,7 @@ controller_server_rclcpp_node:
   ros__parameters:
     use_sim_time: True
 
-# local_costmap:
-#   local_costmap:
-#     ros__parameters:
-#       update_frequency: 5.0
-#       publish_frequency: 2.0
-#       global_frame: odom
-#       robot_base_frame: base_link
-#       use_sim_time: True
-#       rolling_window: True
-#       width: 10
-#       height: 10
-#       resolution: 0.05
-#       transform_tolerance: 0.3
-#       footprint: "[ [0.14, 0.25], [0.14, -0.25], [-0.607, -0.25], [-0.607, 0.25] ]"
-#       plugins: ["hesai_voxel_layer", "front_rplidar_obstacle_layer", "back_rplidar_obstacle_layer", "inflation_layer"]
-#       inflation_layer:
-#         plugin: "nav2_costmap_2d::InflationLayer"
-#         enabled: True
-#         cost_scaling_factor: 0.4
-#         inflation_radius: 0.32
-#       hesai_voxel_layer:
-#         plugin: "nav2_costmap_2d::VoxelLayer"
-#         enabled: True
-#         footprint_clearing_enabled: true
-#         max_obstacle_height: 1.5
-#         publish_voxel_map: False
-#         origin_z: 0.0
-#         z_voxels: 16
-#         z_resolution: 0.05
-#         unknown_threshold: 15
-#         observation_sources: pointcloud
-#         pointcloud:  # no frame set, uses frame from message
-#           topic: /front_3d_lidar/point_cloud
-#           max_obstacle_height: 1.5
-#           min_obstacle_height: 0.2 # Increased to 0.2. Debug why costmap shows freespace as occupoed with lower value
-#           obstacle_max_range: 10.0
-#           obstacle_min_range: 0.0
-#           raytrace_max_range: 10.0
-#           raytrace_min_range: 0.0
-#           clearing: True
-#           marking: True
-#           data_type: "PointCloud2"
-#       front_rplidar_obstacle_layer:
-#         plugin: "nav2_costmap_2d::ObstacleLayer"
-#         enabled: True
-#         observation_sources: scan
-#         scan:
-#           topic: /front_2d_lidar/scan
-#           max_obstacle_height: 2.0
-#           clearing: True
-#           marking: True
-#           data_type: "LaserScan"
-#       back_rplidar_obstacle_layer:
-#         plugin: "nav2_costmap_2d::ObstacleLayer"
-#         enabled: True
-#         observation_sources: scan
-#         scan:
-#           topic: /back_2d_lidar/scan
-#           max_obstacle_height: 2.0
-#           clearing: True
-#           marking: True
-#           data_type: "LaserScan"
-#   local_costmap_client:
-#     ros__parameters:
-#       use_sim_time: True
-#   local_costmap_rclcpp_node:
-#     ros__parameters:
-#       use_sim_time: True
+
 
 local_costmap:
   local_costmap:

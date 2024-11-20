@@ -101,7 +101,7 @@ def generate_launch_description():
     declare_params_file_cmd = DeclareLaunchArgument(
         "params_file",
         # default_value=os.path.join(bringup_dir, 'params', 'nav2_params.yaml'),
-        default_value=os.path.join(bringup_dir, "config", "rtx_carter_navigation_params.yaml"),
+        default_value=os.path.join(bringup_dir, "config", "nav2_config.yaml"),
         description="Full path to the ROS2 parameters file to use for all launched nodes",
     )
 
@@ -144,7 +144,7 @@ def generate_launch_description():
                 output="screen",
             ),
             IncludeLaunchDescription(  # Comentado para ignorar
-                PythonLaunchDescriptionSource(os.path.join(local_launch_dir, "slam_launch.py")),
+                PythonLaunchDescriptionSource(os.path.join(local_launch_dir, "slam_stack_launch.py")),
                 condition=IfCondition(PythonExpression([slam, " and ", active_slam_sel])),
                 launch_arguments={
                     "namespace": namespace,
@@ -170,7 +170,7 @@ def generate_launch_description():
             ),
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
-                    os.path.join(local_launch_dir, "navigation_launch.py")
+                    os.path.join(local_launch_dir, "nav2_launch.py")
                 ),
                 launch_arguments={
                     "namespace": namespace,

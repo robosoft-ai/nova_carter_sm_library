@@ -54,7 +54,7 @@ def generate_launch_description():
         #         "sm_nav2_test_6"
         #     ),
         #     "config",
-        #     "rtx_carter_navigation_params.yaml",
+        #     "nav2_config.yaml",
         # ),
         description="Full path to param file to load",
     )
@@ -89,7 +89,7 @@ def generate_launch_description():
     )
 
     nav2_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(os.path.join(nav2_bringup_launch_dir, "bringup_launch.py")),
+        PythonLaunchDescriptionSource(os.path.join(nav2_bringup_launch_dir, "nav2_bringup_launch.py")),
         launch_arguments={
             "map": LaunchConfiguration("map_file"),
             "use_sim_time": LaunchConfiguration("use_sim_time"),

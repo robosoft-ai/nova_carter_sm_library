@@ -72,8 +72,8 @@ struct StAcquireSensors
   static void staticConfigure() 
   {
     configure_orthogonal<OrNavigation, CbActiveStop>();
-    configure_orthogonal<OrSlam, CbRosLaunch2>("sm_nav2_test_6", "slam_launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
-    configure_orthogonal<OrNavigation, CbRosLaunch2>("sm_nav2_test_6", "carter_navigation_rtx.launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
+    configure_orthogonal<OrSlam, CbRosLaunch2>("sm_nav2_test_6", "slam_stack_launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
+    configure_orthogonal<OrNavigation, CbRosLaunch2>("sm_nav2_test_6", "nav2_stack_launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
     configure_orthogonal<OrNavigation, CbWaitActionServer>(10s);
     //configure_orthogonal<OrAssigner, CbWaitNav2Nodes>();
     configure_orthogonal<OrNavigation, CbSleepFor>(12s);

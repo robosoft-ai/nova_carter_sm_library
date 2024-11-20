@@ -20,7 +20,7 @@ def generate_launch_description():
         default_value=os.path.join(
             get_package_share_directory("sm_nav2_test_6"),
             "config",
-            "mapper_params_online_sync.yaml",
+            "slam_toolbox_config.yaml",
         ),
         description="Full path to the ROS2 parameters file to use for the slam_toolbox node",
     )
