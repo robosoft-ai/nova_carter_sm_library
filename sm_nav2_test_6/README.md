@@ -378,6 +378,9 @@ isaac_ros_freespace_segmentation
 isaac_perceptor
 isaac_ros_depth_segmentation
 isaac_ros_dnn_stereo_depth
+isaac_ros_mission_client
+openav_docking
+spatio_temporal_voxel_layer
  ```
 ## Build Workspace
 Ok, now you're ready to compile everything...
