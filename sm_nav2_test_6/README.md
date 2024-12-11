@@ -375,11 +375,14 @@ isaac_ros_image_segmentation
 isaac_ros_dnn_inference
 isaac_ros_image_pipeline
 isaac_ros_freespace_segmentation
+isaac_ros_map_localization
 isaac_perceptor
 isaac_ros_depth_segmentation
 isaac_ros_dnn_stereo_depth
 isaac_ros_mission_client
-openav_docking
+isaac_ros_apriltag
+isaac_ros_nova
+isaac_ros_compression
 spatio_temporal_voxel_layer
  ```
 ## Build Workspace
