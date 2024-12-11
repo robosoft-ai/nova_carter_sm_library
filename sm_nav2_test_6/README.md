@@ -226,14 +226,15 @@ fi
  ```
 Now download the pre-trained Nvidia SyntheitcaDETR models...
  ```
-mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
+ mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
 cd ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
-   wget 'https://api.ngc.nvidia.com/v2/models/nvidia/isaac/synthetica_detr/versions/1.0.0/files/sdetr_grasp.etlt'
+   wget 'https://api.ngc.nvidia.com/v2/models/nvidia/isaac/synthetica_detr/versions/1.0.0_onnx/files/sdetr_grasp.onnx'
+
 ```
  ```
 mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
 cd ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
-   wget 'https://api.ngc.nvidia.com/v2/models/nvidia/isaac/synthetica_detr/versions/1.0.0/files/sdetr_amr.etlt'
+   wget 'https://api.ngc.nvidia.com/v2/models/nvidia/isaac/synthetica_detr/versions/1.0.0_onnx/files/sdetr_amr.onnx'
 ```
 Then we'll convert the encrypted model (.etlt) to a TensorRT engine plan and drop it in the isaac_ros_assets/models/synthetica_detr folder...
 ```
