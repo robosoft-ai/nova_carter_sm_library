@@ -237,11 +237,12 @@ cd ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr && \
 ```
 Then we'll convert the encrypted model (.etlt) to a TensorRT engine plan and drop it in the isaac_ros_assets/models/synthetica_detr folder...
 ```
-/opt/nvidia/tao/tao-converter -k sdetr -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_grasp.plan -p images,1x3x640x640,2x3x640x640,4x3x640x640 -p orig_target_sizes,1x2,2x2,4x2 ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_grasp.etlt
+/usr/src/tensorrt/bin/trtexec --onnx=${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_grasp.onnx --saveEngine=${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_grasp.plan
 ```
 ```
-/opt/nvidia/tao/tao-converter -k sdetr -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_amr.plan -p images,1x3x640x640,2x3x640x640,4x3x640x640 -p orig_target_sizes,1x2,2x2,4x2 ${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_amr.etlt
+/usr/src/tensorrt/bin/trtexec --onnx=${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_amr.onnx --saveEngine=${ISAAC_ROS_WS}/isaac_ros_assets/models/synthetica_detr/sdetr_amr.plan
 ```
+
 Then get back to the workspace...  
 ```
 cd /workspaces/isaac_ros-dev/
