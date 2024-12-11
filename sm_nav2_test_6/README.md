@@ -86,7 +86,7 @@ PACKAGE_NAME="isaac_ros_ess"
 NGC_RESOURCE="isaac_ros_ess_assets"
 NGC_FILENAME="quickstart.tar.gz"
 MAJOR_VERSION=3
-MINOR_VERSION=1
+MINOR_VERSION=2
 VERSION_REQ_URL="https://catalog.ngc.nvidia.com/api/resources/versions?orgName=$NGC_ORG&teamName=$NGC_TEAM&name=$NGC_RESOURCE&isPublic=true&pageNumber=0&pageSize=100&sortOrder=CREATED_DATE_DESC"
 AVAILABLE_VERSIONS=$(curl -s \
     -H "Accept: application/json" "$VERSION_REQ_URL")
@@ -136,7 +136,7 @@ PACKAGE_NAME="isaac_ros_nvblox"
 NGC_RESOURCE="isaac_ros_nvblox_assets"
 NGC_FILENAME="quickstart.tar.gz"
 MAJOR_VERSION=3
-MINOR_VERSION=1
+MINOR_VERSION=2
 VERSION_REQ_URL="https://catalog.ngc.nvidia.com/api/resources/versions?orgName=$NGC_ORG&teamName=$NGC_TEAM&name=$NGC_RESOURCE&isPublic=true&pageNumber=0&pageSize=100&sortOrder=CREATED_DATE_DESC"
 AVAILABLE_VERSIONS=$(curl -s \
     -H "Accept: application/json" "$VERSION_REQ_URL")
@@ -198,7 +198,7 @@ PACKAGE_NAME="isaac_ros_rtdetr"
 NGC_RESOURCE="isaac_ros_rtdetr_assets"
 NGC_FILENAME="quickstart.tar.gz"
 MAJOR_VERSION=3
-MINOR_VERSION=1
+MINOR_VERSION=2
 VERSION_REQ_URL="https://catalog.ngc.nvidia.com/api/resources/versions?orgName=$NGC_ORG&teamName=$NGC_TEAM&name=$NGC_RESOURCE&isPublic=true&pageNumber=0&pageSize=100&sortOrder=CREATED_DATE_DESC"
 AVAILABLE_VERSIONS=$(curl -s \
     -H "Accept: application/json" "$VERSION_REQ_URL")
@@ -264,7 +264,7 @@ PACKAGE_NAME="isaac_ros_foundationpose"
 NGC_RESOURCE="isaac_ros_foundationpose_assets"
 NGC_FILENAME="quickstart.tar.gz"
 MAJOR_VERSION=3
-MINOR_VERSION=1
+MINOR_VERSION=2
 VERSION_REQ_URL="https://catalog.ngc.nvidia.com/api/resources/versions?orgName=$NGC_ORG&teamName=$NGC_TEAM&name=$NGC_RESOURCE&isPublic=true&pageNumber=0&pageSize=100&sortOrder=CREATED_DATE_DESC"
 AVAILABLE_VERSIONS=$(curl -s \
     -H "Accept: application/json" "$VERSION_REQ_URL")
@@ -290,21 +290,19 @@ versions/$LATEST_VERSION_ID/files/$NGC_FILENAME" && \
     rm ${NGC_FILENAME}
 fi
 ```
-#### Download the foundationpose assets | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_pose_estimation/isaac_ros_foundationpose/index.html#download-quickstart-assets)
-```
-wget --content-disposition https://api.ngc.nvidia.com/v2/models/nvidia/isaac/foundationpose/versions/1.0.0/zip -O foundationpose_1.0.0.zip
-```
-Copy the models to the required directory...
+#### Download the pretrained FoundationPose models | [Source](https://nvidia-isaac-ros.github.io/repositories_and_packages/isaac_ros_pose_estimation/isaac_ros_foundationpose/index.html#download-quickstart-assets)
 ```
 mkdir -p ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose && \
-   unzip foundationpose_1.0.0.zip -d ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose
+   cd ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose && \
+   wget 'https://api.ngc.nvidia.com/v2/models/nvidia/isaac/foundationpose/versions/1.0.0_onnx/files/refine_model.onnx' -O refine_model.onnx && \
+   wget 'https://api.ngc.nvidia.com/v2/models/nvidia/isaac/foundationpose/versions/1.0.0_onnx/files/score_model.onnx' -O score_model.onnx
 ```
 Then we'll convert the encrypted models (.etlt) for the isaac_ros_foundationpose package to TensorRT engine plans and drop it in the isaac_ros_assets/models/isaac_ros_foundationpose folder...
 ```
-/opt/nvidia/tao/tao-converter -k foundationpose -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/refine_trt_engine.plan -p input1,1x160x160x6,1x160x160x6,252x160x160x6 -p input2,1x160x160x6,1x160x160x6,252x160x160x6 -o output1,output2 ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/refine_model.etlt
+/usr/src/tensorrt/bin/trtexec --onnx=${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/refine_model.onnx --saveEngine=${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/refine_trt_engine.plan --minShapes=input1:1x160x160x6,input2:1x160x160x6 --optShapes=input1:1x160x160x6,input2:1x160x160x6 --maxShapes=input1:42x160x160x6,input2:42x160x160x6
 ```
 ```   
-/opt/nvidia/tao/tao-converter -k foundationpose -t fp16 -e ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/score_trt_engine.plan -p input1,1x160x160x6,1x160x160x6,252x160x160x6 -p input2,1x160x160x6,1x160x160x6,252x160x160x6 -o output1 ${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/score_model.etlt
+/usr/src/tensorrt/bin/trtexec --onnx=${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/score_model.onnx --saveEngine=${ISAAC_ROS_WS}/isaac_ros_assets/models/foundationpose/score_trt_engine.plan --minShapes=input1:1x160x160x6,input2:1x160x160x6 --optShapes=input1:1x160x160x6,input2:1x160x160x6 --maxShapes=input1:252x160x160x6,input2:252x160x160x6
 ```   
 
 Then get back to the workspace...  
@@ -378,6 +376,9 @@ isaac_ros_freespace_segmentation
 isaac_perceptor
 isaac_ros_depth_segmentation
 isaac_ros_dnn_stereo_depth
+isaac_ros_mission_client
+openav_docking
+spatio_temporal_voxel_layer
  ```
 ## Build Workspace
 Ok, now you're ready to compile everything...
