@@ -13,14 +13,18 @@ find_package(ament_cmake REQUIRED)
 find_package(Boost COMPONENTS thread REQUIRED)
 
 find_package(ament_cmake_auto REQUIRED)
+find_package(vision_msgs REQUIRED)
+
 ament_auto_find_build_dependencies()
 
-include_directories(include)
+include_directories(include ${vision_msgs_INCLUDE_DIRS})
 
 ament_export_include_directories(include)
 
 ament_auto_add_executable(${PROJECT_NAME}_node
                           src/sm_nav2_test_6/sm_nav2_test_6.cpp
+                          # src/sm_nav2_test_6/clients/cl_foundationpose.hpp
+                          # src/sm_nav2_test_6/components/com_foundationpose.cpp
 )
 
 

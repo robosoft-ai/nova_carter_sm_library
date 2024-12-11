@@ -17,29 +17,27 @@
  * 	 Authors: Pablo Inigo Blasco, Brett Aldrich
  *
  ******************************************************************************************************************/
-
 #pragma once
 
-#include <smacc2/smacc.hpp>
-#include <sm_nav2_test_6/clients/cl_foundationpose/cl_foundationpose.hpp>
-#include <sm_nav2_test_6/clients/cl_foundationpose/components/cp_object_tracker_1.hpp>
+#include <smacc2/smacc_client.hpp>
+#include <vision_msgs/msg/detection3_d_array.hpp>
 
+#include <smacc2/client_base_components/cp_topic_subscriber.hpp>
 
-namespace sm_nav2_test_6 {
+namespace cl_foundationpose 
+{
+  using namespace smacc2::components;
 
-using namespace cl_foundationpose;
+class ClFoundationPose : public smacc2::ISmaccClient 
+{
 
-class OrPerception : public smacc2::Orthogonal<OrPerception> {
 public:
+  ClFoundationPose() {}
+
   void onInitialize() override 
   {
-      auto client = this->createClient<ClFoundationPose>();
-
-      //configure the client
-            auto subcomponent = client->createComponent<CpTopicSubscriber<vision_msgs::msg::Detection3DArray>>("/detection3d_array");    
-
-      client->createComponent<CpObjectTracker1>();
-
+    //auto subcomponent = this->createComponent<CpTopicSubscriber<vision_msgs::msg::Detection3DArray>>("/detection3d_array");    
   }
 };
-} // namespace sm_nav2_test_6
+
+} // namespace cl_apriltag_detector
