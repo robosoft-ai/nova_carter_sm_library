@@ -25,6 +25,9 @@ Then find the wheel_left, wheel_right and change the Max Angular Velocity to 500
 Then, find the chassis_link Mass and change it to 20.0
 Find wheel_material and set Dynamic Friction to 2.0, and Static Friction to 2.0.
 
+Then, in the same Nova_Carter_ROS prim, find the transform_tree_odometry/ros2_publish_odometry OmnigraphNode, then under Inputs topic change the value of
+"chassis/odom" to just "/odom".
+
 In the stage menu, find the Forklift Xform in carter_warehouse_apriltags_worker/warehouse_with_forklifts/Forklift and deactivate it.
 
 Go to PROPS/NVIDIA and drag charging_station_galileo into the scene.
