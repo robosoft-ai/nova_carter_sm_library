@@ -12,17 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*****************************************************************************************************************
- *
- * 	 Authors: Pablo Inigo Blasco, Brett Aldrich
- *
- ******************************************************************************************************************/
 #pragma once
-
 #include <smacc2/component.hpp>
 #include <vision_msgs/msg/detection3_d_array.hpp>
-
 #include <smacc2/client_base_components/cp_topic_subscriber.hpp>
+
 
 namespace cl_foundationpose 
 {
@@ -38,14 +32,13 @@ class CpObjectTracker1 : public smacc2::ISmaccComponent
 {
 
 public:
-  CpObjectTracker1() {}
-
+  // Declare the Component's default constructor.
   void onInitialize() 
   {
-    // we get access to the foundationpose subscriber component
+    // Gain access to the foundationpose subscriber component.
     requiresComponent(subcomponent);
 
-    // we hook each received message to store it into our database
+    // Then hook each received message to store it into our little map/database.
     subcomponent->onMessageReceived(&CpObjectTracker1::onDetection3DArrayReceived, this);
   }
 
@@ -57,7 +50,8 @@ public:
     {
       auto previouslyExistingObjectEntry = detectedObjects.find(detection.id);
 
-      if (previouslyExistingObjectEntry != detectedObjects.end()) // we have seen this object before
+      // if we have seen this object before...
+      if (previouslyExistingObjectEntry != detectedObjects.end()) 
       {
         auto& previouslyExistingObject = previouslyExistingObjectEntry->second;
         previouslyExistingObject.msg = detection;
@@ -72,7 +66,11 @@ public:
   }
 
   private:
+
+    // Declare the subscriber component. 
     CpTopicSubscriber<vision_msgs::msg::Detection3DArray>* subcomponent;
+
+    // Declare a data structure to store the detected objects.
     std::map<std::string, DetectedObject> detectedObjects;
 };
 
