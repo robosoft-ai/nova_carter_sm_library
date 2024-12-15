@@ -1,4 +1,4 @@
-// Copyright 2021 RobosoftAI Inc.
+// Copyright 2024 Robosoft Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/*****************************************************************************************************************
- *
- * 	 Authors: Pablo Inigo Blasco, Brett Aldrich
- *
- ******************************************************************************************************************/
-
 #include <sm_nav2_test_6/sm_nav2_test_6.hpp>
 
+// Main entry point of the application
 int main(int argc, char **argv) {
   rclcpp::init(argc, argv);
   smacc2::run<SmNav2Test6>();
 }
 
-//int StExploreNextPoint::count_visited_states = 0;
