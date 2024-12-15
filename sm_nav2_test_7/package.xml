@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>sm_nav2_test_7</name>
+  <version>0.1.0</version>
+  <description>State Machine for Isaac Sim package</description>
+  <maintainer email="brett@robosoft.ai">admin</maintainer>
+  <license>Copyright Robosoft</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>ament_cmake_auto</depend>
+  <depend>message_runtime</depend>
+  
+  <depend>nav2z_client</depend>
+  <depend>multirole_sensor_client</depend>
+  <depend>navigation2</depend>
+  <depend>nav2_bringup</depend>
+
+  <depend>robot_state_publisher</depend>
+  <depend>ros_publisher_client</depend>
+  <depend>ros_timer_client</depend>
+  <depend>slam_toolbox</depend>
+  <depend>smacc2</depend>
+  <depend>std_msgs</depend>
+  <depend>sr_all_events_go</depend>
+  <depend>sr_event_countdown</depend>
+  <depend>sr_conditional</depend>
+  <depend>visualization_msgs</depend>
+  <depend>tf2</depend>
+  
+  <depend>backward_global_planner</depend>
+  <depend>backward_local_planner</depend>
+  <depend>forward_global_planner</depend>
+  <depend>forward_local_planner</depend>
+  <depend>nav2z_planners_common</depend>
+  <depend>pure_spinning_local_planner</depend>
+  <depend>undo_path_global_planner</depend>
+
+  <depend>isaac_ros_occupancy_grid_localizer</depend>
+  <depend>isaac_ros_pointcloud_utils</depend>
+
+  <depend>isaac_ros_visual_slam</depend>
+  <depend>isaac_ros_image_pipeline</depend>
+  <depend>isaac_ros_apriltag</depend>
+
+  <depend>pointcloud_to_laserscan</depend>
+  <depend>isaac_ros_apriltag_interfaces</depend>
+  <depend>keyboard_client</depend>
+  <depend>lifecyclenode_client</depend>
+
+  <depend>vision_msgs</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
