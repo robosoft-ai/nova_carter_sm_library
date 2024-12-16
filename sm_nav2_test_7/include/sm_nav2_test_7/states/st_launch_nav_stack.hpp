@@ -53,12 +53,12 @@ struct StLaunchNavStack
   // TRANSITION TABLE
   typedef mpl::list<
 
-      Transition<EvAllGo<SrAllEventsGo, SrNavStackLaunched>, StLaunchVisionPipeline, NAV2_LAUNCHED>,
+      Transition<EvAllGo<SrAllEventsGo, SrNavStackLaunched>, StPauseToSetupVideo, NAV2_LAUNCHED>,
       Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoveryNav2, ABORT>,
       Transition<EvGlobalError, MsNav2Test1RecoveryMode>,    
 
       //Keyboard events
-      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StLaunchVisionPipeline, NEXT>  
+      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StPauseToSetupVideo, NEXT>  
     
       >
       reactions;
