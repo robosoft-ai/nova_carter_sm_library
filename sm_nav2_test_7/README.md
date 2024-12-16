@@ -1,6 +1,6 @@
  # State Machine Diagram
 
- ![sm_nav2_test_7](docs/SmNav2Test7_2024-9-7_222225.svg)
+ ![sm_nav2_test_7](docs/SmNav2Test7_2024-12-15_22911.svg)
 
  ## Description 
  A state machine application for the NOVA Carter using Nav2 and the SMACC nav2z Client Behavior Library.
