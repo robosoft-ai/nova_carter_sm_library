@@ -27,12 +27,12 @@ struct StRecoveryNav2
 
   // TRANSITION TABLE
   typedef mpl::list<
-        // Transition<EvAllGo<SrAllEventsGo, SrStopNav2>, StAcquireSensors,
+        // Transition<EvAllGo<SrAllEventsGo, SrStopNav2>, StLaunchNavStack,
         //          ON_STOP_LAUNCHS>,
 
-        Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StAcquireSensors, SUCCESS>,
+        Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StLaunchNavStack, SUCCESS>,
 
-        Transition<EvCbSuccess<CbSleepFor, OrSlam>, StAcquireSensors, SUCCESS>
+        Transition<EvCbSuccess<CbSleepFor, OrSlam>, StLaunchNavStack, SUCCESS>
       
       >
       reactions;

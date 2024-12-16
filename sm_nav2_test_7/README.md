@@ -339,7 +339,7 @@ sudo apt install postgresql-17-pgvector
 
 ## Assemble the Workspace
 
-### Clone the Application Reposinto the src folder...  
+### Clone the Application Repos into the src folder...  
  ```
 git clone https://github.com/robosoft-ai/SMACC2.git  
 git clone https://github.com/robosoft-ai/nova_carter_sm_library
@@ -418,3 +418,8 @@ ros2 launch sm_nav2_test_7 sm_nav2_test_7_launch.py
 ros2 topic echo /detections_output
 
  ```
+ ## Launch Description (WIP)
+ The initial launch file, sm_nav2_test_7_launch.py launches a SMACC Node and a Keyboard Server. 
+ 
+ Then a client behavior triggers the nav2_stack_launch.py and slam_stack_launch.py
+ These cascade nav2_launch.py nav2_bringup_launch.py

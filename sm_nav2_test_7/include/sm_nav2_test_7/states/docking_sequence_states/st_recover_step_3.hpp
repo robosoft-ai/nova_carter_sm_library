@@ -14,7 +14,7 @@
 
 namespace sm_nav2_test_7
 {
-// STATE DECLARATION - Dock
+// STATE DECLARATION - Calculate Final Pose
 struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
 {
   using SmaccState::SmaccState;
@@ -27,13 +27,16 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep4, SUCCESS>
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep4, SUCCESS>
+  
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-   // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
+  //  configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
+  //  configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
+  //  configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 

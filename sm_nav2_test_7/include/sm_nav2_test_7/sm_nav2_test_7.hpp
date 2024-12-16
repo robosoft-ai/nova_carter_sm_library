@@ -76,9 +76,10 @@ using namespace smacc2::state_reactors;
 
 namespace sm_nav2_test_7 {
 // STATE FORWARD DECLARATIONS
-class StAcquireSensors;
+class StLaunchNavStack;
 class StLaunchVisionPipeline;
 class StPauseToSetupVideo;
+class StPauseToAcquireFp;
 class StInitialMove;
 class StInitialMoveStop;
 class StPreSpiralPattern;
@@ -91,6 +92,7 @@ class StSpinLeft2;
 class StWaypointSpinLeft;
 class StWaypointSpinRight;
 class StNavigateWarehouseWaypointsX;
+class StBatteryCheck;
 class StPauseSlam;
 class StFinalState;
 class StFinalReturnToOrigin;
@@ -180,10 +182,11 @@ struct SmNav2Test7
 #include <sm_nav2_test_7/superstates/ss_s_pattern_1.hpp>
 
 // STATES
-#include <sm_nav2_test_7/states/st_acquire_sensors.hpp>
+#include <sm_nav2_test_7/states/st_launch_nav_stack.hpp>
 #include <sm_nav2_test_7/states/st_launch_vision_pipeline.hpp>
 #include <sm_nav2_test_7/states/st_recovery_nav2.hpp>
 #include <sm_nav2_test_7/states/st_pause_to_setup_video.hpp>
+#include <sm_nav2_test_7/states/st_pause_to_acquire_fp.hpp>
 #include <sm_nav2_test_7/states/st_initial_move.hpp>
 #include <sm_nav2_test_7/states/st_initial_move_stop.hpp>
 #include <sm_nav2_test_7/states/st_spiral_pattern.hpp>
@@ -196,6 +199,7 @@ struct SmNav2Test7
 #include <sm_nav2_test_7/states/st_waypoint_spin_left.hpp>
 #include <sm_nav2_test_7/states/st_waypoint_spin_right.hpp>
 #include <sm_nav2_test_7/states/st_navigate_warehouse_waypoints.x.hpp>
+#include <sm_nav2_test_7/states/st_battery_check.hpp>
 #include <sm_nav2_test_7/states/st_pause_slam.hpp>
 #include <sm_nav2_test_7/states/st_navigate_to_waypoint_1.hpp>
 #include <sm_nav2_test_7/states/st_navigate_to_waypoint_2.hpp>

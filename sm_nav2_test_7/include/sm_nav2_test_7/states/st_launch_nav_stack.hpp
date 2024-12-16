@@ -37,34 +37,29 @@ using cl_nav2z::CbWaitNav2Nodes;
 using smacc2::client_behaviors::CbRosLaunch2;
 
 // STATE DECLARATION
-struct StAcquireSensors
-    : smacc2::SmaccState<StAcquireSensors, MsNav2Test1RunMode> {
+struct StLaunchNavStack
+    : smacc2::SmaccState<StLaunchNavStack, MsNav2Test1RunMode> {
   using SmaccState::SmaccState;
 
   // DECLARE CUSTOM OBJECT AND TRANSITION TAGS
-  struct ON_SENSORS_AVAILABLE : SUCCESS {};
-  struct SrAcquireSensors;
+  struct NAV2_LAUNCHED : SUCCESS {};
+
   struct NEXT : SUCCESS{};
   struct PREVIOUS : ABORT{};
+
+  // DECLARE STATE REACTOR
+  struct SrNavStackLaunched;
 
   // TRANSITION TABLE
   typedef mpl::list<
 
-      //Transition<EvAllGo<SrAllEventsGo, SrAcquireSensors>, StPauseToSetupVideo,
-      //           ON_SENSORS_AVAILABLE>,
-
-       Transition<EvAllGo<SrAllEventsGo, SrAcquireSensors>, StLaunchVisionPipeline,
-                ON_SENSORS_AVAILABLE>,
-
+      Transition<EvAllGo<SrAllEventsGo, SrNavStackLaunched>, StLaunchVisionPipeline, NAV2_LAUNCHED>,
       Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoveryNav2, ABORT>,
-
       Transition<EvGlobalError, MsNav2Test1RecoveryMode>,    
 
       //Keyboard events
       Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StLaunchVisionPipeline, NEXT>  
-      // >
-
-      //Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StPauseToSetupVideo, NEXT>  
+    
       >
       reactions;
 
@@ -84,7 +79,7 @@ struct StAcquireSensors
     // Create State Reactor
     auto srAllSensorsReady = static_createStateReactor<
         SrAllEventsGo,
-        smacc2::state_reactors::EvAllGo<SrAllEventsGo, SrAcquireSensors>,
+        smacc2::state_reactors::EvAllGo<SrAllEventsGo, SrNavStackLaunched>,
         mpl::list<
             EvCbSuccess<CbWaitActionServer, OrNavigation>//,
             // EvCbSuccess<CbWaitNav2Nodes, OrAssigner>

@@ -29,7 +29,7 @@ struct StInitialMove
      Transition<EvCbSuccess<CbTimerCountdownOnce, OrTimer>, StInitialMoveStop, SUCCESS>,
 
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMoveStop, NEXT>,
-    Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StAcquireSensors, PREVIOUS>
+    Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StLaunchNavStack, PREVIOUS>
   > reactions;
 
 //   CpTopicPublisher<geometry_msgs::msg::Twist> *pub;

@@ -14,7 +14,7 @@
 
 namespace sm_nav2_test_7
 {
-// STATE DECLARATION - Prepare to Undock
+// STATE DECLARATION - Docked
 struct StRecoverStep5 : smacc2::SmaccState<StRecoverStep5, MsRecover>
 {
   using SmaccState::SmaccState;
@@ -34,6 +34,7 @@ struct StRecoverStep5 : smacc2::SmaccState<StRecoverStep5, MsRecover>
   // STATE FUNCTIONS
   static void staticConfigure()
   {
+   // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
