@@ -339,7 +339,7 @@ sudo apt install postgresql-17-pgvector
 
 ## Assemble the Workspace
 
-### Clone the Application Reposinto the src folder...  
+### Clone the Application Repos into the src folder...  
  ```
 git clone https://github.com/robosoft-ai/SMACC2.git  
 git clone https://github.com/robosoft-ai/nova_carter_sm_library

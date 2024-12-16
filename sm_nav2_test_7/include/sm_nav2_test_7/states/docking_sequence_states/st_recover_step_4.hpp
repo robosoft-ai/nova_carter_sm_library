@@ -14,7 +14,7 @@
 
 namespace sm_nav2_test_7
 {
-// STATE DECLARATION - Docked
+// STATE DECLARATION - Dock
 struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
 {
   using SmaccState::SmaccState;
@@ -28,7 +28,6 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
   typedef mpl::list<
 
      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep5, SUCCESS>
-
     >reactions;
 
   // STATE FUNCTIONS

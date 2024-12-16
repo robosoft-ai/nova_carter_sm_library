@@ -23,7 +23,7 @@ namespace sm_nav2_test_7 {
 // STATE DECLARATION
 class MsNav2Test1RunMode
     : public smacc2::SmaccState<MsNav2Test1RunMode, SmNav2Test7,
-                                StAcquireSensors> {
+                                StLaunchNavStack> {
 public:
   using SmaccState::SmaccState;
 

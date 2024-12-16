@@ -506,7 +506,7 @@ font-family="Ubuntu" font-size="11" font-weight="400" font-style="normal"
 font-family="Ubuntu" font-size="20" font-weight="400" font-style="normal" 
 >
 <text fill="#000000" fill-opacity="1" stroke="none" xml:space="preserve" x="0" y="26" font-family="Ubuntu" font-size="20" font-weight="400" font-style="normal" 
- >StAcquireSensors</text>
+ >StLaunchNavStack</text>
 </g>
 
 <g fill="#ffffff" fill-opacity="1" stroke="#808080" stroke-opacity="1" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel" transform="matrix(0.999949,0,0,0.999949,1017.95,420.979)"
