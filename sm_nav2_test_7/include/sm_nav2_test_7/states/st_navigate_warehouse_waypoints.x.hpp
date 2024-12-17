@@ -60,7 +60,7 @@ struct StNavigateWarehouseWaypointsX
       Transition<EvWaypoint8<ClNav2Z, OrNavigation>, StWaypointSpinLeft, TRANSITION_9>,
       Transition<EvWaypoint9<ClNav2Z, OrNavigation>, StWaypointSpinRight, TRANSITION_10>,
       Transition<EvWaypoint10<ClNav2Z, OrNavigation>, StWaypointSpinLeft, TRANSITION_11>,
-      Transition<EvWaypoint11<ClNav2Z, OrNavigation>, StNavigateToWaypoint2, TRANSITION_12>,
+      Transition<EvWaypoint11<ClNav2Z, OrNavigation>, StBatteryCheck, TRANSITION_12>,
       
     //  Transition<cl_nav2z::EvWaypointFinal, StNavigateToWaypoint2, SUCCESS>,
  

@@ -24,6 +24,7 @@
 
 namespace sm_nav2_test_7 {
 using namespace cl_keyboard;
+using namespace cl_mission_tracker;
 
 // STATE DECLARATION
 struct StBatteryCheck
@@ -43,16 +44,12 @@ struct StBatteryCheck
 
   // TRANSITION TABLE
   typedef mpl::list<
-      Transition<EvWaypoint0<ClNav2Z, OrNavigation>, MsRecover, TRANSITION_1>,
-      Transition<EvWaypoint1<ClNav2Z, OrNavigation>, StNavigateToWaypoint2, TRANSITION_2>,
-      Transition<EvWaypoint2<ClNav2Z, OrNavigation>, MsRecover, TRANSITION_3>,
-      Transition<EvWaypoint3<ClNav2Z, OrNavigation>, StNavigateToWaypoint3, TRANSITION_4>,
-      Transition<EvWaypoint4<ClNav2Z, OrNavigation>, MsRecover, TRANSITION_5>,
-      Transition<EvWaypoint5<ClNav2Z, OrNavigation>, StNavigateToWaypoint4, TRANSITION_6>,
-
+      Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, MsRecover, TRANSITION_1>,
+      Transition<EvRadialMotion<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint2, TRANSITION_2>,
+      Transition<EvSPattern<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint3, TRANSITION_4>,
+      Transition<EvFPattern<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint4, TRANSITION_6>,
       
-    //  Transition<cl_nav2z::EvWaypointFinal, StNavigateToWaypoint2, SUCCESS>,
- 
+    //  Transition<cl_nav2z::EvWaypointFinal, StNavigateToWaypoint2, SUCCESS>, 
     //  Transition<EvCbSuccess<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, SUCCESS>,
     //  Transition<EvCbFailure<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
     //  Transition<EvActionAborted<ClNav2Z, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
@@ -67,8 +64,9 @@ struct StBatteryCheck
   // STATE FUNCTIONS
   static void staticConfigure() {
     // configure_orthogonal<OrNavigation, CbPositionControlFreeSpace>();
-    configure_orthogonal<OrNavigation, CbNavigateNextWaypoint>();
+    // configure_orthogonal<OrNavigation, CbNavigateNextWaypoint>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrMissionTracker, CbBatteryDecission>();
   }
 
   void onEntry() {}
