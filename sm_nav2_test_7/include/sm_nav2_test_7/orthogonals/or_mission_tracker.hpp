@@ -20,27 +20,23 @@
 
 #pragma once
 
-#include <smacc2/smacc.hpp>
-#include <sm_nav2_test_7/clients/cl_foundationpose/cl_foundationpose.hpp>
-#include <sm_nav2_test_7/clients/cl_foundationpose/components/cp_object_tracker_1.hpp>
-#include <sm_nav2_test_7/clients/cl_foundationpose/components/cp_object_tracker_tf.hpp>
+#include <nav2z_client/nav2z_client.hpp>
+#include <smacc2/smacc_orthogonal.hpp>
+
+#include <ament_index_cpp/get_package_share_directory.hpp>
+#include <sm_nav2_test_7/clients/cl_mission_tracker/cl_mission_tracker.hpp>
 
 namespace sm_nav2_test_7 {
+using namespace cl_nav2z;
+using namespace smacc2;
+using namespace client_bases;
+using namespace std::chrono_literals;
 
-using namespace cl_foundationpose;
-
-class OrPerception : public smacc2::Orthogonal<OrPerception> {
+class OrMissionTracker : public smacc2::Orthogonal<OrMissionTracker> {
 public:
-  void onInitialize() override 
-  {
-      auto client = this->createClient<ClFoundationPose>();
+  void onInitialize() override {
 
-      //configure the client
-            auto subcomponent = client->createComponent<CpTopicSubscriber<vision_msgs::msg::Detection3DArray>>("/detection3d_array");    
-
-      client->createComponent<CpObjectTracker1>();
-      client->createComponent<CpObjectTrackerTf>();
-
+        this->createClient<cl_mission_tracker::ClMissionTracker>();
   }
 };
 } // namespace sm_nav2_test_7

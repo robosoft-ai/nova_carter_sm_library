@@ -28,6 +28,9 @@ struct DetectedObject
   vision_msgs::msg::Detection3D msg;
 };
 
+
+struct EvObjectDetected : sc::event<EvObjectDetected> {};
+
 class CpObjectTracker1 : public smacc2::ISmaccComponent 
 {
 
@@ -63,6 +66,8 @@ public:
         detectedObjects[detection.id] = detectedObject;
       }
     }
+
+    this->postEvent<EvObjectDetected>();
   }
 
   private:

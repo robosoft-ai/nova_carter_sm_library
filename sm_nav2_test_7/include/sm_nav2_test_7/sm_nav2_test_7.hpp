@@ -70,6 +70,9 @@
 #include <sm_nav2_test_7/orthogonals/or_slam.hpp>
 #include <sm_nav2_test_7/orthogonals/or_localization.hpp>
 #include <sm_nav2_test_7/orthogonals/or_timer.hpp>
+#include <sm_nav2_test_7/orthogonals/or_mission_tracker.hpp>
+
+#include <sm_nav2_test_7/clients/cl_mission_tracker/client_behaviors/cb_battery_decission.hpp>
 
 using namespace cl_nav2z;
 using namespace smacc2::state_reactors;
@@ -142,6 +145,7 @@ struct EvGlobalError : sc::event<EvGlobalError> {};
 using namespace sm_nav2_test_7;
 using namespace cl_ros_timer;
 using namespace smacc2;
+using namespace cl_mission_tracker;
 
 namespace sm_nav2_test_7 {
 /// \brief Advanced example of state machine with smacc that shows multiple
@@ -165,6 +169,7 @@ struct SmNav2Test7
     this->createOrthogonal<OrLocalization>();
     this->createOrthogonal<OrLifecycleNode>();
     this->createOrthogonal<OrTimer>();
+    this->createOrthogonal<OrMissionTracker>();
   }
 };
 

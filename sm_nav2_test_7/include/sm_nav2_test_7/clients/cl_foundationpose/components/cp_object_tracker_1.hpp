@@ -28,6 +28,8 @@ struct DetectedObject
   vision_msgs::msg::Detection3D msg;
 };
 
+struct EvObjectDetected : sc::event<EvObjectDetected> {};
+
 class CpObjectTracker1 : public smacc2::ISmaccComponent 
 {
 
@@ -63,6 +65,19 @@ public:
         detectedObjects[detection.id] = detectedObject;
       }
     }
+  }
+
+  std::optional<geometry_msgs::msg::PoseStamped> getPose(const std::string& object_id)
+  {
+    auto object = detectedObjects.find(object_id);
+    if (object != detectedObjects.end()) 
+    {
+      geometry_msgs::msg::PoseStamped pose;
+      pose.header = object->second.msg.header;
+      pose.pose = object->second.msg.results[0].pose.pose;
+      return pose;
+    }
+    return std::nullopt;
   }
 
   private:

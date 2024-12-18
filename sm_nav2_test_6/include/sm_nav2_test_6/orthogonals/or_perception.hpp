@@ -36,7 +36,7 @@ public:
       auto client = this->createClient<ClFoundationPose>();
 
       //configure the client
-            auto subcomponent = client->createComponent<CpTopicSubscriber<vision_msgs::msg::Detection3DArray>>("/detection3d_array");    
+       auto subcomponent = client->createComponent<CpTopicSubscriber<vision_msgs::msg::Detection3DArray>>("/detection3d_array");    
 
       client->createComponent<CpObjectTracker1>();
 
