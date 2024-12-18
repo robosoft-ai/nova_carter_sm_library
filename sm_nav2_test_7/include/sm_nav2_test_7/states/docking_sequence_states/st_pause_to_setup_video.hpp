@@ -24,6 +24,7 @@ struct StPauseToSetupVideo
   // TRANSITION TABLE
   typedef mpl::list<
     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StInitialMove, SUCCESS>,
+
     //Keyboard events
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMove, NEXT>
   > reactions;

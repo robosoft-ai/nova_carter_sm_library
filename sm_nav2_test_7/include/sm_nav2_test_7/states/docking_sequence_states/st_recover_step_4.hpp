@@ -14,7 +14,7 @@
 
 namespace sm_nav2_test_7
 {
-// STATE DECLARATION - Dock
+// STATE DECLARATION - Refine Orientation
 struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
 {
   using SmaccState::SmaccState;
@@ -37,7 +37,15 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
-  void runtimeConfigure() {}
+  void runtimeConfigure() 
+  {
+     CpObjectTrackerTf* objectTracker;
+     requiresComponent(objectTracker);
+      
+     auto pose = objectTracker->getObjectFacingPose("map", "fp_object");
+     double targetYaw = tf2::getYaw(pose->pose.orientation);
+     this->configure<OrNavigation, CbAbsoluteRotate>(targetYaw);
+  }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
 

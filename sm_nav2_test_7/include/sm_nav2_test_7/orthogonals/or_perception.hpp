@@ -23,7 +23,7 @@
 #include <smacc2/smacc.hpp>
 #include <sm_nav2_test_7/clients/cl_foundationpose/cl_foundationpose.hpp>
 #include <sm_nav2_test_7/clients/cl_foundationpose/components/cp_object_tracker_1.hpp>
-
+#include <sm_nav2_test_7/clients/cl_foundationpose/components/cp_object_tracker_tf.hpp>
 
 namespace sm_nav2_test_7 {
 
@@ -39,6 +39,7 @@ public:
             auto subcomponent = client->createComponent<CpTopicSubscriber<vision_msgs::msg::Detection3DArray>>("/detection3d_array");    
 
       client->createComponent<CpObjectTracker1>();
+      client->createComponent<CpObjectTrackerTf>();
 
   }
 };

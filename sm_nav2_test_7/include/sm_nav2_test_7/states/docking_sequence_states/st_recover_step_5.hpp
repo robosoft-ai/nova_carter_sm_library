@@ -14,6 +14,8 @@
 
 namespace sm_nav2_test_7
 {
+  using cl_nav2z::CbNavigateForward;
+
 // STATE DECLARATION - Docked
 struct StRecoverStep5 : smacc2::SmaccState<StRecoverStep5, MsRecover>
 {
@@ -36,6 +38,7 @@ struct StRecoverStep5 : smacc2::SmaccState<StRecoverStep5, MsRecover>
   {
    // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrNavigation, CbNavigateForward>(0.5);
   }
 
   void runtimeConfigure() {}

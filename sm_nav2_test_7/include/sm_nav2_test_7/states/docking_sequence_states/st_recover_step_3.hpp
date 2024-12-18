@@ -14,6 +14,8 @@
 
 namespace sm_nav2_test_7
 {
+  using cl_nav2z::CbNavigateGlobalPosition;
+
 // STATE DECLARATION - Calculate Final Pose
 struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
 {
@@ -40,7 +42,15 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
-  void runtimeConfigure() {}
+  void runtimeConfigure() 
+  {
+    CpObjectTrackerTf* objectTracker;
+    requiresComponent(objectTracker);
+    
+    auto pose = objectTracker->getObjectFacingPose("map", "fp_object");
+
+    this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
+  }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
 
