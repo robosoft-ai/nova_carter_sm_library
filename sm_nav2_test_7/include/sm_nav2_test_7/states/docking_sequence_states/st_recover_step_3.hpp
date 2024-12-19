@@ -12,9 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <sm_nav2_test_7/clients/cl_foundationpose/client_behaviors/cb_track_object_pose.hpp>
+
 namespace sm_nav2_test_7
 {
   using cl_nav2z::CbNavigateGlobalPosition;
+  using cl_foundationpose::CbTrackObjectPose;
 
 // STATE DECLARATION - Calculate Final Pose
 struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
@@ -29,7 +32,9 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep4, SUCCESS>
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep4, SUCCESS>,
+    Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep4, SUCCESS>
+    //Transition<EvCbFailure<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep3, ABORT>
   
     >reactions;
 
@@ -40,6 +45,7 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
   //  configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
   //  configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
   }
 
   void runtimeConfigure() 
@@ -47,8 +53,8 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
     CpObjectTrackerTf* objectTracker;
     requiresComponent(objectTracker);
     
-    auto pose = objectTracker->getObjectFacingPose("map", "fp_object");
-
+    auto pose = objectTracker->updateGlobalObjectPoseWithOffset("fp_object", "map");
+    RCLCPP_INFO(getLogger(), "[StRecoverStep3] Navigating to Facing Dock pose: %f, %f, %f", pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
     this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
   }
 

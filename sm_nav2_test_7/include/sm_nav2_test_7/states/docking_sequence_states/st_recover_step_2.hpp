@@ -12,8 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <sm_nav2_test_7/clients/cl_foundationpose/client_behaviors/cb_track_object_pose.hpp>
+
 namespace sm_nav2_test_7
 {
+    using cl_foundationpose::CbTrackObjectPose;
+
 // STATE DECLARATION - Pause to acquire FoundationPose readings
 struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
 {
@@ -35,7 +39,8 @@ struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-    configure_orthogonal<OrNavigation, CbSleepFor>(30s);
+    // configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
+    configure_orthogonal<OrNavigation, CbSleepFor>(10s);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 

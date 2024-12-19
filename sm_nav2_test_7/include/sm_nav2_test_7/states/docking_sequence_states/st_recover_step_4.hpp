@@ -42,7 +42,7 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
      CpObjectTrackerTf* objectTracker;
      requiresComponent(objectTracker);
       
-     auto pose = objectTracker->getObjectFacingPose("map", "fp_object");
+     auto pose = objectTracker->updateGlobalObjectPoseWithOffset("fp_object", "map");
      double targetYaw = tf2::getYaw(pose->pose.orientation);
      this->configure<OrNavigation, CbAbsoluteRotate>(targetYaw);
   }
