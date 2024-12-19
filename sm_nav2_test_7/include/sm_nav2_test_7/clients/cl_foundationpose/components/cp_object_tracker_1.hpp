@@ -16,19 +16,12 @@
 #include <smacc2/component.hpp>
 #include <vision_msgs/msg/detection3_d_array.hpp>
 #include <smacc2/client_base_components/cp_topic_subscriber.hpp>
-
+#include <sm_nav2_test_7/clients/cl_foundationpose/components/tracker_utils.hpp>
 
 namespace cl_foundationpose 
 {
 
 using namespace smacc2::components;
-
-struct DetectedObject
-{
-  vision_msgs::msg::Detection3D msg;
-};
-
-struct EvObjectDetected : sc::event<EvObjectDetected> {};
 
 class CpObjectTracker1 : public smacc2::ISmaccComponent 
 {
@@ -38,10 +31,10 @@ public:
   void onInitialize() 
   {
     // Gain access to the foundationpose subscriber component.
-    requiresComponent(subcomponent);
+    requiresComponent(fondationPoseTopic_);
 
     // Then hook each received message to store it into our little map/database.
-    subcomponent->onMessageReceived(&CpObjectTracker1::onDetection3DArrayReceived, this);
+    fondationPoseTopic_->onMessageReceived(&CpObjectTracker1::onDetection3DArrayReceived, this);
   }
 
   void onDetection3DArrayReceived(const vision_msgs::msg::Detection3DArray& msg)
@@ -64,6 +57,8 @@ public:
         detectedObject.msg = detection;
         detectedObjects[detection.id] = detectedObject;
       }
+
+      this->postEvent<EvObjectDetected>();
     }
   }
 
@@ -83,7 +78,7 @@ public:
   private:
 
     // Declare the subscriber component. 
-    CpTopicSubscriber<vision_msgs::msg::Detection3DArray>* subcomponent;
+    CpTopicSubscriber<vision_msgs::msg::Detection3DArray>* fondationPoseTopic_;
 
     // Declare a data structure to store the detected objects.
     std::map<std::string, DetectedObject> detectedObjects;
