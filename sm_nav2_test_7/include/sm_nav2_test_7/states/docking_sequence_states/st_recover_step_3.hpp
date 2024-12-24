@@ -45,7 +45,7 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
   //  configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
   //  configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
-    configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
+    configure_orthogonal<OrNavigation, CbPauseSlam>();
   }
 
   void runtimeConfigure() 
@@ -57,7 +57,7 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
     //RCLCPP_INFO(getLogger(), "[StRecoverStep3] Navigating to Facing Dock pose: %f, %f, %f", pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
     //this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
 
-    auto pose = objectTracker->getGlobalPose("fp_object", "map");
+    auto pose = objectTracker->updateAndGetGlobalPose("fp_object", "map");
 
     if(pose)
     {

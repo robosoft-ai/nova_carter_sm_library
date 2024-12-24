@@ -12,14 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <sm_nav2_test_7/clients/cl_foundationpose/client_behaviors/cb_track_object_pose.hpp>
-
 namespace sm_nav2_test_7
 {
-    using cl_foundationpose::CbTrackObjectPose;
-
-// STATE DECLARATION - Pause to acquire FoundationPose readings
-struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
+// STATE DECLARATION - Refine Orientation
+struct StRecoverStep4_1 : smacc2::SmaccState<StRecoverStep4_1, MsRecover>
 {
   using SmaccState::SmaccState;
 
@@ -30,23 +26,29 @@ struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
 
   // TRANSITION TABLE
   typedef mpl::list<
-    //  Transition<cl_foundationpose::EvObjectDetected, StRecoverStep3, SUCCESS>,
-     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoverStep3, SUCCESS>,
-     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep3, SUCCESS>
 
+     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep5, SUCCESS>,
+     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoverStep5, SUCCESS>
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-    // configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
-    configure_orthogonal<OrNavigation, CbSleepFor>(3s);
+   // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
     configure_orthogonal<OrNavigation, CbPauseSlam>();
     configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
+    configure_orthogonal<OrNavigation, CbSleepFor>(4s);
   }
 
-  void runtimeConfigure() {}
+  void runtimeConfigure() 
+  {
+     RCLCPP_INFO(getLogger(), "[StRecoverStep4_1] Sleeping for 4 seconds to refine/filter docking pose estimation");
+     CpObjectTrackerTf* objectTracker;
+     requiresComponent(objectTracker);
+     objectTracker->resetPoseEstimation();
+      
+  }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
 

@@ -27,8 +27,8 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep5, SUCCESS>,
-     Transition<EvCbSuccess<CbAbsoluteRotate, OrNavigation>, StRecoverStep5, SUCCESS>
+     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep4_1, SUCCESS>,
+     Transition<EvCbSuccess<CbAbsoluteRotate, OrNavigation>, StRecoverStep4_1, SUCCESS>
     >reactions;
 
   // STATE FUNCTIONS
@@ -36,6 +36,7 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
   {
    // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrNavigation, CbPauseSlam>();
   }
 
   void runtimeConfigure() 

@@ -11,22 +11,22 @@ SmNav2Test7:
         waypoints_file: $(pkg_share)/config/navigation_waypoints_1.yaml
 
 
-        # --- DOCKING PARAMETERS (verison1)--
+        # --- DOCKING PARAMETERS (verison1)-- compensate global navigation goal checking error
         docking_pose.offset.x: -0.4
-        docking_pose.offset.y: -0.075
+        docking_pose.offset.y: -0.05
 
         cb_battery_position_control.enable_static_forward_distance: false
         
-        #STATIC
-        cb_battery_position_control.dynamic_forward_offset: 0.25
-
         #DYNAMIC
-        cb_battery_position_control.forward_distance: 0.32
+        cb_battery_position_control.dynamic_forward_offset: 0.15
+
+        #STATIC
+        cb_battery_position_control.forward_distance: 0.35
 
         #BOTH
-        cb_battery_position_control.threshold_distance: 0.02
+        cb_battery_position_control.threshold_distance: 0.04
         cb_battery_position_control.max_linear_velocity: 0.1
-        cb_battery_position_control.command_timeout_sec: 10.0
+        cb_battery_position_control.command_timeout_sec: 8.0
 
         cb_battery_position_control.kp_angular: 0.0
         cb_battery_position_control.kd_angular: 0.0
@@ -45,9 +45,3 @@ SmNav2Test7:
         # cb_battery_position_control.kd_angular: 0.0
 
         # cb_battery_position_control.backwardDistance: 1.5
-
-        docking_pose.charning_area.x: 0.0
-        docking_pose.charning_area.y: 0.0
-
-        # docking_pose.charning_area.x: 6.25
-        # docking_pose.charning_area.y: -13.8

@@ -42,7 +42,7 @@ struct StRecoverStep1 : smacc2::SmaccState<StRecoverStep1, MsRecover>
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-   // -# configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(6.25, -13.8, 0.0);
+    //configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(6.25, -13.8, 0.0);
     configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(0.0, 0.0, 0.0);
     configure_orthogonal<OrNavigation, CbResumeSlam>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
@@ -51,26 +51,7 @@ struct StRecoverStep1 : smacc2::SmaccState<StRecoverStep1, MsRecover>
   void runtimeConfigure() 
   {
 
-      geometry_msgs::msg::Point chargingAreaPoint;
-      chargingAreaPoint.x = 0.0;
-      chargingAreaPoint.y = 0.0;
-      double yaw = 0.0;
 
-      if(!getNode()->has_parameter("docking_pose.charning_area.x"))
-      {
-        getNode()->declare_parameter("docking_pose.charning_area.x",chargingAreaPoint.x);
-        chargingAreaPoint.x = getNode()->get_parameter("docking_pose.charning_area.x").as_double();
-      }
-
-      if(!getNode()->has_parameter("docking_pose.charning_area.y"))
-      {
-        getNode()->declare_parameter("docking_pose.charning_area.y",chargingAreaPoint.y);
-        chargingAreaPoint.y = getNode()->get_parameter("docking_pose.charning_area.y").as_double();
-      }
-
-      auto cbGlobalNavigation = this->getOrthogonal<OrNavigation>()->getClientBehavior<CbNavigateGlobalPosition>();
-      cbGlobalNavigation->goalPosition = chargingAreaPoint;
-      cbGlobalNavigation->goalYaw = yaw;
   }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
