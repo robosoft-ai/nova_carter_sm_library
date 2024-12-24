@@ -25,12 +25,14 @@ struct StPauseToSetupVideo
   typedef mpl::list<
     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StInitialMove, SUCCESS>,
     //Keyboard events
+    Transition<EvKeyPressD<CbDefaultKeyboardBehavior, OrKeyboard>, StBatteryCheck, SUCCESS>,
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMove, NEXT>
   > reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure() {
-    configure_orthogonal<OrNavigation, CbSleepFor>(20s);
+    // -#configure_orthogonal<OrNavigation, CbSleepFor>(20s);
+    configure_orthogonal<OrNavigation, CbSleepFor>(50s);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 

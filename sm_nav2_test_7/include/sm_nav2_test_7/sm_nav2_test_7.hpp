@@ -73,6 +73,7 @@
 #include <sm_nav2_test_7/orthogonals/or_mission_tracker.hpp>
 
 #include <sm_nav2_test_7/clients/cl_mission_tracker/client_behaviors/cb_battery_decission.hpp>
+#include <sm_nav2_test_7/clients/cl_nav2z/client_behaviors/cb_position_control_free_space.hpp>
 
 using namespace cl_nav2z;
 using namespace smacc2::state_reactors;
