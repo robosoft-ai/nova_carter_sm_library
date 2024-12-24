@@ -53,9 +53,37 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
     CpObjectTrackerTf* objectTracker;
     requiresComponent(objectTracker);
     
-    auto pose = objectTracker->updateGlobalObjectPoseWithOffset("fp_object", "map");
-    RCLCPP_INFO(getLogger(), "[StRecoverStep3] Navigating to Facing Dock pose: %f, %f, %f", pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
-    this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
+    //auto pose = objectTracker->updateGlobalObjectPoseWithOffset("fp_object", "map");
+    //RCLCPP_INFO(getLogger(), "[StRecoverStep3] Navigating to Facing Dock pose: %f, %f, %f", pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
+    //this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
+
+    auto pose = objectTracker->getGlobalPose("fp_object", "map");
+
+    if(pose)
+    {
+      geometry_msgs::msg::Point dockingPoseOffset;
+      dockingPoseOffset.x = -0.5;
+      if(!getNode()->has_parameter("docking_pose.offset.x"))
+      {
+        getNode()->declare_parameter("docking_pose.offset.x",dockingPoseOffset.x);
+        dockingPoseOffset.x = getNode()->get_parameter("docking_pose.offset.x").as_double();
+      }
+
+      if(!getNode()->has_parameter("docking_pose.offset.y"))
+      {
+        getNode()->declare_parameter("docking_pose.offset.y",dockingPoseOffset.y);
+        dockingPoseOffset.y = getNode()->get_parameter("docking_pose.offset.y").as_double();
+      }
+
+      // pose->pose.position.x-=0.2;
+      pose->pose.position.x+= dockingPoseOffset.x;
+      pose->pose.position.y+=dockingPoseOffset.y;
+      this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, 0.0);
+    }
+    else
+    {
+      RCLCPP_ERROR(getLogger(), "The object pose is not available. global navigation was not configured.");
+    }
   }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }

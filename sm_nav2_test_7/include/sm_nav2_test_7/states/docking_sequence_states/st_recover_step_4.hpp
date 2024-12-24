@@ -27,7 +27,8 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep5, SUCCESS>
+     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep5, SUCCESS>,
+     Transition<EvCbSuccess<CbAbsoluteRotate, OrNavigation>, StRecoverStep5, SUCCESS>
     >reactions;
 
   // STATE FUNCTIONS
@@ -42,9 +43,10 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
      CpObjectTrackerTf* objectTracker;
      requiresComponent(objectTracker);
       
-     auto pose = objectTracker->updateGlobalObjectPoseWithOffset("fp_object", "map");
-     double targetYaw = tf2::getYaw(pose->pose.orientation);
-     this->configure<OrNavigation, CbAbsoluteRotate>(targetYaw);
+     //auto pose = objectTracker->updateGlobalObjectPoseWithOffset("fp_object", "map");
+     //double targetYaw = tf2::getYaw(pose->pose.orientation);
+     //this->configure<OrNavigation, CbAbsoluteRotate>(targetYaw);
+     this->configure<OrNavigation, CbAbsoluteRotate>(0.0);
   }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }

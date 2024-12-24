@@ -46,7 +46,18 @@ struct StRecoverStep6 : smacc2::SmaccState<StRecoverStep6, MsRecover>
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
-  void runtimeConfigure() {}
+  void runtimeConfigure() 
+  {
+      double backwardDistance = 1.5;
+      if(!getNode()->has_parameter("cb_battery_position_control.backwardDistance"))
+      {
+        getNode()->declare_parameter("cb_battery_position_control.backwardDistance",backwardDistance);
+        backwardDistance = getNode()->get_parameter("cb_battery_position_control.backwardDistance").as_double();
+      }
+
+      auto cb_position_control_backwards=this->getOrthogonal<OrNavigation>()->getClientBehavior<CbNavigateBackwards>();
+      cb_position_control_backwards->backwardDistance = backwardDistance;
+  }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
 
