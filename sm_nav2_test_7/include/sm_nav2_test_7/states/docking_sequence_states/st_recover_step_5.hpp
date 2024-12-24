@@ -39,6 +39,7 @@ struct StRecoverStep5 : smacc2::SmaccState<StRecoverStep5, MsRecover>
   {
    // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrNavigation, CbPauseSlam>();
     // configure_orthogonal<OrNavigation, CbNavigateForward>(0.5);
   }
 
@@ -46,7 +47,7 @@ struct StRecoverStep5 : smacc2::SmaccState<StRecoverStep5, MsRecover>
   {
     CpObjectTrackerTf* objectTracker;
     requiresComponent(objectTracker);
-    auto dockingPose = objectTracker->getGlobalPose("fp_object", "map");
+    auto dockingPose = objectTracker->updateAndGetGlobalPose("fp_object", "map");
 
     cl_nav2z::Pose* robotPose;
     requiresComponent(robotPose);

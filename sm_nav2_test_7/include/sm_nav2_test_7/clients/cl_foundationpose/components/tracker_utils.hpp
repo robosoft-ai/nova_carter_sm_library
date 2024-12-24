@@ -24,6 +24,8 @@ struct DetectedObject
   vision_msgs::msg::Detection3D msg;
 
   std::optional<geometry_msgs::msg::PoseStamped> filtered_pose;
+
+  std::vector<geometry_msgs::msg::PoseStamped> historicalPoses_;
 };
 
 

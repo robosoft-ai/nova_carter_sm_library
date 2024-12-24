@@ -25,17 +25,13 @@
 namespace cl_foundationpose 
 {
 
-class CbTrackObjectPose : public smacc2::SmaccClientBehavior , public smacc2::ISmaccUpdatable
+class CbTrackObjectPause : public smacc2::SmaccClientBehavior , public smacc2::ISmaccUpdatable
 {
 private:
-    std::string globalFrame_;
-    std::string objectToTrackId_;
     cl_foundationpose::CpObjectTrackerTf   *objectTracker_ = nullptr;
 
 public:
-  CbTrackObjectPose(std::string objectToTrackId, std::string globalFrame="map"):
-    globalFrame_(globalFrame),
-    objectToTrackId_(objectToTrackId)
+  CbTrackObjectPose()
   {
 
   }
@@ -49,10 +45,8 @@ public:
   {
     requiresComponent(objectTracker_);
     RCLCPP_INFO(getLogger(), "CbTrackObjectPose onEntry");
-    objectTracker_->setEnabled(true);
-    RCLCPP_INFO(getLogger(), "CbTrackObjectPose onEntry - enabled");
-    objectTracker_->updateAndGetGlobalPose(objectToTrackId_, globalFrame_); 
-    RCLCPP_INFO(getLogger(), "CbTrackObjectPose onEntry - updateAndGetGlobalPose, objectToTrackId: %s, globalFrame: %s", objectToTrackId_.c_str(), globalFrame_.c_str());
+    objectTracker_->setEnabled(False);
+    RCLCPP_INFO(getLogger(), "CbTrackObjectPose onEntry - enabled");    
   }
 
   virtual void onExit() override 
