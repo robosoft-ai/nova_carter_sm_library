@@ -33,6 +33,7 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
   typedef mpl::list<
 
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep4, SUCCESS>,
+    Transition<EvCbFailure<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep3, ABORT>,
     Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep4, SUCCESS>
     //Transition<EvCbFailure<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep3, ABORT>
   

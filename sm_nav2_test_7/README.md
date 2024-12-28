@@ -29,10 +29,16 @@ Then, in the same Nova_Carter_ROS prim, find the transform_tree_odometry/ros2_pu
 "chassis/odom" to just "/odom".
 
 In the stage menu, find the Forklift Xform in carter_warehouse_apriltags_worker/warehouse_with_forklifts/Forklift and deactivate it.
+Then find carter_warehouse_apriltags_worker/mac_and_cheese and delete/deactivate it.
+Then find carter_warehouse_apriltags_worker/Warehouse_Extras/Extras/Misc/SM_BucketPlastic_B_01 
+Scroll down to Transform/Translate and set the position to... x= -7.5, y= 64.5, x= 0.0
+Then find carter_warehouse_apriltags_worker/Warehouse_Extras/Extras/Misc/SM_BucketPlastic_B_02
+Scroll down to Transform/Translate and set the position to... x= -7.5, y= 36.5, x= 0.0
+
 
 Go to PROPS/NVIDIA and drag charging_station_galileo into the scene.
 In the Stage panel, select the charging_station_galileo Xform 
-Scroll down to Transform/Translate and set the position to... x= -10.0, y= 14.0, x= 0.01
+Scroll down to Transform/Translate and set the position to... x= -10.15, y= 16.5, x= 0.007
 Scroll down to Transform/Rotate and set z= 180.0
 Scroll down to Physics/Rigid Body and check all the boxes for Disable Gravity, Locked Pos Axis & Locked Rot Axis or it will fall through the floor.
 

@@ -108,6 +108,7 @@ class StNavigateToWaypoint5;
 class StLoadingWaypointsFile;
 class StBackup1;
 class StRecoverStep1;
+class StRecoverStep1b;
 class StRecoverStep2;
 class StRecoverStep3;
 class StRecoverStep4;
@@ -219,6 +220,7 @@ struct SmNav2Test7
 
 
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_1.hpp>
+#include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_1b.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_2.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_3.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_4.hpp>
