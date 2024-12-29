@@ -12,13 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <sm_nav2_test_7/clients/cl_foundationpose/client_behaviors/cb_track_object_pose.hpp>
-
 namespace sm_nav2_test_7
 {
-    using cl_foundationpose::CbTrackObjectPose;
+using namespace smacc2::default_events;
+using smacc2::client_behaviors::CbSleepFor;
+using cl_nav2z::CbAbsoluteRotate;
+using namespace std::chrono_literals;
+using namespace cl_nav2z;
+using namespace cl_keyboard;
 
-// STATE DECLARATION - Pause to acquire FoundationPose readings
+// STATE DECLARATION - Navigate to Staging
 struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
 {
   using SmaccState::SmaccState;
@@ -30,20 +33,18 @@ struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
 
   // TRANSITION TABLE
   typedef mpl::list<
-    //  Transition<cl_foundationpose::EvObjectDetected, StRecoverStep3, SUCCESS>,
-     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoverStep3, SUCCESS>,
-     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep3, SUCCESS>
+
+    Transition<EvCbSuccess<CbAbsoluteRotate, OrNavigation>, StRecoverStep3, SUCCESS>,
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep3, SUCCESS>
 
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-    // configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
-    configure_orthogonal<OrNavigation, CbSleepFor>(5s);
-    configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrNavigation, CbAbsoluteRotate>(0.0);
     configure_orthogonal<OrNavigation, CbPauseSlam>();
-    configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
+    configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
   void runtimeConfigure() {}

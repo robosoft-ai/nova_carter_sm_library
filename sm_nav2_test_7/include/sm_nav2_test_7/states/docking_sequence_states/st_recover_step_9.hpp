@@ -14,41 +14,36 @@
 
 namespace sm_nav2_test_7
 {
-// STATE DECLARATION - Refine Orientation
-struct StRecoverStep4_1 : smacc2::SmaccState<StRecoverStep4_1, MsRecover>
+using namespace cl_nav2z;  
+using namespace cl_keyboard;
+
+// STATE DECLARATION - Turn Around
+struct StRecoverStep9 : smacc2::SmaccState<StRecoverStep9, MsRecover>
 {
   using SmaccState::SmaccState;
 
   // DECLARE CUSTOM OBJECT TAGS
-  struct TIMEOUT : ABORT{};
   struct NEXT : SUCCESS{};
   struct PREVIOUS : ABORT{};
 
   // TRANSITION TABLE
   typedef mpl::list<
 
-     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep5, SUCCESS>,
-     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoverStep5, SUCCESS>
+    Transition<EvCbSuccess<CbPureSpinning, OrNavigation>, StRecoverStep10>,
+    Transition<EvCbFailure<CbPureSpinning, OrNavigation>, StRecoverStep10>,
+
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep10, NEXT>
+
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-   // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
-    configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
-    configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
-    configure_orthogonal<OrNavigation, CbSleepFor>(4s);
+    configure_orthogonal<OrNavigation, CbPureSpinning>(-1*M_PI, 1.0 /*rad_s*/);
+    configure_orthogonal<OrNavigation, CbResumeSlam>();
   }
 
-  void runtimeConfigure() 
-  {
-     RCLCPP_INFO(getLogger(), "[StRecoverStep4_1] Sleeping for 4 seconds to refine/filter docking pose estimation");
-     CpObjectTrackerTf* objectTracker;
-     requiresComponent(objectTracker);
-     objectTracker->resetPoseEstimation();
-      
-  }
+  void runtimeConfigure() {}
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
 

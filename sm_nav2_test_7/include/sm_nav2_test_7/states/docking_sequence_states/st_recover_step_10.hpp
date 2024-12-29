@@ -16,13 +16,12 @@ namespace sm_nav2_test_7
 {
 using namespace smacc2::default_events;
 using smacc2::client_behaviors::CbSleepFor;
-using cl_nav2z::CbNavigateGlobalPosition;
 using namespace std::chrono_literals;
 using namespace cl_nav2z;
 using namespace cl_keyboard;
 
-// STATE DECLARATION - Navigate to Staging
-struct StRecoverStep1b : smacc2::SmaccState<StRecoverStep1b, MsRecover>
+// STATE DECLARATION - Go back to previous task
+struct StRecoverStep10 : smacc2::SmaccState<StRecoverStep10, MsRecover>
 {
   using SmaccState::SmaccState;
 
@@ -34,26 +33,19 @@ struct StRecoverStep1b : smacc2::SmaccState<StRecoverStep1b, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-    Transition<EvCbSuccess<CbAbsoluteRotate, OrNavigation>, StRecoverStep2, SUCCESS>,
-    //Transition<EvCbFailure<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep1, ABORT>,
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep2, SUCCESS>
+    Transition<EvCbSuccess<CbSleepFor, OrNavigation>, smacc2::deep_history<MsNav2Test1RunMode::LastDeepState>, SUCCESS>,
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, smacc2::deep_history<MsNav2Test1RunMode::LastDeepState>, SUCCESS>
 
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-    configure_orthogonal<OrNavigation, CbAbsoluteRotate>(0.0);
-    //configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(0.0, 0.0, 0.0);
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    configure_orthogonal<OrNavigation, CbSleepFor>(.5s);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
-  void runtimeConfigure() 
-  {
-
-
-  }
+  void runtimeConfigure() {}
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
 
