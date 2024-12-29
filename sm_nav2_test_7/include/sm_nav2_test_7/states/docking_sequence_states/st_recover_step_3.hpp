@@ -16,10 +16,9 @@
 
 namespace sm_nav2_test_7
 {
-  using cl_nav2z::CbNavigateGlobalPosition;
-  using cl_foundationpose::CbTrackObjectPose;
+    using cl_foundationpose::CbTrackObjectPose;
 
-// STATE DECLARATION - Calculate Final Pose
+// STATE DECLARATION - Pause to acquire FoundationPose readings
 struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
 {
   using SmaccState::SmaccState;
@@ -31,61 +30,23 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
 
   // TRANSITION TABLE
   typedef mpl::list<
+    //  Transition<cl_foundationpose::EvObjectDetected, StRecoverStep3, SUCCESS>,
+     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoverStep4, SUCCESS>,
+     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep4, SUCCESS>
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep4, SUCCESS>,
-    Transition<EvCbFailure<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep3, ABORT>,
-    Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep4, SUCCESS>
-    //Transition<EvCbFailure<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep3, ABORT>
-  
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-  //  configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
-  //  configure_orthogonal<OrSubscriber, CbWatchdogSubscriberBehavior>();
-  //  configure_orthogonal<OrUpdatablePublisher, CbDefaultPublishLoop>();
+    // configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
+    configure_orthogonal<OrNavigation, CbSleepFor>(5s);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
     configure_orthogonal<OrNavigation, CbPauseSlam>();
+    configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
   }
 
-  void runtimeConfigure() 
-  {
-    CpObjectTrackerTf* objectTracker;
-    requiresComponent(objectTracker);
-    
-    //auto pose = objectTracker->updateGlobalObjectPoseWithOffset("fp_object", "map");
-    //RCLCPP_INFO(getLogger(), "[StRecoverStep3] Navigating to Facing Dock pose: %f, %f, %f", pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
-    //this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
-
-    auto pose = objectTracker->updateAndGetGlobalPose("fp_object", "map");
-
-    if(pose)
-    {
-      geometry_msgs::msg::Point dockingPoseOffset;
-      dockingPoseOffset.x = -0.5;
-      if(!getNode()->has_parameter("docking_pose.offset.x"))
-      {
-        getNode()->declare_parameter("docking_pose.offset.x",dockingPoseOffset.x);
-        dockingPoseOffset.x = getNode()->get_parameter("docking_pose.offset.x").as_double();
-      }
-
-      if(!getNode()->has_parameter("docking_pose.offset.y"))
-      {
-        getNode()->declare_parameter("docking_pose.offset.y",dockingPoseOffset.y);
-        dockingPoseOffset.y = getNode()->get_parameter("docking_pose.offset.y").as_double();
-      }
-
-      // pose->pose.position.x-=0.2;
-      pose->pose.position.x+= dockingPoseOffset.x;
-      pose->pose.position.y+=dockingPoseOffset.y;
-      this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, 0.0);
-    }
-    else
-    {
-      RCLCPP_ERROR(getLogger(), "The object pose is not available. global navigation was not configured.");
-    }
-  }
+  void runtimeConfigure() {}
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }
 

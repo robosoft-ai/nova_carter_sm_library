@@ -14,50 +14,40 @@
 
 namespace sm_nav2_test_7
 {
-using namespace cl_nav2z;  
-using namespace cl_keyboard;
-
-// STATE DECLARATION - Undock
+// STATE DECLARATION - Filter the pose estimation
 struct StRecoverStep6 : smacc2::SmaccState<StRecoverStep6, MsRecover>
 {
   using SmaccState::SmaccState;
 
   // DECLARE CUSTOM OBJECT TAGS
+  struct TIMEOUT : ABORT{};
   struct NEXT : SUCCESS{};
   struct PREVIOUS : ABORT{};
 
   // TRANSITION TABLE
   typedef mpl::list<
 
-      Transition<EvCbSuccess<CbNavigateBackwards, OrNavigation>, StRecoverStep7,
-                 SUCCESS>,
-     
-      // Keyboard events  
-      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep7, NEXT>
-      >
-      reactions;
+     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep7, SUCCESS>,
+     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoverStep7, SUCCESS>
+    >reactions;
 
   // STATE FUNCTIONS
-  static void staticConfigure() {
-    // RCLCPP_INFO(getLogger(),"ssr radial end point, distance in meters: %lf",
-    // SS::ray_length_meters());
-    configure_orthogonal<OrNavigation, CbNavigateBackwards>(1.0);
-    //configure_orthogonal<OrNavigation, CbPauseSlam>();
+  static void staticConfigure()
+  {
+   // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
     configure_orthogonal<OrNavigation, CbPauseSlam>();
+    configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
+    configure_orthogonal<OrNavigation, CbSleepFor>(4s);
   }
 
   void runtimeConfigure() 
   {
-      double backwardDistance = 1.5;
-      if(!getNode()->has_parameter("cb_battery_position_control.backwardDistance"))
-      {
-        getNode()->declare_parameter("cb_battery_position_control.backwardDistance",backwardDistance);
-        backwardDistance = getNode()->get_parameter("cb_battery_position_control.backwardDistance").as_double();
-      }
-
-      auto cb_position_control_backwards=this->getOrthogonal<OrNavigation>()->getClientBehavior<CbNavigateBackwards>();
-      cb_position_control_backwards->backwardDistance = backwardDistance;
+     RCLCPP_INFO(getLogger(), "[StRecoverStep6] Sleeping for 4 seconds to refine/filter docking pose estimation");
+     CpObjectTrackerTf* objectTracker;
+     requiresComponent(objectTracker);
+     objectTracker->resetPoseEstimation();
+      
   }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }

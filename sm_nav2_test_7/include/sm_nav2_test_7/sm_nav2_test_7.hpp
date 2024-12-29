@@ -108,15 +108,15 @@ class StNavigateToWaypoint5;
 class StLoadingWaypointsFile;
 class StBackup1;
 class StRecoverStep1;
-class StRecoverStep1b;
 class StRecoverStep2;
 class StRecoverStep3;
 class StRecoverStep4;
-class StRecoverStep4_1;
 class StRecoverStep5;
 class StRecoverStep6;
 class StRecoverStep7;
 class StRecoverStep8;
+class StRecoverStep9;
+class StRecoverStep10;
 
 // SUPERSTATE FORWARD DECLARATIONS
 // MODE STATES FORWARD DECLARATIONS
@@ -220,12 +220,12 @@ struct SmNav2Test7
 
 
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_1.hpp>
-#include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_1b.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_2.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_3.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_4.hpp>
-#include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_4 1.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_5.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_6.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_7.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_8.hpp>
+#include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_9.hpp>
+#include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_10.hpp>
