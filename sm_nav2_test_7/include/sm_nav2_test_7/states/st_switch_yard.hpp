@@ -32,7 +32,7 @@ struct StSwitchYard
     Transition<EvKeyPressD<CbDefaultKeyboardBehavior, OrKeyboard>, StBatteryCheck, NEXT>,
     //Transition<EvKeyPressD<CbDefaultKeyboardBehavior, OrKeyboard>, MsRecover, NEXT>,
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StSpinRight1, NEXT>,
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, NEXT>,
     Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMoveStop, PREVIOUS>
   > reactions;
 

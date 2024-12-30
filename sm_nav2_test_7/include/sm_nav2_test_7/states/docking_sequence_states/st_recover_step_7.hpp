@@ -29,8 +29,8 @@ struct StRecoverStep7 : smacc2::SmaccState<StRecoverStep7, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep7, SUCCESS>,
-     Transition<EvCbSuccess<sm_nav2_test_7::CbPositionControlFreeSpace, OrNavigation>, StRecoverStep7,SUCCESS>
+     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep8, SUCCESS>,
+     Transition<EvCbSuccess<sm_nav2_test_7::CbPositionControlFreeSpace, OrNavigation>, StRecoverStep8,SUCCESS>
 
     >reactions;
 
