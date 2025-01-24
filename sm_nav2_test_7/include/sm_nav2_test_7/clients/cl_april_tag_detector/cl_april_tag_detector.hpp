@@ -79,9 +79,32 @@ public:
   std::map<std::string, geometry_msgs::msg::PoseStamped>
       detectedAprilTagsMapPose_;
 
+  std::mutex detectedAprilTagsMapPoseMutex_;
+
+  std::map<std::string, geometry_msgs::msg::PoseStamped> getTagsWithinTime(rclcpp::Duration duration) {
+    std::lock_guard<std::mutex> lock(detectedAprilTagsMapPoseMutex_);
+    std::map<std::string, geometry_msgs::msg::PoseStamped> ret;
+
+    auto now = getNode()->now();
+
+
+    for (auto &apriltag : detectedAprilTagsMapPose_) 
+    {
+      rclcpp::Duration ellapsed = rclcpp::Time(apriltag.second.header.stamp) - now;
+
+      if ( ellapsed > duration) {
+        ret.insert(apriltag);
+      }
+    }
+    return ret;
+  }
+
 private:
   void onAprilTagMessageCallback(const isaac_ros_apriltag_interfaces::msg::
                                      AprilTagDetectionArray::SharedPtr msg) {
+    
+    std::lock_guard<std::mutex> lock(detectedAprilTagsMapPoseMutex_);
+
     std::stringstream ss;
     for (auto &detection : msg->detections) {
       std::string apriltag_frameid =
