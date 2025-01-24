@@ -45,7 +45,15 @@ struct StiRadialReturn : smacc2::SmaccState<StiRadialReturn, SS> {
 
   // STATE FUNCTIONS
   static void staticConfigure() {
-    configure_orthogonal<OrNavigation, CbUndoPathBackwards>();
+    // configure_orthogonal<OrNavigation, CbUndoPathBackwards>();
+
+    // Create serializable struct for parameterization options - see CbUndoPathBackwards.hpp
+    cl_nav2z::CbUndoPathBackwardsOptions options;
+    // Select the specific goal checker to use - see config/nav2_config.yaml
+    options.goalCheckerId_ = "undo_path_backwards_goal_checker_2";
+    
+    configure_orthogonal<OrNavigation, CbUndoPathBackwards>(options);
+
     configure_orthogonal<OrNavigation, CbPauseSlam>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }

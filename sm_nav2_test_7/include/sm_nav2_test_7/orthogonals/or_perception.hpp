@@ -25,6 +25,8 @@
 #include <sm_nav2_test_7/clients/cl_foundationpose/components/cp_object_tracker_1.hpp>
 #include <sm_nav2_test_7/clients/cl_foundationpose/components/cp_object_tracker_tf.hpp>
 
+#include <sm_nav2_test_7/clients/cl_april_tag_detector/cl_april_tag_detector.hpp>
+
 namespace sm_nav2_test_7 {
 
 using namespace cl_foundationpose;
@@ -36,10 +38,12 @@ public:
       auto client = this->createClient<ClFoundationPose>();
 
       //configure the client
-            auto subcomponent = client->createComponent<CpTopicSubscriber<vision_msgs::msg::Detection3DArray>>("/detection3d_array");    
+      auto subcomponent = client->createComponent<CpTopicSubscriber<vision_msgs::msg::Detection3DArray>>("/detection3d_array");    
 
       client->createComponent<CpObjectTracker1>();
       client->createComponent<CpObjectTrackerTf>();
+
+      auto apriltagDetctor = this->createClient<cl_apriltag_detector::ClAprilTagDetector>();
 
   }
 };

@@ -14,10 +14,10 @@ Panels:
         - /Marker1
         - /Marker1/Topic1
         - /Odometry1
-        - /Odometry1/Status1
         - /Odometry1/Shape1
         - /Image2
         - /Image2/Topic1
+        - /MarkerArray2
       Splitter Ratio: 0.5833333134651184
     Tree Height: 338
   - Class: rviz_common/Selection
@@ -114,6 +114,8 @@ Visualization Manager:
           Value: true
         chassis_imu:
           Value: true
+        fp_object:
+          Value: true
         front_2d_lidar:
           Value: true
         front_3d_lidar:
@@ -176,6 +178,16 @@ Visualization Manager:
           Value: true
         right_stereo_camera_right_optical:
           Value: true
+        tag36h11:0:
+          Value: true
+        tag36h11:1:
+          Value: true
+        tag36h11:2:
+          Value: true
+        tag36h11:3:
+          Value: true
+        tag36h11:4:
+          Value: true
         wheel_left:
           Value: true
         wheel_right:
@@ -222,7 +234,18 @@ Visualization Manager:
               front_stereo_camera_left:
                 {}
               front_stereo_camera_left_optical:
-                {}
+                fp_object:
+                  {}
+                tag36h11:0:
+                  {}
+                tag36h11:1:
+                  {}
+                tag36h11:2:
+                  {}
+                tag36h11:3:
+                  {}
+                tag36h11:4:
+                  {}
               front_stereo_camera_right:
                 {}
               front_stereo_camera_right_optical:
@@ -710,7 +733,7 @@ Visualization Manager:
         LaserScan: true
         Map: false
         Marker: true
-        MarkerArray: false
+        MarkerArray: true
         Odometry: true
         Realsense:
           RealsenseCamera: true
@@ -729,7 +752,7 @@ Visualization Manager:
       Line Width: 0.05000000074505806
       Name: Detection3DArray
       Namespaces:
-        {}
+        bounding_box: true
       Only Edge: false
       Show Score: false
       Topic:
@@ -754,8 +777,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 4.024794101715088
-        Min Value: -0.00022214651107788086
+        Max Value: 1.207953929901123
+        Min Value: 0.0008103847503662109
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -890,6 +913,19 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /front_stereo_camera/depth/ground_truth
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        InvalidTrajectories: true
+        ValidTrajectories: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: marker
       Value: true
   Enabled: true
   Global Options:
