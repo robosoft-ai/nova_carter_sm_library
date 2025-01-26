@@ -26,6 +26,7 @@
 #include <sm_nav2_test_7/clients/cl_foundationpose/components/cp_object_tracker_tf.hpp>
 
 #include <sm_nav2_test_7/clients/cl_april_tag_detector/cl_april_tag_detector.hpp>
+#include <sm_nav2_test_7/clients/cl_april_tag_detector/components/cp_april_visualization.hpp>
 
 namespace sm_nav2_test_7 {
 
@@ -44,6 +45,7 @@ public:
       client->createComponent<CpObjectTrackerTf>();
 
       auto apriltagDetctor = this->createClient<cl_apriltag_detector::ClAprilTagDetector>();
+      apriltagDetctor->createComponent<cl_apriltag_detector::CpAprilTagVisualization>();
 
   }
 };
