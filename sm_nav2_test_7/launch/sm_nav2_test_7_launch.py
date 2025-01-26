@@ -148,6 +148,16 @@ def generate_launch_description():
         arguments=["--ros-args", "--log-level", "INFO"],
     )
 
+    april_tag_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory("isaac_ros_apriltag"),
+                "launch",
+                "isaac_ros_apriltag_isaac_sim_pipeline.launch.py",
+            )
+        )
+    )
+
     keyboard_client_node = Node(
         package="keyboard_client",
         executable="keyboard_server_node.py",
@@ -181,5 +191,6 @@ def generate_launch_description():
     ld.add_action(sm_nav2_test_7_node)
     ld.add_action(declare_active_slam_sel)
     ld.add_action(keyboard_client_node)
+    ld.add_action(april_tag_launch)
 
     return ld

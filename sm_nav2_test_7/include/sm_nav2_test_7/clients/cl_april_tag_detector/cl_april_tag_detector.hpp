@@ -88,14 +88,28 @@ public:
     auto now = getNode()->now();
 
 
+    std::stringstream ss;
     for (auto &apriltag : detectedAprilTagsMapPose_) 
     {
-      rclcpp::Duration ellapsed = rclcpp::Time(apriltag.second.header.stamp) - now;
+      auto tagstamp = rclcpp::Time(apriltag.second.header.stamp);
+      rclcpp::Duration ellapsed = now - tagstamp; ;
+      // RCLCPP_INFO(getLogger(), "- AprilTag: %s Ellapsed: %f Stamp: %f now %f, loc:%f,%f,%f", apriltag.first.c_str(), ellapsed.seconds(), apriltag.second.header.stamp.seconds(), now.seconds(), apriltag.second.pose.position.x, apriltag.second.pose.position.y, apriltag.second.pose.position.z);
 
-      if ( ellapsed > duration) {
+      ss << "[ClAprilTagDetector] AprilTag: " << apriltag.first << " Ellapsed: " << ellapsed.seconds() << " Stamp: " << tagstamp.seconds() << " now " << now.seconds() << std::endl;
+      if ( ellapsed < duration) 
+      {
         ret.insert(apriltag);
+        ss << "[SELECTD]" << std::endl;
       }
+      else
+      {
+        ss << "[NOT SELECTED]" << std::endl;
+      }
+      ss << std::endl;
+
     }
+
+    RCLCPP_INFO_THROTTLE(getLogger(), *(getNode()->get_clock()), 1000, "%s", ss.str().c_str());
     return ret;
   }
 
@@ -112,55 +126,57 @@ private:
       ss << "[ClAprilTagDetector] AprilTag detected: " << apriltag_frameid
          << std::endl;
 
-      if (detectedAprilTagsMapPose_.find(apriltag_frameid) ==
-          detectedAprilTagsMapPose_.end()) {
+      // if (detectedAprilTagsMapPose_.find(apriltag_frameid) ==
+      //     detectedAprilTagsMapPose_.end()) {
         // get map position using tfListener
-        geometry_msgs::msg::TransformStamped transformStamped;
+        geometry_msgs::msg::TransformStamped transformStampedGlobal;
 
         try {
           // first create auxiliar transform locally z - 1 meter from the
           // detection.id frame
-          geometry_msgs::msg::TransformStamped transformStampedAux;
-          transformStampedAux.header.stamp = msg->header.stamp;
-          transformStampedAux.header.frame_id = apriltag_frameid;
-          transformStampedAux.child_frame_id = "auxiliar_" + apriltag_frameid;
-          transformStampedAux.transform.translation.z = -5.0;
+          // geometry_msgs::msg::TransformStamped transformStampedAux;
+          // transformStampedAux.header.stamp = msg->header.stamp;
+          // transformStampedAux.header.frame_id = apriltag_frameid;
+          // transformStampedAux.child_frame_id = "auxiliar_" + apriltag_frameid;
+          // transformStampedAux.transform.translation.z = -5.0;
 
           // // get quaternion from yaw
           // tf2::Quaternion q;
           // q.setEuler(M_PI/2,0,0);
           // transformStamped.transform.rotation = tf2::toMsg(q);
 
+       
           // add to the tfBuffer
-          tfBuffer_->setTransform(transformStampedAux, "default_authority");
+          // tfBuffer_->setTransform(transformStampedAux, "default_authority");
 
-          transformStamped = tfBuffer_->lookupTransform(
-              "map", transformStampedAux.child_frame_id, msg->header.stamp);
+          transformStampedGlobal = tfBuffer_->lookupTransform(
+              "map", apriltag_frameid, msg->header.stamp);
         } catch (tf2::TransformException &ex) {
           RCLCPP_ERROR(getLogger(), "%s", ex.what());
-          return;
+          continue;
         }
         // transform to pose
         geometry_msgs::msg::PoseStamped poseStamped;
-        poseStamped.header = transformStamped.header;
-        poseStamped.pose.position.x = transformStamped.transform.translation.x;
-        poseStamped.pose.position.y = transformStamped.transform.translation.y;
-        poseStamped.pose.position.z = transformStamped.transform.translation.z;
-        poseStamped.pose.orientation = transformStamped.transform.rotation;
+        poseStamped.header = transformStampedGlobal.header;
+        poseStamped.pose.position.x = transformStampedGlobal.transform.translation.x;
+        poseStamped.pose.position.y = transformStampedGlobal.transform.translation.y;
+        poseStamped.pose.position.z = transformStampedGlobal.transform.translation.z;
+        poseStamped.pose.orientation = transformStampedGlobal.transform.rotation;
 
         detectedAprilTagsMapPose_[apriltag_frameid] = poseStamped;
 
         RCLCPP_INFO_STREAM(
             getLogger(),
-            "[ClAprilTagDetector] new AprilTag detected: " << apriltag_frameid);
-      } else {
-        RCLCPP_INFO_STREAM_THROTTLE(
-            getLogger(), *(getNode()->get_clock()), 5000,
-            "[ClAprilTagDetector] Skipping AprilTag already detected: "
-                << apriltag_frameid);
-      }
+            "[ClAprilTagDetector] new AprilTag detected: " << apriltag_frameid << " at "
+                                                           << poseStamped.pose.position.x << ", " << poseStamped.pose.position.y << ", " << poseStamped.pose.position.z);
+      // } else {
+      //   RCLCPP_INFO_STREAM_THROTTLE(
+      //       getLogger(), *(getNode()->get_clock()), 1000,
+      //       "[ClAprilTagDetector] Skipping AprilTag already detected: "
+      //           << apriltag_frameid);
+      // }
     }
-    RCLCPP_INFO_STREAM_THROTTLE(getLogger(), *(getNode()->get_clock()), 5000,
+    RCLCPP_INFO_STREAM_THROTTLE(getLogger(), *(getNode()->get_clock()), 1000,
                                 ss.str());
     onAprilTagDetection_(msg);
   }
