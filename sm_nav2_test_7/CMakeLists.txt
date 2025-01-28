@@ -57,8 +57,13 @@ install(
   DESTINATION include
 )
 
-install(DIRECTORY
-  scripts
+# install(DIRECTORY
+#   scripts
+#   DESTINATION lib/${PROJECT_NAME}
+# )
+
+install(PROGRAMS
+  scripts/lidar_completion.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

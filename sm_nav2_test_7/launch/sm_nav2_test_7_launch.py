@@ -167,6 +167,19 @@ def generate_launch_description():
         arguments=["--ros-args", "--log-level", "INFO"],
     )
 
+    lidar_completion_node = Node(
+            package="sm_nav2_test_7",
+            executable="lidar_completion.py",
+            name="lidar_completion",
+            output="screen",
+            prefix="xterm -hold -e",
+            arguments=["--ros-args", "--log-level", "INFO"],
+            remappings=[
+                ("/scan_input", "/scan2"),
+                ("/scan_output", "/scan"),
+            ],
+        )
+
 
     # Create the launch description and populate
     ld = LaunchDescription()
@@ -192,5 +205,6 @@ def generate_launch_description():
     ld.add_action(declare_active_slam_sel)
     ld.add_action(keyboard_client_node)
     ld.add_action(april_tag_launch)
+    ld.add_action(lidar_completion_node)
 
     return ld

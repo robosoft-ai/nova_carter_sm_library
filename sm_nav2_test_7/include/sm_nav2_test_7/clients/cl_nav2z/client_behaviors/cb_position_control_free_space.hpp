@@ -37,8 +37,10 @@ private:
 
   double prev_error_linear_ = 0.0;
   double prev_error_angular_ = 0.0;
+  double prev_error_betta_ = 0.0;
   double integral_linear_ = 0.0;
   double integral_angular_ = 0.0;
+  double integral_betta_ = 0.0;
 
   rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_pub_;
 
@@ -49,21 +51,27 @@ public:
   
   // Limit the maximum linear velocity and angular velocity to avoid sudden movements
   double max_linear_velocity = 1.0;   // Adjust this value according to your needs
-  double max_angular_velocity = 1.0;  // Adjust this value according to your needs
-
+  double max_angular_velocity = 2.0;  // Adjust this value according to your needs
 
   // PID controller gains (proportional, integral, and derivative)
   double kp_linear = 0.5;
   double ki_linear = 0.0;
   double kd_linear = 0.1;
 
+  double kp_lateral = 0.5;
+
   double kp_angular = 0.5;
   double ki_angular = 0.0;
   double kd_angular = 0.1;
+
+  double kp_angular_betta = 1.0;
+  double ki_angular_betta = 0.0;
+  double kd_angular_betta = 0.1;
+
   double command_timeout_sec = 10.0;
   rclcpp::Time commandStartTime_;
 
-  geometry_msgs::msg::Pose target_pose_;
+  std::function<std::optional<geometry_msgs::msg::Pose>()> getTargetPoseCallback_;
 
   CbPositionControlFreeSpace();
 

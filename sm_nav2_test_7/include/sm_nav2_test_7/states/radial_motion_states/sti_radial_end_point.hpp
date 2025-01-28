@@ -18,6 +18,7 @@
  *
  ******************************************************************************************************************/
 
+
 namespace sm_nav2_test_7 {
 namespace radial_motion_states {
 using namespace cl_keyboard;
@@ -35,7 +36,7 @@ struct StiRadialEndPoint : smacc2::SmaccState<StiRadialEndPoint, SS> {
 
       Transition<EvCbSuccess<CbNavigateForward, OrNavigation>, StiRadialReturn,
                  SUCCESS>,
-      Transition<EvCbFailure<CbNavigateForward, OrNavigation>, StiRadialReturn,
+      Transition<EvCbFailure<CbNavigateForward, OrNavigation>, StiRadialEndPoint,
                  ABORT>,
      
       // Keyboard events  
@@ -72,7 +73,30 @@ struct StiRadialEndPoint : smacc2::SmaccState<StiRadialEndPoint, SS> {
                               << previousGoal->pose.orientation.w);
     };
 
-    RCLCPP_ERROR_STREAM(this->getLogger(), "..");
+    ::sm_nav2_test_7::cl_lidar::ClLidarSensor * lidarClient;
+      this->requiresClient(lidarClient);
+
+    if(lidarClient)
+    {
+      auto lidarData = lidarClient->getComponent<::sm_nav2_test_7::cl_lidar::CpForwardObstacleDetector>();
+
+      auto forwardDistance = lidarData->getForwardDistance()-1.0;
+      //forwardDistance = 4.0;
+      cbForwardMotion->setForwardDistance( forwardDistance);
+      RCLCPP_INFO(
+        this->getLogger(), "Going forward in Radial pattern, (CpForwardObstacleDetector) distance to wall: %lf",
+        //lidarData->getForwardDistance());
+        forwardDistance);
+    }
+    else
+    {
+      RCLCPP_WARN(this->getLogger(), "No lidar and cp forward obstacle detector available");
+      cbForwardMotion->setForwardDistance(1.0);
+      RCLCPP_WARN(
+        this->getLogger(), "Going forward in Radial pattern, distance to wall: %lf",
+        SS::ray_length_meters());
+    }
+
   }
 };
 } // namespace radial_motion_states

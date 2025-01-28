@@ -63,8 +63,6 @@ struct StiFPatternForward2 : smacc2::SmaccState<StiFPatternForward2<SS>, SS> {
                               << previousGoal->pose.orientation.z << ", "
                               << previousGoal->pose.orientation.w);
     };
-
-    RCLCPP_ERROR_STREAM(this->getLogger(), "..");
   }
 };
 } // namespace f_pattern_states

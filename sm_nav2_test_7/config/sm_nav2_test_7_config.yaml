@@ -12,24 +12,37 @@ SmNav2Test7:
 
 
         # --- DOCKING PARAMETERS (verison1)-- compensate global navigation goal checking error
-        docking_pose.offset.x: -0.6
-        docking_pose.offset.y: -0.2
+        docking_pose.offset.x: -1.4
+        docking_pose.offset.y: 0.0
 
-        cb_battery_position_control.enable_static_forward_distance: false
-        
+        cb_battery_position_control.enable_static_forward_distance: false        
         #DYNAMIC
-        cb_battery_position_control.dynamic_forward_offset: 0.6
+        # cb_battery_position_control.dynamic_forward_offset: 0.6
+        cb_battery_position_control.dynamic_forward_offset: 0.0
+
 
         #STATIC
+
+
         cb_battery_position_control.forward_distance: 0.35
 
-        #BOTH
-        cb_battery_position_control.threshold_distance: 0.5
-        cb_battery_position_control.max_linear_velocity: 0.1
-        cb_battery_position_control.command_timeout_sec: 3.0
 
-        cb_battery_position_control.kp_angular: 0.0
+        #BOTH
+        cb_battery_position_control.threshold_distance: 0.16
+        cb_battery_position_control.max_linear_velocity: 0.1
+        cb_battery_position_control.max_angular_velocity: 2.0
+        cb_battery_position_control.command_timeout_sec: 25.0
+
+        cb_battery_position_control.kp_linear: 0.5
+        cb_battery_position_control.kp_lateral: 5.0
+
+        cb_battery_position_control.kp_angular: 2.0
         cb_battery_position_control.kd_angular: 0.0
+        cb_battery_position_control.ki_angular: 0.0
+
+        cb_battery_position_control.kp_angular_betta: 1.0
+        cb_battery_position_control.kd_angular_betta: 0.0
+        cb_battery_position_control.ki_angular_betta: 0.5
 
         cb_battery_position_control.backwardDistance: 1.5
 

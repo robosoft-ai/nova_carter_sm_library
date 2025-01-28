@@ -36,6 +36,9 @@
 
 #include <smacc2/client_base_components/cp_topic_publisher.hpp>
 
+#include <sm_nav2_test_7/clients/cl_lidar/cl_lidar.hpp>
+#include <sm_nav2_test_7/clients/cl_lidar/components/cp_forward_obstacle_detector.hpp>
+
 namespace sm_nav2_test_7 {
 using namespace cl_nav2z;
 using namespace smacc2;
@@ -52,7 +55,7 @@ public:
     // auto publisherClient = this->createClient<SmaccPublisherClient>();
 
     // create pose component
-    nav2zClient->createComponent<cl_nav2z::Pose>();
+    nav2zClient->createComponent<cl_nav2z::Pose>(cl_nav2z::StandardReferenceFrames::Map);
 
     // create planner switcher
     nav2zClient->createComponent<CpPlannerSwitcher>();
@@ -67,7 +70,7 @@ public:
     nav2zClient->createComponent<cl_nav2z::CpSlamToolbox>();
 
     nav2zClient->createComponent<smacc2::components::CpTopicPublisher<geometry_msgs::msg::Twist>>("/cmd_vel");
-
+    
     // create waypoints navigator component
     auto waypointsNavigator =
         nav2zClient->createComponent<CpWaypointNavigator>();
