@@ -63,10 +63,12 @@ public:
 
   void computeAggregatdMarker()
   {
-    RCLCPP_INFO(getLogger(), "[CpAprilTagVisualization] computeAggregatdMarker");
+    std::stringstream ss;
+    
+    ss << "[CpAprilTagVisualization] computeAggregatdMarker" << std::endl;
      cl_apriltag_detector::ClAprilTagDetector* apriltagDetector = dynamic_cast<cl_apriltag_detector::ClAprilTagDetector*>(this->owner_);
       
-      RCLCPP_INFO(getLogger(), "[CpAprilTagVisualization] getTagsWithinTime");
+      ss << "[CpAprilTagVisualization] getTagsWithinTime" << std::endl;
       auto tags = apriltagDetector->getTagsWithinTime(0.5s);
 
       //avergae apriltag position
@@ -95,8 +97,8 @@ public:
       //substract some small forward offset from apriltag position for the goal position
       avgX -= 0.15;
 
-      RCLCPP_INFO(getLogger(), "[CpAprilTagVisualization] detected %ld tags", tags.size());
-      RCLCPP_INFO(getLogger(), "[CpAprilTagVisualization] avgX: %f, avgY: %f, avgZ: %f", avgX, avgY, avgZ);
+      ss << "[CpAprilTagVisualization] detected " << tags.size() << " tags" << std::endl;
+      ss << "[CpAprilTagVisualization] avgX: " << avgX << ", avgY: " << avgY << ", avgZ: " << avgZ << std::endl;
       // cl_nav2z::Pose* robotPose;
       // RCLCPP_INFO(getLogger(), "[CpAprilTagVisualization] robotPose");
       // // requiresComponent(robotPose, true);
@@ -121,10 +123,11 @@ public:
       // RCLCPP_INFO(getLogger(), "[CpAprilTagVisualization] robotTransform: %f, %f, %f", robotTransform.getOrigin().x(), robotTransform.getOrigin().y(), robotTransform.getOrigin().z());
 
       //local apriltag transform
-      RCLCPP_INFO(getLogger(), "[CpAprilTagVisualization] apriltagTransform: %f, %f, %f", apriltagTransform.getOrigin().x(), apriltagTransform.getOrigin().y(), apriltagTransform.getOrigin().z());
-
+      //wihtout format
+      ss << "[CpAprilTagVisualization] apriltagTransform: " << apriltagTransform.getOrigin().x() << ", " << apriltagTransform.getOrigin().y() << ", " << apriltagTransform.getOrigin().z();
       //global apriltag transform
-      RCLCPP_INFO(getLogger(), "[CpAprilTagVisualization] globalApriltagTransform: %f, %f, %f", globalApriltagTransform->getOrigin().x(), globalApriltagTransform->getOrigin().y(), globalApriltagTransform->getOrigin().z());
+      ss << "[CpAprilTagVisualization] globalApriltagTransform: " << globalApriltagTransform->getOrigin().x() << ", " << globalApriltagTransform->getOrigin().y() << ", " << globalApriltagTransform->getOrigin().z();
+      RCLCPP_INFO_THROTTLE(getLogger(), *(getNode()->get_clock()), 1000, ss.str().c_str());
   }
 
   virtual void update() override

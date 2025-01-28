@@ -27,8 +27,8 @@ struct StRecoverStep6 : smacc2::SmaccState<StRecoverStep6, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep7, SUCCESS>,
-     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoverStep7, SUCCESS>
+     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep7_a, SUCCESS>,
+     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoverStep7_a, SUCCESS>
     >reactions;
 
   // STATE FUNCTIONS

@@ -35,8 +35,8 @@ struct StiRadialReturn : smacc2::SmaccState<StiRadialReturn, SS> {
 
       Transition<EvCbSuccess<CbUndoPathBackwards, OrNavigation>,
                  StiRadialLoopStart, SUCCESS>,
-      Transition<EvCbFailure<CbUndoPathBackwards, OrNavigation>,
-                 StiRadialEndPoint, ABORT>,
+      // Transition<EvCbFailure<CbUndoPathBackwards, OrNavigation>,
+      //            StiRadialEndPoint, ABORT>,
 
       // Keyboard events  
       Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StiRadialLoopStart, NEXT>

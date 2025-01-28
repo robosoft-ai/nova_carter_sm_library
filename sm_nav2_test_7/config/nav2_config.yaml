@@ -127,7 +127,7 @@ controller_server:
     failure_tolerance: 0.3
     progress_checker_plugin: "progress_checker"
     # goal_checker_plugin: ["general_goal_checker"]
-    goal_checker_plugins: ["goal_checker", "forward_goal_checker", "backward_goal_checker", "absolute_rotate_goal_checker", "undo_path_backwards_goal_checker"]
+    goal_checker_plugins: ["goal_checker", "forward_goal_checker", "backward_goal_checker", "absolute_rotate_goal_checker", "undo_path_backwards_goal_checker", undo_path_backwards_goal_checker_2]
 
     # controller_plugins: ["FollowPath"]
     controller_plugins: ["FollowPath","BackwardLocalPlanner", "ForwardLocalPlanner", "PureSpinningLocalPlanner"]
@@ -224,7 +224,7 @@ controller_server:
     BackwardLocalPlanner:
       plugin: "backward_local_planner::BackwardLocalPlanner"
       transform_tolerance: 0.5
-      k_rho: -1.6 # linear distance to the goal gain, default = -1.0 (related with carrot distance)
+      k_rho: -2.0 # linear distance to the goal gain, default = -1.0 (related with carrot distance)
       k_alpha: -16.4 #-0.1
       k_betta: -0.01 # -1.0
       carrot_distance: 0.8 #meters default 0.5

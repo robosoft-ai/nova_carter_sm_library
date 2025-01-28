@@ -165,10 +165,8 @@ private:
 
         detectedAprilTagsMapPose_[apriltag_frameid] = poseStamped;
 
-        RCLCPP_INFO_STREAM(
-            getLogger(),
-            "[ClAprilTagDetector] new AprilTag detected: " << apriltag_frameid << " at "
-                                                           << poseStamped.pose.position.x << ", " << poseStamped.pose.position.y << ", " << poseStamped.pose.position.z);
+        ss << "[ClAprilTagDetector] new AprilTag detected: " << apriltag_frameid << " at "
+                                                           << poseStamped.pose.position.x << ", " << poseStamped.pose.position.y << ", " << poseStamped.pose.position.z;
       // } else {
       //   RCLCPP_INFO_STREAM_THROTTLE(
       //       getLogger(), *(getNode()->get_clock()), 1000,

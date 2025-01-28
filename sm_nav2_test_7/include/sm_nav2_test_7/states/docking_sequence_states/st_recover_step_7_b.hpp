@@ -12,17 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+
 namespace sm_nav2_test_7
 {
-using namespace smacc2::default_events;
-using smacc2::client_behaviors::CbSleepFor;
-using cl_nav2z::CbNavigateGlobalPosition;
-using namespace std::chrono_literals;
-using namespace cl_nav2z;
-using namespace cl_keyboard;
+  using cl_nav2z::CbNavigateForward;
 
-// STATE DECLARATION - Navigate to Staging
-struct StRecoverStep1 : smacc2::SmaccState<StRecoverStep1, MsRecover>
+// STATE DECLARATION - Dock
+struct StRecoverStep7_b : smacc2::SmaccState<StRecoverStep7_b, MsRecover>
 {
   using SmaccState::SmaccState;
 
@@ -34,28 +31,26 @@ struct StRecoverStep1 : smacc2::SmaccState<StRecoverStep1, MsRecover>
   // TRANSITION TABLE
   typedef mpl::list<
 
-    Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep2, SUCCESS>,
-    Transition<EvCbFailure<CbNavigateGlobalPosition, OrNavigation>, StRecoverStep1, ABORT>,
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep2, SUCCESS>
+     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StRecoverStep8, SUCCESS>,
+     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoverStep8,SUCCESS>
 
     >reactions;
 
   // STATE FUNCTIONS
   static void staticConfigure()
   {
-    // configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(6.75, -16.5, 0.0);
-
-    configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(6.75, -16.5, 0.0);
-
-    //configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(0.0, 0.0, 0.0);
-    configure_orthogonal<OrNavigation, CbResumeSlam>();
+   // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    configure_orthogonal<OrNavigation, CbSleepFor>(4s);
+    // configure_orthogonal<OrNavigation, CbNavigateForward>(0.5);
   }
+
 
   void runtimeConfigure() 
   {
-
-
+    //this->foundationPoseRuntimeConfigure();
+    // this->aprilTagBasedRuntimeConfigure();
   }
 
   void onEntry() { RCLCPP_INFO(getLogger(), "On Entry!"); }

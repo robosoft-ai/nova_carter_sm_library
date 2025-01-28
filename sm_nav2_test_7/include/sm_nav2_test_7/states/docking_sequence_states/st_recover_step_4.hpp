@@ -48,7 +48,28 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
     configure_orthogonal<OrNavigation, CbPauseSlam>();
   }
 
-  void runtimeConfigure() 
+
+  void computeDockingPoseOffset(geometry_msgs::msg::Point& dockingPoseOffset)
+  {
+    dockingPoseOffset.x = -0.8; // default
+    dockingPoseOffset.y = 0.0;
+    dockingPoseOffset.z = 0.0;
+
+    if(!getNode()->has_parameter("docking_pose.offset.x"))
+    {
+      getNode()->declare_parameter("docking_pose.offset.x",dockingPoseOffset.x);
+      dockingPoseOffset.x = getNode()->get_parameter("docking_pose.offset.x").as_double();
+    }
+
+    if(!getNode()->has_parameter("docking_pose.offset.y"))
+    {
+      getNode()->declare_parameter("docking_pose.offset.y",dockingPoseOffset.y);
+      dockingPoseOffset.y = getNode()->get_parameter("docking_pose.offset.y").as_double();
+    }
+
+    RCLCPP_INFO(getLogger(), "Docking pose offset: %f, %f", dockingPoseOffset.x, dockingPoseOffset.y);
+  }
+  void foundationPoseBasedRntimeConfigure() 
   {
     CpObjectTrackerTf* objectTracker;
     requiresComponent(objectTracker);
@@ -62,25 +83,22 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
     if(pose)
     {
       geometry_msgs::msg::Point dockingPoseOffset;
-      dockingPoseOffset.x = -0.5;
-      if(!getNode()->has_parameter("docking_pose.offset.x"))
-      {
-        getNode()->declare_parameter("docking_pose.offset.x",dockingPoseOffset.x);
-        dockingPoseOffset.x = getNode()->get_parameter("docking_pose.offset.x").as_double();
-      }
-
-      if(!getNode()->has_parameter("docking_pose.offset.y"))
-      {
-        getNode()->declare_parameter("docking_pose.offset.y",dockingPoseOffset.y);
-        dockingPoseOffset.y = getNode()->get_parameter("docking_pose.offset.y").as_double();
-      }
+      this->computeDockingPoseOffset(dockingPoseOffset);
 
       // pose->pose.position.x-=0.2;
       pose->pose.position.x+= dockingPoseOffset.x;
       pose->pose.position.y+= dockingPoseOffset.y;
 
-      // this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, 0.0);
+      this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, 0.0);
+    }
+    else
+    {
+      RCLCPP_ERROR(getLogger(), "The object pose is not available. global navigation was not configured.");
+    }
+  }
 
+  void aprilTagBasedRuntimeConfigure() 
+  {
       // apriltag detctor
       cl_apriltag_detector::ClAprilTagDetector* apriltagDetector;
       requiresClient(apriltagDetector);
@@ -92,19 +110,30 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
 
       if(globalApriltagTransform)
       {
+        geometry_msgs::msg::Point dockingPoseOffset;
+        this->computeDockingPoseOffset(dockingPoseOffset);
+
         this->configure<OrNavigation, CbNavigateGlobalPosition>(
-          globalApriltagTransform->getOrigin().x()-0.2,
-          globalApriltagTransform->getOrigin().y(),
+          globalApriltagTransform->getOrigin().x() + dockingPoseOffset.x,
+          globalApriltagTransform->getOrigin().y() + dockingPoseOffset.y,
           tf2::getYaw(globalApriltagTransform->getRotation())  
         );
       }
+      else
+      {
+        RCLCPP_ERROR(getLogger(), "The docking station pose is not available. global navigation was not configured.");
+      }
 
       RCLCPP_INFO(getLogger(), "Setting target pose for docking: %f, %f", globalApriltagTransform->getOrigin().x(), globalApriltagTransform->getOrigin().y());
-    }
-    else
-    {
-      RCLCPP_ERROR(getLogger(), "The object pose is not available. global navigation was not configured.");
-    }
+   
+  }
+
+
+
+  void runtimeConfigure() 
+  {
+    //this->foundationPoseBasedRntimeConfigure();
+    this->aprilTagBasedRuntimeConfigure();
   }
 
 

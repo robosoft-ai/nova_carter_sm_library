@@ -65,7 +65,21 @@ struct StiFPatternForward1
                               << previousGoal->pose.orientation.w);
     };
 
-    RCLCPP_ERROR_STREAM(this->getLogger(), "..");
+     ::sm_nav2_test_7::cl_lidar::ClLidarSensor * lidarClient;
+      this->requiresClient(lidarClient);
+
+    if(lidarClient)
+    {
+      auto lidarData = lidarClient->getComponent<::sm_nav2_test_7::cl_lidar::CpForwardObstacleDetector>();
+
+      auto forwardDistance = lidarData->getForwardDistance()- 1.0;
+      //forwardDistance = 4.0;
+      cbForwardMotion->setForwardDistance( forwardDistance);
+      RCLCPP_INFO(
+        this->getLogger(), "Going forward in F pattern, (CpForwardObstacleDetector) distance to wall: %lf",
+        //lidarData->getForwardDistance());
+        forwardDistance);
+    }
   }
 };
 } // namespace f_pattern_states

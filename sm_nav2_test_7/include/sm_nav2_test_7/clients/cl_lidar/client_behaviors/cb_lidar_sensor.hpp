@@ -17,26 +17,29 @@
  * 	 Authors: Pablo Inigo Blasco, Brett Aldrich
  *
  ******************************************************************************************************************/
- #pragma once
 
-#include <multirole_sensor_client/cl_multirole_sensor.h>
-#include <std_msgs/String.h>
-#include <sensor_msgs/LaserScan.h>
+#pragma once
+
+#include <multirole_sensor_client/client_behaviors/cb_default_multirole_sensor_behavior.hpp>
+#include <sensor_msgs/msg/laser_scan.hpp>
+#include <sm_nav2_test_7/clients/cl_lidar/cl_lidar.hpp>
 
 namespace sm_nav2_test_7
 {
 namespace cl_lidar
 {
-
-class ClLidarSensor : public cl_multirole_sensor::ClMultiroleSensor<sensor_msgs::LaserScan>
+struct CbLidarSensor : cl_multirole_sensor::CbDefaultMultiRoleSensorBehavior<ClLidarSensor>
 {
 public:
-    ClLidarSensor(std::string topicname, ros::Duration timeout)
-    {
+  CbLidarSensor() {}
 
-        this->topicName = topicname;
-        this->timeout_ = timeout;
-    }
+  void onEntry() override
+  {
+    RCLCPP_INFO(getLogger(), "[CbLidarSensor] onEntry");
+    cl_multirole_sensor::CbDefaultMultiRoleSensorBehavior<ClLidarSensor>::onEntry();
+  }
+
+  virtual void onMessageCallback(const sensor_msgs::msg::LaserScan & /*msg*/) override {}
 };
-} // namespace cl_lidar
-} // namespace sm_nav2_test_7
+}  // namespace cl_lidar
+}  // namespace sm_dance_bot_warehouse_3

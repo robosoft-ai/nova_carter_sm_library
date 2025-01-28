@@ -40,6 +40,9 @@
 #include <nav2z_client/nav2z_client.hpp>
 #include <nav2z_client/client_behaviors/cb_navigate_global_position.hpp>
 
+#include <sm_nav2_test_7/clients/cl_lidar/cl_lidar.hpp>
+#include <sm_nav2_test_7/clients/cl_lidar/components/cp_forward_obstacle_detector.hpp>
+
 // #include
 // <sm_nav2_test_7/clients/nav2z_client/client_behaviors/cb_navigate_next_waypoint.hpp>
 #include <nav2z_client/client_behaviors/cb_active_stop.hpp>
@@ -48,7 +51,6 @@
 #include <nav2z_client/client_behaviors/cb_position_control_free_space.hpp>
 #include <nav2z_client/client_behaviors/cb_pure_spinning.hpp>
 #include <nav2z_client/client_behaviors/cb_save_slam_map.hpp>
-
 
 #include <ros_publisher_client/client_behaviors/cb_default_publish_loop.hpp>
 #include <ros_publisher_client/client_behaviors/cb_muted_behavior.hpp>
@@ -71,6 +73,7 @@
 #include <sm_nav2_test_7/orthogonals/or_localization.hpp>
 #include <sm_nav2_test_7/orthogonals/or_timer.hpp>
 #include <sm_nav2_test_7/orthogonals/or_mission_tracker.hpp>
+#include <sm_nav2_test_7/orthogonals/or_obstacle_perception.hpp>
 
 #include <sm_nav2_test_7/clients/cl_mission_tracker/client_behaviors/cb_battery_decission.hpp>
 #include <sm_nav2_test_7/clients/cl_nav2z/client_behaviors/cb_position_control_free_space.hpp>
@@ -113,7 +116,8 @@ class StRecoverStep3;
 class StRecoverStep4;
 class StRecoverStep5;
 class StRecoverStep6;
-class StRecoverStep7;
+class StRecoverStep7_a;
+class StRecoverStep7_b;
 class StRecoverStep8;
 class StRecoverStep9;
 class StRecoverStep10;
@@ -173,6 +177,7 @@ struct SmNav2Test7
     this->createOrthogonal<OrLifecycleNode>();
     this->createOrthogonal<OrTimer>();
     this->createOrthogonal<OrMissionTracker>();
+    this->createOrthogonal<OrObstaclePerception>();
   }
 };
 
@@ -225,7 +230,8 @@ struct SmNav2Test7
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_4.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_5.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_6.hpp>
-#include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_7.hpp>
+#include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_7_a.hpp>
+#include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_7_b.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_8.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_9.hpp>
 #include <sm_nav2_test_7/states/docking_sequence_states/st_recover_step_10.hpp>

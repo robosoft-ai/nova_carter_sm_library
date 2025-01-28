@@ -27,6 +27,8 @@ struct StPauseToSetupVideo
     //Keyboard events
     Transition<EvKeyPressD<CbDefaultKeyboardBehavior, OrKeyboard>, StBatteryCheck, SUCCESS>,
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMove, NEXT>
+    // Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, MsRecover, NEXT>
+    // Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint2, NEXT>
   > reactions;
 
   // STATE FUNCTIONS
