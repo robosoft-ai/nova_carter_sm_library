@@ -28,15 +28,11 @@ struct StSwitchYard
     Transition<EvKeyPressR<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint2, NEXT>,
     Transition<EvKeyPressS<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint3, NEXT>,
     Transition<EvKeyPressF<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint4, NEXT>,
-    Transition<EvKeyPressB<CbDefaultKeyboardBehavior, OrKeyboard>, StBackup1, NEXT>,
     Transition<EvKeyPressD<CbDefaultKeyboardBehavior, OrKeyboard>, StBatteryCheck, NEXT>,
-    //Transition<EvKeyPressD<CbDefaultKeyboardBehavior, OrKeyboard>, MsRecover, NEXT>,
 
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, NEXT>,
     Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMoveStop, PREVIOUS>
   > reactions;
-
-//   CpTopicPublisher<geometry_msgs::msg::Twist> *pub;
 
   // STATE FUNCTIONS
   static void staticConfigure() {

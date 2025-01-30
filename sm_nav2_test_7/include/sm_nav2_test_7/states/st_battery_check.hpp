@@ -39,6 +39,9 @@ struct StBatteryCheck
   struct TRANSITION_4 : SUCCESS {};
   struct TRANSITION_5 : SUCCESS {};
   struct TRANSITION_6 : SUCCESS {};
+  struct TRANSITION_7 : SUCCESS {};
+  struct TRANSITION_8 : SUCCESS {};
+  struct TRANSITION_9 : SUCCESS {};    
   struct NEXT : SUCCESS{};
   struct PREVIOUS : ABORT{};
 
@@ -46,15 +49,11 @@ struct StBatteryCheck
   typedef mpl::list<
       Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, MsRecover, TRANSITION_1>,
       Transition<EvRadialMotion<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint2, TRANSITION_2>,
+      Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, MsRecover, TRANSITION_3>,
       Transition<EvSPattern<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint3, TRANSITION_4>,
+      Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, MsRecover, TRANSITION_5>,
       Transition<EvFPattern<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint4, TRANSITION_6>,
       
-    //  Transition<cl_nav2z::EvWaypointFinal, StNavigateToWaypoint2, SUCCESS>, 
-    //  Transition<EvCbSuccess<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, SUCCESS>,
-    //  Transition<EvCbFailure<CbNavigateNextWaypoint, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
-    //  Transition<EvActionAborted<ClNav2Z, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
-
-
       //Keyboard events    
       Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint2, NEXT>,
       Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, PREVIOUS>
@@ -63,8 +62,6 @@ struct StBatteryCheck
 
   // STATE FUNCTIONS
   static void staticConfigure() {
-    // configure_orthogonal<OrNavigation, CbPositionControlFreeSpace>();
-    // configure_orthogonal<OrNavigation, CbNavigateNextWaypoint>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
     configure_orthogonal<OrMissionTracker, CbBatteryDecission>();
   }

@@ -38,10 +38,10 @@ struct StSpinLeft1 : smacc2::SmaccState<StSpinLeft1, MsNav2Test1RunMode>
   // TRANSITION TABLE
   typedef mpl::list<
 
-    Transition<EvCbSuccess<CbPureSpinning, OrNavigation>, StNavigateToWaypoint1>,
+    Transition<EvCbSuccess<CbPureSpinning, OrNavigation>, StLoadingWaypointsFile, SUCCESS>,
     Transition<EvCbFailure<CbPureSpinning, OrNavigation>, StSpinLeft1>,
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, NEXT>
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StLoadingWaypointsFile, NEXT>
 
     >reactions;
 
