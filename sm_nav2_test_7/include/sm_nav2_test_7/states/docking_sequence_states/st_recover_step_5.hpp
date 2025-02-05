@@ -36,7 +36,7 @@ struct StRecoverStep5 : smacc2::SmaccState<StRecoverStep5, MsRecover>
   {
    // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();
   }
 
   void runtimeConfigure() 

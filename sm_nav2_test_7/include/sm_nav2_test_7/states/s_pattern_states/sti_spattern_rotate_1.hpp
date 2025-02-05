@@ -47,6 +47,9 @@ struct StiSPatternRotate1 : smacc2::SmaccState<StiSPatternRotate1, SS> {
       // counter-clockwise
       configure_orthogonal<OrNavigation, CbAbsoluteRotate>(180 + offset);
     }
+
+    configure_orthogonal<OrNavigation, CbResumeSlam>();
+    configure_orthogonal<OrNavigation, CbTrackPathSLAM>();
   }
 
   void runtimeConfigure() {}

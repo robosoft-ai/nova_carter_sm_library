@@ -48,18 +48,46 @@ struct StiRadialEndPoint : smacc2::SmaccState<StiRadialEndPoint, SS> {
   static void staticConfigure() {
     // RCLCPP_INFO(getLogger(),"ssr radial end point, distance in meters: %lf",
     // SS::ray_length_meters());
-    configure_orthogonal<OrNavigation, CbNavigateForward>(
-        SS::ray_length_meters());
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrNavigation, CbTrackPathOdometry>();
+    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    configure_orthogonal<OrNavigation, CbNavigateForward>(SS::ray_length_meters());
   }
 
   void runtimeConfigure() {
+
+    RCLCPP_INFO(this->getLogger(),"[StiRadialEndPoint] - distance to wall: %lf", SS::ray_length_meters());
+
+    // this->configure<OrNavigation, CbTrackPathOdometry>();
+    //odom tracker
     cl_nav2z::odom_tracker::CpOdomTracker *odomTracker;
     this->requiresComponent(odomTracker);
+
+    // RCLCPP_INFO(this->getLogger(), "Pose tracker freeze reference frame");
+    // cl_nav2z::Pose *poseComponent;
+    // requiresComponent(poseComponent);
+    // poseComponent->freezeReferenceFrame();
+    
+    // // poseComponent->setReferenceFrame("odom");
+    
+    // RCLCPP_INFO(this->getLogger(), "Odom tracker clear path");
+    // cl_nav2z::odom_tracker::CpOdomTracker *odomTracker;
+    // this->requiresComponent(odomTracker);
+    // // odomTracker->setOdomFrame("odom");
+  
+    // odomTracker->clearPath();
+
+
+    // RCLCPP_INFO(this->getLogger(), "Creating motion client");
+    // this->configure<OrNavigation, CbNavigateForward>(
+    //     SS::ray_length_meters());
+
     auto *cbForwardMotion =
-        this->template getOrthogonal<OrNavigation>()
-            ->template getClientBehavior<CbNavigateForward>();
+        this->getOrthogonal<OrNavigation>()
+            ->getClientBehavior<CbNavigateForward>();
+
+    RCLCPP_INFO(this->getLogger(), "Configuring motion client");
     auto previousGoal = odomTracker->getCurrentMotionGoal();
 
     if (previousGoal) {
@@ -73,6 +101,7 @@ struct StiRadialEndPoint : smacc2::SmaccState<StiRadialEndPoint, SS> {
                               << previousGoal->pose.orientation.w);
     };
 
+    RCLCPP_INFO(this->getLogger(), "Getting forward distance");
     ::sm_nav2_test_7::cl_lidar::ClLidarSensor * lidarClient;
       this->requiresClient(lidarClient);
 
@@ -96,6 +125,9 @@ struct StiRadialEndPoint : smacc2::SmaccState<StiRadialEndPoint, SS> {
         this->getLogger(), "Going forward in Radial pattern, distance to wall: %lf",
         SS::ray_length_meters());
     }
+
+    // RCLCPP_INFO(this->getLogger(), "Configuring Slam Pause");
+    // this->configure<OrNavigation, CbPauseSlam>();
 
   }
 };

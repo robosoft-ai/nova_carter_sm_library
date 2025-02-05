@@ -103,6 +103,7 @@ CpObjectTrackerTf(std::string global_frame_id="map") : global_frame_id_(global_f
     if (object == detectedObjects.end()) // already tracked
     {
       detectedObject = &object->second;
+      RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] tracking existing object: %s", child_frame_id.c_str());
     }
     else
     {
@@ -122,7 +123,7 @@ CpObjectTrackerTf(std::string global_frame_id="map") : global_frame_id_(global_f
          pose.pose.position.z = transformStamped.transform.translation.z;
          pose.pose.orientation = transformStamped.transform.rotation;
 
-         RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') pose: %f, %f, %f", child_frame_id.c_str(), frame_id.c_str(), pose.pose.position.x, pose.pose.position.y, tf2::getYaw(pose.pose.orientation));
+         RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] *updateAndGetGlobalPose('%s', '%s') pose: %f, %f, %f", child_frame_id.c_str(), frame_id.c_str(), pose.pose.position.x, pose.pose.position.y, tf2::getYaw(pose.pose.orientation));
 
         //  if (!detectedObject->filtered_pose)
         //  {
@@ -130,6 +131,7 @@ CpObjectTrackerTf(std::string global_frame_id="map") : global_frame_id_(global_f
         //  }
 
         auto& historicalPoses_ = detectedObject->historicalPoses_;
+        RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') historical poses: %ld", child_frame_id.c_str(), frame_id.c_str(), historicalPoses_.size() );
 
          const size_t MAX_HISTORY=512;
          if(historicalPoses_.size() > MAX_HISTORY)
@@ -138,10 +140,15 @@ CpObjectTrackerTf(std::string global_frame_id="map") : global_frame_id_(global_f
          }
          historicalPoses_.push_back(pose);
 
+         RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') historical poses: %ld", child_frame_id.c_str(), frame_id.c_str(), historicalPoses_.size() );
+
          // compute median position in x
          std::sort(historicalPoses_.begin(), historicalPoses_.end(), [](const geometry_msgs::msg::PoseStamped& a, const geometry_msgs::msg::PoseStamped& b) {
            return a.pose.position.x < b.pose.position.x;
          });
+
+
+         RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') historical poses: %ld", child_frame_id.c_str(), frame_id.c_str(), historicalPoses_.size() );
 
          geometry_msgs::msg::PoseStamped medianPose;
          medianPose.pose.position.x = historicalPoses_[historicalPoses_.size()/2].pose.position.x;
@@ -168,6 +175,8 @@ CpObjectTrackerTf(std::string global_frame_id="map") : global_frame_id_(global_f
 
          return detectedObject->filtered_pose;
     }
+
+    RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') failed", child_frame_id.c_str(), frame_id.c_str());
 
     return std::nullopt;
   }

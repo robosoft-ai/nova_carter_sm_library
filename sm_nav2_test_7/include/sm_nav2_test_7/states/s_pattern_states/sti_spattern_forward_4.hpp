@@ -41,7 +41,12 @@ struct StiSPatternForward4
 
     configure_orthogonal<OrNavigation, CbNavigateForward>(
         SS::pitch2_lenght_meters());
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbTrackPathOdometry>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();  
+
+      configure_orthogonal<OrNavigation, CbResumeSlam>();
+      configure_orthogonal<OrNavigation, CbTrackPathSLAM>();
+
   }
 
   void runtimeConfigure() {

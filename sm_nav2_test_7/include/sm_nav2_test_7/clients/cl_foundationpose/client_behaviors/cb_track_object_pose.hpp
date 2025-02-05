@@ -47,7 +47,7 @@ public:
 
   virtual void onEntry() override
   {
-    requiresComponent(objectTracker_);
+    requiresComponent(objectTracker_,true);
     RCLCPP_INFO(getLogger(), "CbTrackObjectPose onEntry");
     objectTracker_->setEnabled(true);
     RCLCPP_INFO(getLogger(), "CbTrackObjectPose onEntry - enabled");

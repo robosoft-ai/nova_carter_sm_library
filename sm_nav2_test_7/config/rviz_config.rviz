@@ -16,6 +16,11 @@ Panels:
         - /Image2/Topic1
         - /MarkerArray2
         - /OdomTracker1
+        - /MarkerArray3
+        - /MarkerArray3/Namespaces1
+        - /MarkerArray4
+        - /MarkerArray4/Topic1
+        - /Path1
       Splitter Ratio: 0.5833333134651184
     Tree Height: 338
   - Class: rviz_common/Selection
@@ -80,221 +85,19 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        back_fisheye_camera:
-          Value: true
-        back_fisheye_camera_optical:
-          Value: true
-        back_stereo_camera:
-          Value: true
-        back_stereo_camera_imu:
-          Value: true
-        back_stereo_camera_left:
-          Value: true
-        back_stereo_camera_left_optical:
-          Value: true
-        back_stereo_camera_right:
-          Value: true
-        back_stereo_camera_right_optical:
-          Value: true
-        base_link:
-          Value: true
-        caster_swivel_left:
-          Value: true
-        caster_swivel_right:
-          Value: true
-        caster_wheel_left:
-          Value: true
-        caster_wheel_right:
-          Value: true
-        chassis_imu:
-          Value: true
-        fp_object:
-          Value: true
-        front_2d_lidar:
-          Value: true
-        front_3d_lidar:
-          Value: true
-        front_fisheye_camera:
-          Value: true
-        front_fisheye_camera_optical:
-          Value: true
-        front_stereo_camera:
-          Value: true
-        front_stereo_camera_imu:
-          Value: true
-        front_stereo_camera_left:
-          Value: true
-        front_stereo_camera_left_optical:
-          Value: true
-        front_stereo_camera_right:
-          Value: true
-        front_stereo_camera_right_optical:
-          Value: true
-        left_fisheye_camera:
-          Value: true
-        left_fisheye_camera_optical:
-          Value: true
-        left_stereo_camera:
-          Value: true
-        left_stereo_camera_imu:
-          Value: true
-        left_stereo_camera_left:
-          Value: true
-        left_stereo_camera_left_optical:
-          Value: true
-        left_stereo_camera_right:
-          Value: true
-        left_stereo_camera_right_optical:
-          Value: true
-        map:
-          Value: true
-        nova_carter:
-          Value: true
-        nova_carter_caster_frame_base:
-          Value: true
-        odom:
-          Value: true
-        rear_2d_lidar:
-          Value: true
-        right_fisheye_camera:
-          Value: true
-        right_fisheye_camera_optical:
-          Value: true
-        right_stereo_camera:
-          Value: true
-        right_stereo_camera_imu:
-          Value: true
-        right_stereo_camera_left:
-          Value: true
-        right_stereo_camera_left_optical:
-          Value: true
-        right_stereo_camera_right:
-          Value: true
-        right_stereo_camera_right_optical:
-          Value: true
-        tag36h11:1:
-          Value: true
-        tag36h11:2:
-          Value: true
-        tag36h11:3:
-          Value: true
-        tag36h11:4:
-          Value: true
-        wheel_left:
-          Value: true
-        wheel_right:
-          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        map:
-          odom:
-            base_link:
-              back_fisheye_camera:
-                {}
-              back_fisheye_camera_optical:
-                {}
-              back_stereo_camera:
-                {}
-              back_stereo_camera_imu:
-                {}
-              back_stereo_camera_left:
-                {}
-              back_stereo_camera_left_optical:
-                {}
-              back_stereo_camera_right:
-                {}
-              back_stereo_camera_right_optical:
-                {}
-              chassis_imu:
-                {}
-              front_2d_lidar:
-                {}
-              front_3d_lidar:
-                {}
-              front_fisheye_camera:
-                {}
-              front_fisheye_camera_optical:
-                {}
-              front_stereo_camera:
-                {}
-              front_stereo_camera_imu:
-                {}
-              front_stereo_camera_left:
-                {}
-              front_stereo_camera_left_optical:
-                fp_object:
-                  {}
-                tag36h11:1:
-                  {}
-                tag36h11:2:
-                  {}
-                tag36h11:3:
-                  {}
-                tag36h11:4:
-                  {}
-              front_stereo_camera_right:
-                {}
-              front_stereo_camera_right_optical:
-                {}
-              left_fisheye_camera:
-                {}
-              left_fisheye_camera_optical:
-                {}
-              left_stereo_camera:
-                {}
-              left_stereo_camera_imu:
-                {}
-              left_stereo_camera_left:
-                {}
-              left_stereo_camera_left_optical:
-                {}
-              left_stereo_camera_right:
-                {}
-              left_stereo_camera_right_optical:
-                {}
-              nova_carter:
-                caster_swivel_left:
-                  {}
-                caster_swivel_right:
-                  {}
-                caster_wheel_left:
-                  {}
-                caster_wheel_right:
-                  {}
-                nova_carter_caster_frame_base:
-                  {}
-                wheel_left:
-                  {}
-                wheel_right:
-                  {}
-              rear_2d_lidar:
-                {}
-              right_fisheye_camera:
-                {}
-              right_fisheye_camera_optical:
-                {}
-              right_stereo_camera:
-                {}
-              right_stereo_camera_imu:
-                {}
-              right_stereo_camera_left:
-                {}
-              right_stereo_camera_left_optical:
-                {}
-              right_stereo_camera_right:
-                {}
-              right_stereo_camera_right_optical:
-                {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -729,6 +532,7 @@ Visualization Manager:
         MarkerArray: true
         OdomTracker: true
         Odometry: true
+        Path: true
         Realsense:
           RealsenseCamera: true
           RealsenseDepthImage: true
@@ -914,7 +718,7 @@ Visualization Manager:
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
-      Length: 0.30000001192092896
+      Length: 0.20000000298023224
       Line Style: Lines
       Line Width: 0.029999999329447746
       Name: OdomTracker
@@ -934,6 +738,58 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /odom_tracker_path
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        my_namespace2: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /backward_local_planner/goal_marker
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        my_namespace2: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /undo_path_planner/markers
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz_default_plugins/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /undo_path_planner/global_plan
       Value: true
   Enabled: true
   Global Options:
@@ -972,7 +828,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0.8549997806549072
+      Angle: 0.8299998044967651
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -982,11 +838,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 159.93951416015625
+      Scale: 315.7466735839844
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.1354781538248062
-      Y: -0.16934238374233246
+      X: 0.5195516347885132
+      Y: -0.28375881910324097
     Saved: ~
 Window Geometry:
   Camera:

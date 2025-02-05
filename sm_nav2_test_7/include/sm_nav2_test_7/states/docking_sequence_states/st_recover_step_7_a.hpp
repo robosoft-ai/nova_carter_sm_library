@@ -41,14 +41,21 @@ struct StRecoverStep7_a : smacc2::SmaccState<StRecoverStep7_a, MsRecover>
   {
    // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();
     // configure_orthogonal<OrNavigation, CbNavigateForward>(0.5);
   }
 
   void foundationPoseRuntimeConfigure() 
   {
-    CpObjectTrackerTf* objectTracker;
+    CpObjectTrackerTf* objectTracker=nullptr;
     requiresComponent(objectTracker);
+
+    if(objectTracker == nullptr)
+    {
+      RCLCPP_ERROR(getLogger(), "The object pose is not available. global navigation was not configured.");
+      return;
+    }
+
     auto dockingPose = objectTracker->updateAndGetGlobalPose("fp_object", "map");
 
     cl_nav2z::Pose* robotPose;

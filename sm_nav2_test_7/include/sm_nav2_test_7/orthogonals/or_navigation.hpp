@@ -64,7 +64,7 @@ public:
     nav2zClient->createComponent<cl_nav2z::CpGoalCheckerSwitcher>();
 
     // create odom tracker
-    nav2zClient->createComponent<cl_nav2z::odom_tracker::CpOdomTracker>();
+    nav2zClient->createComponent<cl_nav2z::odom_tracker::CpOdomTracker>("notopic","map", cl_nav2z::odom_tracker::OdomTrackerStrategy::POSE_COMPONENT);
 
     // create odom tracker
     nav2zClient->createComponent<cl_nav2z::CpSlamToolbox>();

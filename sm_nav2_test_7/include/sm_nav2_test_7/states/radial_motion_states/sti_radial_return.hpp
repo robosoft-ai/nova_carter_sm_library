@@ -35,8 +35,8 @@ struct StiRadialReturn : smacc2::SmaccState<StiRadialReturn, SS> {
 
       Transition<EvCbSuccess<CbUndoPathBackwards, OrNavigation>,
                  StiRadialLoopStart, SUCCESS>,
-      // Transition<EvCbFailure<CbUndoPathBackwards, OrNavigation>,
-      //            StiRadialEndPoint, ABORT>,
+      Transition<EvCbFailure<CbUndoPathBackwards, OrNavigation>,
+               StiRadialEndPoint, ABORT>,
 
       // Keyboard events  
       Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StiRadialLoopStart, NEXT>
@@ -50,14 +50,22 @@ struct StiRadialReturn : smacc2::SmaccState<StiRadialReturn, SS> {
     // Create serializable struct for parameterization options - see CbUndoPathBackwards.hpp
     cl_nav2z::CbUndoPathBackwardsOptions options;
     // Select the specific goal checker to use - see config/nav2_config.yaml
-    options.goalCheckerId_ = "undo_path_backwards_goal_checker_2";
-    
+    //options.goalCheckerId_ = "undo_path_backwards_goal_checker_2";
+    options.undoControllerName_ = "UndoBackwardLocalPlanner";
     configure_orthogonal<OrNavigation, CbUndoPathBackwards>(options);
+    //configure_orthogonal<OrNavigation, CbUndoPathBackwards>();
 
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
+  // void runtimeConfigure() 
+  // {
+  //   //cl_nav2z::Pose *poseComponent;
+  //   //requiresComponent(poseComponent);
+  //   poseComponent->setReferenceFrame("map");
+
+  // }
   void onExit() {
     ClNav2Z *moveBase;
     this->requiresClient(moveBase);

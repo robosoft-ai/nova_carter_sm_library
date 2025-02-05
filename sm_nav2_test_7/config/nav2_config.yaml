@@ -127,10 +127,10 @@ controller_server:
     failure_tolerance: 0.3
     progress_checker_plugin: "progress_checker"
     # goal_checker_plugin: ["general_goal_checker"]
-    goal_checker_plugins: ["goal_checker", "forward_goal_checker", "backward_goal_checker", "absolute_rotate_goal_checker", "undo_path_backwards_goal_checker", undo_path_backwards_goal_checker_2]
+    goal_checker_plugins: ["goal_checker", "forward_goal_checker", "backward_goal_checker", "absolute_rotate_goal_checker", "undo_path_backwards_goal_checker"] #,  "undo_path_backwards_goal_checker_2"] #,
 
     # controller_plugins: ["FollowPath"]
-    controller_plugins: ["FollowPath","BackwardLocalPlanner", "ForwardLocalPlanner", "PureSpinningLocalPlanner"]
+    controller_plugins: ["FollowPath","BackwardLocalPlanner", "ForwardLocalPlanner", "PureSpinningLocalPlanner", "UndoBackwardLocalPlanner"]
 
     current_goal_checker: "goal_checker"
 
@@ -145,7 +145,6 @@ controller_server:
       xy_goal_tolerance: .5
       yaw_goal_tolerance: 3.14
       stateful: True
-
     goal_checker:
       plugin: "nav2_controller::SimpleGoalChecker"
       xy_goal_tolerance: .25 #.25
@@ -153,7 +152,7 @@ controller_server:
       stateful: True
     backward_goal_checker:
       plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.7 #0.9
+      xy_goal_tolerance: 0.2 #0.7 #0.9
       yaw_goal_tolerance: 0.1 #0.05
       stateful: True
     forward_goal_checker:
@@ -171,16 +170,17 @@ controller_server:
       xy_goal_tolerance: 0.02 # 4 cm
       yaw_goal_tolerance: 0.34
       stateful: True
-    undo_path_backwards_goal_checker_2:
-      plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.04 # 4 cm
-      yaw_goal_tolerance: 0.34
-      stateful: True
-    undo_path_backwards_goal_checker_3:
-      plugin: "nav2_controller::SimpleGoalChecker"
-      xy_goal_tolerance: 0.02 # 4 cm
-      yaw_goal_tolerance: 0.34
-      stateful: True
+
+    # undo_path_backwards_goal_checker_2:
+    #   plugin: "nav2_controller::SimpleGoalChecker"
+    #   xy_goal_tolerance: 0.02 # 4 cm
+    #   yaw_goal_tolerance: 0.34
+    #   stateful: True
+    # undo_path_backwards_goal_checker_3:
+    #   plugin: "nav2_controller::SimpleGoalChecker"
+    #   xy_goal_tolerance: 0.02 # 4 cm
+    #   yaw_goal_tolerance: 0.34
+    #   stateful: True
     # DWB parameters
     FollowPath:
       plugin: "dwb_core::DWBLocalPlanner"
@@ -222,6 +222,17 @@ controller_server:
       RotateToGoal.slowing_factor: 5.0
       RotateToGoal.lookahead_time: -1.0
     BackwardLocalPlanner:
+      plugin: "backward_local_planner::BackwardLocalPlanner"
+      transform_tolerance: 0.5
+      k_rho: -2.0 # linear distance to the goal gain, default = -1.0 (related with carrot distance)
+      k_alpha: -16.4 #-0.1
+      k_betta: -0.01 # -1.0
+      carrot_distance: 0.8 #meters default 0.5
+      carrot_angular_distance: 0.35 # no constraint, max 3.1416
+      pure_spinning_straight_line_mode: true
+      max_linear_x_speed: 0.15
+      max_angular_z_speed: 0.15
+    UndoBackwardLocalPlanner:
       plugin: "backward_local_planner::BackwardLocalPlanner"
       transform_tolerance: 0.5
       k_rho: -2.0 # linear distance to the goal gain, default = -1.0 (related with carrot distance)
