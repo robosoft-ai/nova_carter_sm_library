@@ -39,18 +39,29 @@ struct StInitialMove
     //configure_orthogonal<OrTimer, CbTimerCountdownOnce>(10s); I would like to use the CLtimer instead
     configure_orthogonal<OrNavigation, CbSleepFor>(19.25s);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrNavigation, CbTrackPathOdometry>();
+    configure_orthogonal<OrNavigation, CbPauseSlam>();
+
+    CbSpiralMotionOptions options;
+    options.linearVelocity = 0.0f;
+    options.maxLinearVelocity = 0.5f;
+    options.initialAngularVelocity = 1.5f;
+    options.spiralMotionDuration = rclcpp::Duration::from_seconds(40);
+    options.finalRadius = 20.0f;
+    configure_orthogonal<OrNavigation, CbSpiralMotion>(options);
+
   }
 
   void runtimeConfigure() {}
 
   void onEntry() {
-    cl_nav2z::ClNav2Z* clNav;
-    this->requiresClient(clNav);
-    auto pub = clNav->getComponent<smacc2::components::CpTopicPublisher<geometry_msgs::msg::Twist>>();
-    auto twist_msg = std::make_shared<geometry_msgs::msg::Twist>();
-    twist_msg->linear.x = 0.3; 
-    twist_msg->angular.z = 0.3; 
-    pub->publish(*twist_msg);
+    // cl_nav2z::ClNav2Z* clNav;
+    // this->requiresClient(clNav);
+    // auto pub = clNav->getComponent<smacc2::components::CpTopicPublisher<geometry_msgs::msg::Twist>>();
+    // auto twist_msg = std::make_shared<geometry_msgs::msg::Twist>();
+    // twist_msg->linear.x = 0.3; 
+    // twist_msg->angular.z = 0.3; 
+    // pub->publish(*twist_msg);
   }
 };
 } 
