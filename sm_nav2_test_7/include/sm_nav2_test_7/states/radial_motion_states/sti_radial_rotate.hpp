@@ -47,6 +47,7 @@ struct StiRadialRotate : smacc2::SmaccState<StiRadialRotate, SS> {
   static void staticConfigure() {
     configure_orthogonal<OrNavigation, CbAbsoluteRotate>();
     configure_orthogonal<OrNavigation, CbResumeSlam>();
+    configure_orthogonal<OrNavigation, CbTrackPathSLAM>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 

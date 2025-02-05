@@ -43,14 +43,14 @@ struct StiFPatternRotate1 : smacc2::SmaccState<StiFPatternRotate1<SS>, SS> {
     float angle = 0;
     double offset = 0; //-1.5;  // for a better behaving
 
-    if (SS::direction() == TDirection::LEFT)
-      angle = 90 + offset;
-    else
-      angle = -90 - offset;
+    // if (SS::direction() == TDirection::LEFT)
+    //   angle = 90 + offset;
+    // else
+    //   angle = -90 - offset;
 
     // TSti::template configure_orthogonal<OrNavigation, CbRotate>(angle);
     TSti::template configure_orthogonal<OrNavigation, CbAbsoluteRotate>(
-        angle); // absolute aligned to the y-axis
+        0); // absolute aligned to the y-axis
   }
 
   void runtimeConfigure() {}

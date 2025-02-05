@@ -48,6 +48,7 @@ struct StiRadialLoopStart : smacc2::SmaccState<StiRadialLoopStart, SS> {
   }
 
   void onEntry() {
+
     RCLCPP_INFO(getLogger(), "LOOP START ON ENTRY");
     checkWhileLoopConditionAndThrowEvent(
         &StiRadialLoopStart::loopWhileCondition);

@@ -45,7 +45,7 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
   static void staticConfigure()
   {
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();
   }
 
 
@@ -73,6 +73,12 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
   {
     CpObjectTrackerTf* objectTracker;
     requiresComponent(objectTracker);
+
+    if(objectTracker == nullptr)
+    {
+      RCLCPP_ERROR(getLogger(), "The object pose is not available. global navigation was not configured.");
+      return;
+    }
     
     //auto pose = objectTracker->updateGlobalObjectPoseWithOffset("fp_object", "map");
     //RCLCPP_INFO(getLogger(), "[StRecoverStep3] Navigating to Facing Dock pose: %f, %f, %f", pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));

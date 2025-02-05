@@ -49,6 +49,7 @@
 #include <nav2z_client/client_behaviors/cb_load_waypoints_file.hpp>
 #include <nav2z_client/client_behaviors/cb_navigate_next_waypoint_free.hpp>
 #include <nav2z_client/client_behaviors/cb_position_control_free_space.hpp>
+
 #include <nav2z_client/client_behaviors/cb_pure_spinning.hpp>
 #include <nav2z_client/client_behaviors/cb_save_slam_map.hpp>
 
@@ -77,6 +78,8 @@
 
 #include <sm_nav2_test_7/clients/cl_mission_tracker/client_behaviors/cb_battery_decission.hpp>
 #include <sm_nav2_test_7/clients/cl_nav2z/client_behaviors/cb_position_control_free_space.hpp>
+#include <sm_nav2_test_7/clients/cl_nav2z/client_behaviors/cb_track_path_slam.hpp>
+#include <sm_nav2_test_7/clients/cl_nav2z/client_behaviors/cb_track_path_odometry.hpp>
 
 using namespace cl_nav2z;
 using namespace smacc2::state_reactors;

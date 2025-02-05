@@ -64,11 +64,9 @@ public:
   {
     this->lastScanMessage_ = scanmsg;
 
-
     auto fwdist = lastScanMessage_.ranges[lastScanMessage_.ranges.size() / 2] /*meter*/;
     //auto fwdist = lastScanMessage_.ranges[0] /*meter*/;
     //auto fwdist = lastScanMessage_.ranges[lastScanMessage_.ranges.size() -1] /*meter*/;
-
 
     auto raysWidthCount = 0;
     std::stringstream ss;
@@ -85,21 +83,22 @@ public:
 
       float fwdist2 = lastScanMessage_.ranges[scanindex];
 
-      RCLCPP_INFO_STREAM(
-        getLogger(), "[" << getName() << "]"
+       RCLCPP_INFO_STREAM_THROTTLE(
+        getLogger(), *(getNode()->get_clock()), 1000, "[" << getName() << "]"
                          << "range[" << scanindex << "] = " << fwdist2);
 
       if (fwdist2 > 0.01 && fwdist2 < fwdist)
       {
-        RCLCPP_INFO_STREAM(
-          getLogger(), "[" << getName() << "]"
+         RCLCPP_INFO_STREAM_THROTTLE(
+        getLogger(), *(getNode()->get_clock()), 1000, "[" << getName() << "]"
                            << "updated range[0] = " << fwdist2);
 
         fwdist = fwdist2;
       }
     }
 
-    RCLCPP_INFO_STREAM(getLogger(), "[" << getName() << "]" << ss.str());
+    RCLCPP_INFO_STREAM_THROTTLE(
+        getLogger(), *(getNode()->get_clock()), 1000, "[" << getName() << "]" << ss.str());
 
     /*if the distance is infinity or nan, use max range distance*/
     if (fwdist == std::numeric_limits<float>::infinity() || fwdist != fwdist)

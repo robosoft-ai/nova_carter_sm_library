@@ -40,8 +40,12 @@ struct StiSPatternForward3
   static void staticConfigure() {
     configure_orthogonal<OrNavigation, CbNavigateForward>(
         SS::pitch1_lenght_meters());
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
-  }
+    
+    // configure_orthogonal<OrNavigation, CbTrackPathOdometry>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();  
+      configure_orthogonal<OrNavigation, CbResumeSlam>();
+      configure_orthogonal<OrNavigation, CbTrackPathSLAM>();
+    }
 };
 } // namespace s_pattern_states
 } // namespace sm_nav2_test_7

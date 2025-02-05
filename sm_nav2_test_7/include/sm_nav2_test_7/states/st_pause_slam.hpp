@@ -43,7 +43,7 @@ struct StPauseSlam
 
   // STATE FUNCTIONS
   static void staticConfigure() {
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();
     // configure_orthogonal<OrNavigation, CbSleepFor>(2s);
   }
 };

@@ -180,6 +180,28 @@ def generate_launch_description():
             ],
         )
 
+#    configure_orthogonal<OrSlam, CbRosLaunch2>("sm_nav2_test_7", "slam_stack_launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
+#    configure_orthogonal<OrNavigation, CbRosLaunch2>("sm_nav2_test_7", "nav2_stack_launch2.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
+
+    slam_stack_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory("sm_nav2_test_7"),
+                "launch",
+                "slam_stack_launch.py",
+            )
+        )
+    )
+
+    nav_2_stack = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                get_package_share_directory("sm_nav2_test_7"),
+                "launch",
+                "nav2_stack_launch.py",
+            )
+        )
+    )
 
     # Create the launch description and populate
     ld = LaunchDescription()
@@ -202,6 +224,10 @@ def generate_launch_description():
     ld.add_action(declare_use_rviz_cmd)
 
     ld.add_action(sm_nav2_test_7_node)
+
+    ld.add_action(slam_stack_launch)
+    ld.add_action(nav_2_stack)
+
     ld.add_action(declare_active_slam_sel)
     ld.add_action(keyboard_client_node)
     ld.add_action(april_tag_launch)

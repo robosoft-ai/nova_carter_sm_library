@@ -12,28 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/*****************************************************************************************************************
+ *
+ * 	 Authors: Pablo Inigo Blasco, Brett Aldrich
+ *
+ ******************************************************************************************************************/
+
 #pragma once
-#include <smacc2/component.hpp>
-#include <vision_msgs/msg/detection3_d_array.hpp>
 
-namespace cl_foundationpose 
+#include <nav2z_client/components/pose/cp_pose.hpp>
+#include <smacc2/smacc_asynchronous_client_behavior.hpp>
+
+namespace sm_nav2_test_7
 {
-
-struct DetectedObject
+struct CbTrackPathSLAM : public smacc2::SmaccAsyncClientBehavior
 {
-  vision_msgs::msg::Detection3D msg;
+private:
+  
 
-  std::optional<geometry_msgs::msg::PoseStamped> filtered_pose;
+public:
+  
+  CbTrackPathSLAM();
 
-  std::vector<geometry_msgs::msg::PoseStamped> historicalPoses_;
+  void onEntry() override;
 
-  DetectedObject() 
-  {
-    historicalPoses_.clear();
-  }
+  void onExit() override;
 };
-
-
-struct EvObjectDetected : sc::event<EvObjectDetected> {};
-
-} // namespace cl_apriltag_detector
+}  // namespace sm_nav2_test_7

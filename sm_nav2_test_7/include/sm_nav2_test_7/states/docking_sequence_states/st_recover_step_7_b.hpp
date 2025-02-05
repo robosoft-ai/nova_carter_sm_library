@@ -41,7 +41,7 @@ struct StRecoverStep7_b : smacc2::SmaccState<StRecoverStep7_b, MsRecover>
   {
    // configure_orthogonal<OrTimer, CbTimerCountdownOnce>(50);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();
     configure_orthogonal<OrNavigation, CbSleepFor>(4s);
     // configure_orthogonal<OrNavigation, CbNavigateForward>(0.5);
   }

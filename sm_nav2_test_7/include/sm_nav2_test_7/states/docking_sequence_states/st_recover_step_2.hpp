@@ -43,7 +43,7 @@ struct StRecoverStep2 : smacc2::SmaccState<StRecoverStep2, MsRecover>
   static void staticConfigure()
   {
     configure_orthogonal<OrNavigation, CbAbsoluteRotate>(0.0);
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 

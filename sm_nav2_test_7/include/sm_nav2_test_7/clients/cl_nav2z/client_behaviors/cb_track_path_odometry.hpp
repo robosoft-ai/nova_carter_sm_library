@@ -18,33 +18,24 @@
  *
  ******************************************************************************************************************/
 
-namespace sm_nav2_test_7 {
-namespace s_pattern_states {
-// STATE DECLARATION
-struct StiSPatternForward1
-    : public smacc2::SmaccState<StiSPatternForward1, SS> {
-  using SmaccState::SmaccState;
+#pragma once
 
-  // TRANSITION TABLE
-  typedef mpl::list<
+#include <nav2z_client/components/pose/cp_pose.hpp>
+#include <smacc2/smacc_asynchronous_client_behavior.hpp>
 
-      Transition<EvCbSuccess<CbNavigateForward, OrNavigation>,
-                 StiSPatternRotate2>,
-      Transition<EvCbFailure<CbNavigateForward, OrNavigation>,
-                 StiSPatternRotate1>
+namespace sm_nav2_test_7
+{
+struct CbTrackPathOdometry : public smacc2::SmaccAsyncClientBehavior
+{
+private:
+  
 
-      >
-      reactions;
+public:
+  
+  CbTrackPathOdometry();
 
-  // STATE FUNCTIONS
-  static void staticConfigure() {
-    configure_orthogonal<OrNavigation, CbNavigateForward>(
-        SS::pitch1_lenght_meters());
-    configure_orthogonal<OrNavigation, CbResumeSlam>();
-    configure_orthogonal<OrNavigation, CbTrackPathSLAM>();
-  }
+  void onEntry() override;
 
-  void runtimeConfigure() {}
+  void onExit() override;
 };
-} // namespace s_pattern_states
-} // namespace sm_nav2_test_7
+}  // namespace sm_nav2_test_7

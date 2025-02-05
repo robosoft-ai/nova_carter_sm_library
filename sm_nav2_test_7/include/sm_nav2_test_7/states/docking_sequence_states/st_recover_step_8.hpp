@@ -43,7 +43,7 @@ struct StRecoverStep8 : smacc2::SmaccState<StRecoverStep8, MsRecover>
     // SS::ray_length_meters());
     configure_orthogonal<OrNavigation, CbNavigateBackwards>(1.0);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
-    configure_orthogonal<OrNavigation, CbPauseSlam>();
+    // configure_orthogonal<OrNavigation, CbPauseSlam>();
   }
 
   void runtimeConfigure() 
