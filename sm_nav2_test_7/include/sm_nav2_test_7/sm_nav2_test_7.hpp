@@ -80,6 +80,7 @@
 #include <sm_nav2_test_7/clients/cl_nav2z/client_behaviors/cb_position_control_free_space.hpp>
 #include <sm_nav2_test_7/clients/cl_nav2z/client_behaviors/cb_track_path_slam.hpp>
 #include <sm_nav2_test_7/clients/cl_nav2z/client_behaviors/cb_track_path_odometry.hpp>
+#include <sm_nav2_test_7/clients/cl_nav2z/client_behaviors/cb_spiral_motion.hpp>
 
 using namespace cl_nav2z;
 using namespace smacc2::state_reactors;

@@ -26,6 +26,7 @@ ament_auto_add_executable(${PROJECT_NAME}_node
                           src/clients/nav2z_client/client_behaviors/cb_position_control_free_space.cpp
                           src/clients/nav2z_client/client_behaviors/cb_track_path_odometry.cpp
                           src/clients/nav2z_client/client_behaviors/cb_track_path_slam.cpp
+                          src/clients/nav2z_client/client_behaviors/cb_spiral_motion.cpp
                           # src/sm_nav2_test_7/clients/cl_foundationpose.hpp
                           # src/sm_nav2_test_7/components/com_foundationpose.cpp
 
