@@ -41,6 +41,9 @@ struct StRecoverStep8 : smacc2::SmaccState<StRecoverStep8, MsRecover>
   static void staticConfigure() {
     // RCLCPP_INFO(getLogger(),"ssr radial end point, distance in meters: %lf",
     // SS::ray_length_meters());
+    configure_orthogonal<OrNavigation, CbTrackPathOdometry>();
+    configure_orthogonal<OrNavigation, CbPauseSlam>();
+
     configure_orthogonal<OrNavigation, CbNavigateBackwards>(1.0);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
     // configure_orthogonal<OrNavigation, CbPauseSlam>();

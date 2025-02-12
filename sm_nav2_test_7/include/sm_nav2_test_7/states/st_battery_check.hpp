@@ -53,10 +53,10 @@ struct StBatteryCheck
       Transition<EvSPattern<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint3, TRANSITION_4>,
       Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, MsRecover, TRANSITION_5>,
       Transition<EvFPattern<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint4, TRANSITION_6>,
+      Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, StInitialReturnToOrigin, TRANSITION_7>,
       
       //Keyboard events    
-      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint2, NEXT>,
-      Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, PREVIOUS>
+      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint2, NEXT>
       >
       reactions;
 

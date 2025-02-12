@@ -39,7 +39,7 @@ struct StWaypointSpinLeft : smacc2::SmaccState<StWaypointSpinLeft, MsNav2Test1Ru
   typedef mpl::list<
 
     Transition<EvCbSuccess<CbPureSpinning, OrNavigation>, StNavigateWarehouseWaypointsX, SUCCESS>,
-    Transition<EvCbFailure<CbPureSpinning, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
+    // Commented out to prettift the demo - Transition<EvCbFailure<CbPureSpinning, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
 
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateWarehouseWaypointsX, NEXT>,
     Transition<EvKeyPressZ<CbDefaultKeyboardBehavior, OrKeyboard>, StWaypointSpinRight, NEXT>

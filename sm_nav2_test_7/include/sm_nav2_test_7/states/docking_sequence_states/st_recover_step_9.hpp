@@ -41,6 +41,7 @@ struct StRecoverStep9 : smacc2::SmaccState<StRecoverStep9, MsRecover>
   {
     configure_orthogonal<OrNavigation, CbPureSpinning>(-1*M_PI, 1.0 /*rad_s*/);
     configure_orthogonal<OrNavigation, CbResumeSlam>();
+    configure_orthogonal<OrNavigation, CbTrackPathSLAM>();  
   }
 
   void runtimeConfigure() {}

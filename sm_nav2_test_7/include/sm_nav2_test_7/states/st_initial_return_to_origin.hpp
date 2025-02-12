@@ -21,44 +21,35 @@
 #pragma once
 
 #include <smacc2/smacc.hpp>
-// #include <nav2z_client/client_behavior>
 
 namespace sm_nav2_test_7 {
 using namespace smacc2::default_events;
-using smacc2::client_behaviors::CbSleepFor;
-using cl_nav2z::CbNavigateGlobalPosition;
 using namespace std::chrono_literals;
-using namespace cl_nav2z;
-using namespace cl_keyboard;
-
-
+using cl_nav2z::CbPauseSlam;
+using cl_nav2z::CbNavigateGlobalPosition;
+using smacc2::client_behaviors::CbSleepFor;
+using smacc2::client_behaviors::CbRosStop2;
 
 // STATE DECLARATION
-struct StNavigateToWaypoint1 : smacc2::SmaccState<StNavigateToWaypoint1, MsNav2Test1RunMode>
+struct StInitialReturnToOrigin
+    : smacc2::SmaccState<StInitialReturnToOrigin, MsNav2Test1RunMode> 
 {
   using SmaccState::SmaccState;
 
-   // DECLARE CUSTOM OBJECT TAGS
-  struct NEXT : SUCCESS{};
-  struct PREVIOUS : ABORT{};
-
   // TRANSITION TABLE
   typedef mpl::list<
+      Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StSpiralPattern1, SUCCESS>
+      // Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StFinalMapSaving, SUCCESS>
+      // Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, SS2::SsRadialPattern2, SUCCESS>
+      >
+      reactions;
 
-    Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StInitialReturnToOrigin, SUCCESS>,
-    //Transition<EvCbFailure<CbNavigateGlobalPosition, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>
-
-    //Keyboard events
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StLoadingWaypointsFile, NEXT>,
-    Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMoveStop, PREVIOUS>
-    >reactions;
 
   // STATE FUNCTIONS
-  static void staticConfigure()
-  {
-    configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(-9.7, 10.85, 0.0); //(-3.75, -2.25, 0.0)
-    // configure_orthogonal<OrNavigation, CbResumeSlam>();
-    configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+  static void staticConfigure() {
+    configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(); // parameterless navigates to 0,0,0
+    // configure_orthogonal<OrNavigation, CbSleepFor>(20s);
+    // configure_orthogonal<OrNavigation, CbRosStop2>();
   }
 };
-}  // namespace sm_nav2_test_7
+} // namespace sm_nav2_test_7

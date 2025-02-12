@@ -25,12 +25,13 @@ struct StSwitchYard
   typedef mpl::list<
     Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StSpinRight1, SUCCESS>,
     //Keyboard events
+    Transition<EvKeyPressG<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, NEXT>,
     Transition<EvKeyPressR<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint2, NEXT>,
     Transition<EvKeyPressS<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint3, NEXT>,
     Transition<EvKeyPressF<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint4, NEXT>,
     Transition<EvKeyPressD<CbDefaultKeyboardBehavior, OrKeyboard>, StBatteryCheck, NEXT>,
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, NEXT>,
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StLoadingWaypointsFile, NEXT>,
     Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMoveStop, PREVIOUS>
   > reactions;
 

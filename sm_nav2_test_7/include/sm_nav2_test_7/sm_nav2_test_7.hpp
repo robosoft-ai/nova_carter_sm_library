@@ -94,7 +94,7 @@ class StPauseToAcquireFp;
 class StInitialMove;
 class StInitialMoveStop;
 class StPreSpiralPattern;
-class StSpiralPattern;
+class StSpiralPattern1;
 class StSwitchYard;
 class StRecoveryNav2;
 class StSpinRight1;
@@ -106,6 +106,7 @@ class StNavigateWarehouseWaypointsX;
 class StBatteryCheck;
 class StPauseSlam;
 class StFinalState;
+class StInitialReturnToOrigin;
 class StFinalReturnToOrigin;
 class StNavigateToWaypoint1;
 class StNavigateToWaypoint2;
@@ -206,7 +207,7 @@ struct SmNav2Test7
 #include <sm_nav2_test_7/states/st_pause_to_acquire_fp.hpp>
 #include <sm_nav2_test_7/states/st_initial_move.hpp>
 #include <sm_nav2_test_7/states/st_initial_move_stop.hpp>
-#include <sm_nav2_test_7/states/st_spiral_pattern.hpp>
+#include <sm_nav2_test_7/states/st_spiral_pattern_1.hpp>
 #include <sm_nav2_test_7/states/st_pre_spiral_pattern.hpp>
 #include <sm_nav2_test_7/states/st_switch_yard.hpp>
 #include <sm_nav2_test_7/states/st_final_state.hpp>
@@ -224,6 +225,7 @@ struct SmNav2Test7
 #include <sm_nav2_test_7/states/st_navigate_to_waypoint_4.hpp>
 #include <sm_nav2_test_7/states/st_navigate_to_waypoint_5.hpp>
 #include <sm_nav2_test_7/states/st_loading_waypoints_file.hpp>
+#include <sm_nav2_test_7/states/st_initial_return_to_origin.hpp>
 #include <sm_nav2_test_7/states/st_final_return_to_origin.hpp>
 #include <sm_nav2_test_7/states/st_backup_1.hpp>
 
