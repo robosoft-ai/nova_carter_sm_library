@@ -52,8 +52,8 @@ public:
 
       // Transition<EvLoopEnd<StiSPatternLoopStart>, StNavigateReverse3,
       // ENDLOOP>
-      Transition<EvLoopEnd<StiSPatternLoopStart>, StNavigateToWaypoint4,
-                 ENDLOOP> //,
+      Transition<EvLoopEnd<StiSPatternLoopStart>, StBatteryCheck,
+                 ENDLOOP> //,StNavigateToWaypoint4
 
       >
       reactions;
@@ -63,7 +63,7 @@ public:
 
   static constexpr float pitch1_lenght_meters() { return 0.5; }
   static constexpr float pitch2_lenght_meters() { return 27.0; }
-  static constexpr int total_iterations() { return 13; }
+  static constexpr int total_iterations() { return 9; }
   static constexpr TDirection direction() { return TDirection::RIGHT; }
 
   int iteration_count;

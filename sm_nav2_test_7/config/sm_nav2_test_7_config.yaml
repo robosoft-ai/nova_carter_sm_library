@@ -12,7 +12,7 @@ SmNav2Test7:
 
 
         # --- DOCKING PARAMETERS (verison1)-- compensate global navigation goal checking error
-        docking_pose.offset.x: -1.4
+        docking_pose.offset.x: -1.0 # 1.4
         docking_pose.offset.y: 0.0
 
         cb_battery_position_control.enable_static_forward_distance: false        

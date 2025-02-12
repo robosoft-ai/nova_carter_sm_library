@@ -6,13 +6,18 @@ Panels:
       Expanded:
         - /Global Options1
         - /Grid1
+        - /RobotModel1
+        - /TF1
         - /TF1/Frames1
         - /TF1/Tree1
         - /Map1
         - /Controller1/Local Costmap1
         - /Camera1/Visibility1
+        - /Detection3DArray1
         - /Image1
+        - /Odometry1
         - /Odometry1/Shape1
+        - /Image2
         - /Image2/Topic1
         - /MarkerArray2
         - /OdomTracker1
@@ -21,8 +26,11 @@ Panels:
         - /MarkerArray4
         - /MarkerArray4/Topic1
         - /Path1
+        - /Detection3D1
+        - /Detection3DArray2
+        - /Detection3DArray2/Topic1
       Splitter Ratio: 0.5833333134651184
-    Tree Height: 991
+    Tree Height: 280
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -44,7 +52,7 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz_default_plugins/Grid
       Color: 160; 160; 164
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.029999999329447746
         Value: Lines
@@ -57,7 +65,7 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 50
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
@@ -85,19 +93,225 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz_default_plugins/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        back_fisheye_camera:
+          Value: true
+        back_fisheye_camera_optical:
+          Value: true
+        back_stereo_camera:
+          Value: true
+        back_stereo_camera_imu:
+          Value: true
+        back_stereo_camera_left:
+          Value: true
+        back_stereo_camera_left_optical:
+          Value: true
+        back_stereo_camera_right:
+          Value: true
+        back_stereo_camera_right_optical:
+          Value: true
+        base_link:
+          Value: true
+        caster_swivel_left:
+          Value: true
+        caster_swivel_right:
+          Value: true
+        caster_wheel_left:
+          Value: true
+        caster_wheel_right:
+          Value: true
+        chassis_imu:
+          Value: true
+        fp_object:
+          Value: true
+        front_2d_lidar:
+          Value: true
+        front_3d_lidar:
+          Value: true
+        front_fisheye_camera:
+          Value: true
+        front_fisheye_camera_optical:
+          Value: true
+        front_stereo_camera:
+          Value: true
+        front_stereo_camera_imu:
+          Value: true
+        front_stereo_camera_left:
+          Value: true
+        front_stereo_camera_left_optical:
+          Value: true
+        front_stereo_camera_right:
+          Value: true
+        front_stereo_camera_right_optical:
+          Value: true
+        left_fisheye_camera:
+          Value: true
+        left_fisheye_camera_optical:
+          Value: true
+        left_stereo_camera:
+          Value: true
+        left_stereo_camera_imu:
+          Value: true
+        left_stereo_camera_left:
+          Value: true
+        left_stereo_camera_left_optical:
+          Value: true
+        left_stereo_camera_right:
+          Value: true
+        left_stereo_camera_right_optical:
+          Value: true
+        map:
+          Value: true
+        nova_carter:
+          Value: true
+        nova_carter_caster_frame_base:
+          Value: true
+        odom:
+          Value: true
+        rear_2d_lidar:
+          Value: true
+        right_fisheye_camera:
+          Value: true
+        right_fisheye_camera_optical:
+          Value: true
+        right_stereo_camera:
+          Value: true
+        right_stereo_camera_imu:
+          Value: true
+        right_stereo_camera_left:
+          Value: true
+        right_stereo_camera_left_optical:
+          Value: true
+        right_stereo_camera_right:
+          Value: true
+        right_stereo_camera_right_optical:
+          Value: true
+        tag36h11:0:
+          Value: true
+        tag36h11:1:
+          Value: true
+        tag36h11:2:
+          Value: true
+        tag36h11:3:
+          Value: true
+        tag36h11:4:
+          Value: true
+        wheel_left:
+          Value: true
+        wheel_right:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        map:
+          odom:
+            base_link:
+              back_fisheye_camera:
+                {}
+              back_fisheye_camera_optical:
+                {}
+              back_stereo_camera:
+                {}
+              back_stereo_camera_imu:
+                {}
+              back_stereo_camera_left:
+                {}
+              back_stereo_camera_left_optical:
+                {}
+              back_stereo_camera_right:
+                {}
+              back_stereo_camera_right_optical:
+                {}
+              chassis_imu:
+                {}
+              front_2d_lidar:
+                {}
+              front_3d_lidar:
+                {}
+              front_fisheye_camera:
+                {}
+              front_fisheye_camera_optical:
+                {}
+              front_stereo_camera:
+                {}
+              front_stereo_camera_imu:
+                {}
+              front_stereo_camera_left:
+                {}
+              front_stereo_camera_left_optical:
+                fp_object:
+                  {}
+                tag36h11:0:
+                  {}
+                tag36h11:1:
+                  {}
+                tag36h11:2:
+                  {}
+                tag36h11:3:
+                  {}
+                tag36h11:4:
+                  {}
+              front_stereo_camera_right:
+                {}
+              front_stereo_camera_right_optical:
+                {}
+              left_fisheye_camera:
+                {}
+              left_fisheye_camera_optical:
+                {}
+              left_stereo_camera:
+                {}
+              left_stereo_camera_imu:
+                {}
+              left_stereo_camera_left:
+                {}
+              left_stereo_camera_left_optical:
+                {}
+              left_stereo_camera_right:
+                {}
+              left_stereo_camera_right_optical:
+                {}
+              nova_carter:
+                caster_swivel_left:
+                  {}
+                caster_swivel_right:
+                  {}
+                caster_wheel_left:
+                  {}
+                caster_wheel_right:
+                  {}
+                nova_carter_caster_frame_base:
+                  {}
+                wheel_left:
+                  {}
+                wheel_right:
+                  {}
+              rear_2d_lidar:
+                {}
+              right_fisheye_camera:
+                {}
+              right_fisheye_camera_optical:
+                {}
+              right_stereo_camera:
+                {}
+              right_stereo_camera_imu:
+                {}
+              right_stereo_camera_left:
+                {}
+              right_stereo_camera_left_optical:
+                {}
+              right_stereo_camera_right:
+                {}
+              right_stereo_camera_right_optical:
+                {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -110,7 +324,7 @@ Visualization Manager:
       Color: 255; 0; 0
       Color Transformer: FlatColor
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 0
@@ -131,7 +345,7 @@ Visualization Manager:
         Value: /scan
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -168,7 +382,7 @@ Visualization Manager:
       Value: true
     - Alpha: 0.20000000298023224
       Class: rviz_default_plugins/Map
-      Color Scheme: map
+      Color Scheme: costmap
       Draw Behind: true
       Enabled: true
       Name: Map
@@ -327,7 +541,7 @@ Visualization Manager:
             Reliability Policy: Reliable
             Value: /global_costmap/published_footprint
           Value: false
-      Enabled: false
+      Enabled: true
       Name: Global Planner
     - Class: rviz_common/Group
       Displays:
@@ -439,7 +653,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-      Enabled: false
+      Enabled: true
       Name: Controller
     - Class: rviz_common/Group
       Displays:
@@ -517,6 +731,7 @@ Visualization Manager:
           Trajectories: true
           Value: true
           VoxelGrid: true
+        Detection3D: true
         Detection3DArray: true
         Global Planner:
           Downsampled Costmap: true
@@ -546,11 +761,11 @@ Visualization Manager:
     - Alpha: 1
       Class: vision_msgs_rviz_plugins/Detection3DArray
       ConfigPath: ""
-      Enabled: false
+      Enabled: true
       Line Width: 0.05000000074505806
       Name: Detection3DArray
       Namespaces:
-        {}
+        bounding_box: true
       Only Edge: false
       Show Score: false
       Topic:
@@ -559,9 +774,9 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /output
-      Value: false
+      Value: true
     - Class: rviz_default_plugins/MarkerArray
-      Enabled: false
+      Enabled: true
       Name: MarkerArray
       Namespaces:
         {}
@@ -571,12 +786,12 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /waypoints
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 5.323212623596191
-        Min Value: -0.016496360301971436
+        Max Value: 1.5414482355117798
+        Min Value: 0.013013601303100586
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -584,7 +799,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: AxisColor
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -605,9 +820,9 @@ Visualization Manager:
         Value: /front_3d_lidar/lidar_points
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -619,7 +834,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /front_stereo_camera/left/image_rect_color
-      Value: true
+      Value: false
     - Class: rviz_default_plugins/Marker
       Enabled: true
       Name: global detector shapes
@@ -664,7 +879,7 @@ Visualization Manager:
           Value: true
         Value: true
       Enabled: true
-      Keep: 1000
+      Keep: 220
       Name: Odometry
       Position Tolerance: 0.10000000149011612
       Shape:
@@ -697,10 +912,10 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /front_stereo_camera/depth/ground_truth
+        Value: /depth_image
       Value: true
     - Class: rviz_default_plugins/MarkerArray
-      Enabled: true
+      Enabled: false
       Name: MarkerArray
       Namespaces:
         {}
@@ -710,7 +925,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /markers_2
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 1
       Class: rviz_default_plugins/Path
@@ -743,7 +958,7 @@ Visualization Manager:
       Enabled: true
       Name: MarkerArray
       Namespaces:
-        {}
+        my_namespace2: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -755,7 +970,7 @@ Visualization Manager:
       Enabled: true
       Name: MarkerArray
       Namespaces:
-        {}
+        my_namespace2: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
@@ -790,6 +1005,40 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /undo_path_planner/global_plan
+      Value: true
+    - Alpha: 1
+      Class: vision_msgs_rviz_plugins/Detection3D
+      ConfigPath: ""
+      Enabled: true
+      Line Width: 0.05000000074505806
+      Name: Detection3D
+      Namespaces:
+        {}
+      Only Edge: false
+      Show Score: false
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: detection3_d
+      Value: true
+    - Alpha: 1
+      Class: vision_msgs_rviz_plugins/Detection3DArray
+      ConfigPath: ""
+      Enabled: true
+      Line Width: 0.05000000074505806
+      Name: Detection3DArray
+      Namespaces:
+        {}
+      Only Edge: false
+      Show Score: false
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: detection3_d_array
       Value: true
   Enabled: true
   Global Options:
@@ -828,7 +1077,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0.8299998044967651
+      Angle: -1.554999589920044
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -838,25 +1087,25 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 68.09744262695312
+      Scale: 26.571645736694336
       Target Frame: base_link
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 0.5195516347885132
-      Y: -0.28375881910324097
+      X: -0.004510847851634026
+      Y: -0.14894510805606842
     Saved: ~
 Window Geometry:
   Camera:
     collapsed: false
   Displays:
     collapsed: false
-  Height: 1136
+  Height: 425
   Hide Left Dock: false
   Hide Right Dock: true
   Image:
     collapsed: false
   Navigation 2:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000002ac0000041afc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afc0000003b0000041a000000c700fffffffa000000010100000002fb0000000a0049006d0061006700650300000f3b000003e90000017800000138fb000000100044006900730070006c00610079007301000000000000016a0000015600fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb00000018004e0061007600690067006100740069006f006e00200032000000003b000001dd0000012300fffffffb0000001e005200650061006c00730065006e0073006500430061006d00650072006100000002c6000000c10000002800fffffffb0000000a0049006d0061006700650300000f4000000291000001790000013afb0000000c00430061006d00650072006100000001ce000002870000002800ffffff000000010000010f000002adfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003b000002ad000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b2000000000000000000000002000004ba00000094fc0100000002fb0000000a0049006d006100670065030000037d000002170000016c00000104fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000004880000041a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000024600000153fc020000000dfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afc0000003b000001530000000000fffffffaffffffff0100000002fb0000000a0049006d0061006700650200000fdf000002b80000025d0000018dfb000000100044006900730070006c00610079007300000000000000016a0000015600fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb00000018004e0061007600690067006100740069006f006e00200032000000003b000001dd0000012300fffffffb0000001e005200650061006c00730065006e0073006500430061006d0065007200610000000115000000790000002800fffffffb0000000a0049006d00610067006503000007f6000002e700000332000001c9fb0000000c00430061006d0065007200610200000b310000005d000003cf00000281fb0000000a0049006d0061006700650000000108000000860000000000000000000000010000010f000002adfc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003b000002ad000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b2000000000000000000000002000004ba00000094fc0100000002fb0000000a0049006d006100670065030000037d000002170000016c00000104fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000003cb0000015300000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   RealsenseCamera:
     collapsed: false
   Selection:
@@ -865,6 +1114,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 1850
-  X: 1990
-  Y: 27
+  Width: 971
+  X: 2866
+  Y: 738

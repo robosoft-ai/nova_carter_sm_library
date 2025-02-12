@@ -46,8 +46,7 @@ struct StLoadingWaypointsFile
       Transition<EvCbSuccess<CbLoadWaypointsFile, OrNavigation>, StNavigateWarehouseWaypointsX, TRANSITION_1>,
  
       //Keyboard events    
-      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateWarehouseWaypointsX, NEXT>,
-      Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint1, PREVIOUS>
+      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateWarehouseWaypointsX, NEXT>
       >
       reactions;
 

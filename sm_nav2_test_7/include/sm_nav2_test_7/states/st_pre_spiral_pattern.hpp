@@ -25,9 +25,9 @@ struct StPreSpiralPattern
 
   // TRANSITION TABLE
   typedef mpl::list<
-    Transition<EvCbSuccess<CbAbortNavigation, OrNavigation>, StSpiralPattern, SUCCESS>,
+    Transition<EvCbSuccess<CbAbortNavigation, OrNavigation>, StSpiralPattern1, SUCCESS>,
 
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StSpiralPattern, NEXT>
+    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StSpiralPattern1, NEXT>
   > reactions;
 
 //   CpTopicPublisher<geometry_msgs::msg::Twist> *pub;
