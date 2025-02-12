@@ -84,6 +84,7 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
     //RCLCPP_INFO(getLogger(), "[StRecoverStep3] Navigating to Facing Dock pose: %f, %f, %f", pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
     //this->configure<OrNavigation, CbNavigateGlobalPosition>(pose->pose.position.x, pose->pose.position.y, tf2::getYaw(pose->pose.orientation));
 
+    RCLCPP_INFO(getLogger(), "[StRecoverStep3] Runtime Configure found object pose.");
     auto pose = objectTracker->updateAndGetGlobalPose("fp_object", "map");
 
     if(pose)
@@ -138,8 +139,8 @@ struct StRecoverStep4 : smacc2::SmaccState<StRecoverStep4, MsRecover>
 
   void runtimeConfigure() 
   {
-    //this->foundationPoseBasedRntimeConfigure();
-    this->aprilTagBasedRuntimeConfigure();
+    this->foundationPoseBasedRntimeConfigure();
+    //this->aprilTagBasedRuntimeConfigure();
   }
 
 

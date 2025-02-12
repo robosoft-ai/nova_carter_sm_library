@@ -56,6 +56,7 @@ public:
 
   virtual void update() override
   {
+    if (objectTracker_!=nullptr && objectTracker_->isEnabled())
     objectTracker_->updateAndGetGlobalPose(objectToTrackId_, globalFrame_);
   }
 };

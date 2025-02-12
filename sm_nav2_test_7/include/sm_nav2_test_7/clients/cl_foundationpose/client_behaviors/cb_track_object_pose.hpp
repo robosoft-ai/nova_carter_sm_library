@@ -49,10 +49,11 @@ public:
   {
     requiresComponent(objectTracker_,true);
     RCLCPP_INFO(getLogger(), "CbTrackObjectPose onEntry");
-    objectTracker_->setEnabled(true);
     RCLCPP_INFO(getLogger(), "CbTrackObjectPose onEntry - enabled");
-    objectTracker_->updateAndGetGlobalPose(objectToTrackId_, globalFrame_); 
+    objectTracker_->setEnabled(true);
     RCLCPP_INFO(getLogger(), "CbTrackObjectPose onEntry - updateAndGetGlobalPose, objectToTrackId: %s, globalFrame: %s", objectToTrackId_.c_str(), globalFrame_.c_str());
+    objectTracker_->updateAndGetGlobalPose(objectToTrackId_, globalFrame_); 
+
   }
 
   virtual void onExit() override 
@@ -62,7 +63,11 @@ public:
 
   virtual void update() override
   {
-    objectTracker_->updateAndGetGlobalPose(objectToTrackId_, globalFrame_);
+    if(objectTracker_!=nullptr && objectTracker_->isEnabled())
+    {
+      RCLCPP_INFO(getLogger(), "CbTrackObjectPose update");
+      objectTracker_->updateAndGetGlobalPose(objectToTrackId_, globalFrame_);
+    }
   }
 };
 } // namespace cl_apriltag_detector

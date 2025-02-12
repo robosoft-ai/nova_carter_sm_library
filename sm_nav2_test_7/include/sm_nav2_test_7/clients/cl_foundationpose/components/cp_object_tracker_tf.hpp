@@ -41,39 +41,55 @@ private:
 
   // Declare a data structure to store the detected objects.
   std::map<std::string, DetectedObject> detectedObjects;
+  std::mutex m_mutex_;
 
 public:
 CpObjectTrackerTf(std::string global_frame_id="map") : global_frame_id_(global_frame_id) {}
 
   void setEnabled(bool enabled) 
   {
+    resetPoseEstimation();
     enabled_ = enabled;
+  }
+
+  bool isEnabled() 
+  {
+    return enabled_;
   }
 
   void resetPoseEstimation() 
   {
+    std::lock_guard<std::mutex> lock(m_mutex_);
+
+    RCLCPP_INFO(getLogger(), "CpObjectTrackerTf::resetPoseEstimation() tracked objects: %ld", detectedObjects.size());
     for(auto &detectedObject : detectedObjects)
     {
       auto& detectedObjectInfo = detectedObject.second; 
+      RCLCPP_INFO(getLogger(), "CpObjectTrackerTf::resetPoseEstimation() tracking object: %s", detectedObject.first.c_str());
+
       detectedObjectInfo.filtered_pose.reset();
       detectedObjectInfo.historicalPoses_.clear();
     }
+    detectedObjects.clear();
     
   }
 
   void update() override
   {
+    RCLCPP_INFO(getLogger(), "CpObjectTrackerTf::update() tracked objects: %ld", detectedObjects.size());
+    std::lock_guard<std::mutex> lock(m_mutex_);
+
     if(!enabled_)
       return;
     
-    //throttle
-    //RCLCPP_INFO(getLogger(), "CpObjectTrackerTf::update() heartbeat");
-    RCLCPP_INFO_THROTTLE(getLogger(), *getNode(), 5000, "CpObjectTrackerTf::update() heartbeat, tracked objects: %ld", detectedObjects.size());
+    RCLCPP_INFO(getLogger(), "CpObjectTrackerTf::update() heartbeat, tracked objects: %ld", detectedObjects.size());
+    // RCLCPP_INFO_THROTTLE(getLogger(), *getNode(), 5000, "CpObjectTrackerTf::update() heartbeat, tracked objects: %ld", detectedObjects.size());
 
     // refresh tracked object poses
     for (auto &detectedObject : detectedObjects)
     {
-      RCLCPP_INFO_THROTTLE(getLogger(), *getNode(), 5000, "CpObjectTrackerTf::update() tracking object: %s", detectedObject.first.c_str());
+      //RCLCPP_INFO_THROTTLE(getLogger(), *getNode(), 5000, 
+      RCLCPP_INFO(getLogger(), "CpObjectTrackerTf::update() tracking object: %s", detectedObject.first.c_str());
       
       auto globalObjectPose = this->updateAndGetGlobalPose(detectedObject.first, global_frame_id_);
       if (globalObjectPose)
@@ -100,7 +116,7 @@ CpObjectTrackerTf(std::string global_frame_id="map") : global_frame_id_(global_f
     // check in database if the object is already tracked
     auto object = detectedObjects.find(child_frame_id);
     DetectedObject* detectedObject = nullptr;
-    if (object == detectedObjects.end()) // already tracked
+    if (object != detectedObjects.end()) // already tracked
     {
       detectedObject = &object->second;
       RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] tracking existing object: %s", child_frame_id.c_str());
@@ -136,11 +152,13 @@ CpObjectTrackerTf(std::string global_frame_id="map") : global_frame_id_(global_f
          const size_t MAX_HISTORY=512;
          if(historicalPoses_.size() > MAX_HISTORY)
          {
+           RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') historical poses, popping oldest pose", child_frame_id.c_str(), frame_id.c_str());
            historicalPoses_.erase(historicalPoses_.begin());
          }
+         RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') historical poses, pushing new pose", child_frame_id.c_str(), frame_id.c_str());
          historicalPoses_.push_back(pose);
 
-         RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') historical poses: %ld", child_frame_id.c_str(), frame_id.c_str(), historicalPoses_.size() );
+         RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') -presort- historical poses: %ld", child_frame_id.c_str(), frame_id.c_str(), historicalPoses_.size() );
 
          // compute median position in x
          std::sort(historicalPoses_.begin(), historicalPoses_.end(), [](const geometry_msgs::msg::PoseStamped& a, const geometry_msgs::msg::PoseStamped& b) {
@@ -148,7 +166,7 @@ CpObjectTrackerTf(std::string global_frame_id="map") : global_frame_id_(global_f
          });
 
 
-         RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s') historical poses: %ld", child_frame_id.c_str(), frame_id.c_str(), historicalPoses_.size() );
+         RCLCPP_INFO(getLogger(), "[CpObjectTrackerTf] updateAndGetGlobalPose('%s', '%s')- presort- historical poses: %ld", child_frame_id.c_str(), frame_id.c_str(), historicalPoses_.size() );
 
          geometry_msgs::msg::PoseStamped medianPose;
          medianPose.pose.position.x = historicalPoses_[historicalPoses_.size()/2].pose.position.x;

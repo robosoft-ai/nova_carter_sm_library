@@ -42,8 +42,10 @@ struct StRecoverStep3 : smacc2::SmaccState<StRecoverStep3, MsRecover>
     // configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
     configure_orthogonal<OrNavigation, CbSleepFor>(5s);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+    configure_orthogonal<OrNavigation, CbResumeSlam>();
+    configure_orthogonal<OrNavigation, CbTrackPathSLAM>();
     // configure_orthogonal<OrNavigation, CbPauseSlam>();
-    // configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
+    configure_orthogonal<OrPerception, CbTrackObjectPose>("fp_object");
   }
 
   void runtimeConfigure() {}
