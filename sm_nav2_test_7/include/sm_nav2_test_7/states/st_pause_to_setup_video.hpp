@@ -34,7 +34,7 @@ struct StPauseToSetupVideo
   // STATE FUNCTIONS
   static void staticConfigure() {
     // -#configure_orthogonal<OrNavigation, CbSleepFor>(20s);
-    configure_orthogonal<OrNavigation, CbSleepFor>(50s);
+    configure_orthogonal<OrNavigation, CbSleepFor>(10s);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
   }
 
