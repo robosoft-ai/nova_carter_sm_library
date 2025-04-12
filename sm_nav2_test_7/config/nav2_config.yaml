@@ -257,7 +257,7 @@ controller_server:
       plugin: "pure_spinning_local_planner::PureSpinningLocalPlanner"
       transform_tolerance: 0.5
       k_betta: 25.0
-      max_angular_z_speed: 0.3
+      max_angular_z_speed: 0.1 #0.3
       use_shortest_angular_distance: true
 
 controller_server_rclcpp_node:

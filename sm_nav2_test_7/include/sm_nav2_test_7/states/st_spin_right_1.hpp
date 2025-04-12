@@ -40,9 +40,11 @@ struct StSpinRight1
   struct PREVIOUS : ABORT{};
 
   // TRANSITION TABLE
-  typedef mpl::list<Transition<EvCbSuccess<CbPureSpinning, OrNavigation>, StSpinLeft1, SUCCESS>,
-                    Transition<EvCbFailure<CbPureSpinning, OrNavigation>, StSpinRight1, ABORT>,
-                    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StSpinLeft1, NEXT>
+  typedef mpl::list<
+  //Transition<EvCbSuccess<CbPureSpinning, OrNavigation>, StSpinRight1, SUCCESS>,
+  Transition<EvCbSuccess<CbPureSpinning, OrNavigation>, StSpinLeft1, SUCCESS>,
+  Transition<EvCbFailure<CbPureSpinning, OrNavigation>, StSpinRight1, ABORT>,
+  Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StSpinLeft1, NEXT>
                     >
       reactions;
 
