@@ -322,26 +322,6 @@ cd /workspaces/isaac_ros-dev/
 ```
 To test this section use this [IsaacSim Tutorial](https://nvidia-isaac-ros.github.io/concepts/pose_estimation/foundationpose/tutorial_isaac_sim.html)
 
-#### Install Postgres (Optional - experimental)
-
-First install quickstart pkgs [Source](https://wiki.postgresql.org/wiki/Apt)
-```
-sudo apt install -y postgresql-common
-sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
-```
-Then install the version you want (in this case 17)
-```
-sudo apt install postgresql-17
-```
-Then install PostGIS and pgrouting [Source](https://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS3UbuntuPGSQLApt)
-```
-sudo apt install postgresql-17-postgis-3
-sudo apt install postgresql-17-pgrouting
-```
-Then pgvector [Source](https://github.com/pgvector/pgvector?tab=readme-ov-file#apt)
-```
-sudo apt install postgresql-17-pgvector
-```
 
 ## Assemble the Workspace
 
@@ -412,20 +392,18 @@ Source the workspace...
  ```
 source install/setup.bash
  ```
-```
-ros2 run sm_nav2_test_7 lidar_completion.py --ros-args -r /scan_input:=/scan2 -r /scan_output:=/scan
-```
+Launch the application
  ```
 ros2 launch sm_nav2_test_7 sm_nav2_test_7_launch.py 
  ```
+ ## Launch Description
+ The initial launch file, sm_nav2_test_7_launch.py launches a SMACC Node and a Keyboard Server. 
+ 
+ From there, the SMACC state machine then launches (CbRosLaunch) the nav2_stack_launch.py and slam_stack_launch.py launch files, which then
+ cascade and launch the nav2_launch.py nav2_bringup_launch.py scripts.
 
-## Test Commands
+ ## Test Commands
  ```
 ros2 topic echo /detections_output
 
  ```
- ## Launch Description (WIP)
- The initial launch file, sm_nav2_test_7_launch.py launches a SMACC Node and a Keyboard Server. 
- 
- Then a client behavior triggers the nav2_stack_launch.py and slam_stack_launch.py
- These cascade nav2_launch.py nav2_bringup_launch.py
