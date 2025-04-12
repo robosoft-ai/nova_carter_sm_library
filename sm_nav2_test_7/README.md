@@ -405,5 +405,4 @@ ros2 launch sm_nav2_test_7 sm_nav2_test_7_launch.py
  ## Test Commands
  ```
 ros2 topic echo /detections_output
-
  ```
