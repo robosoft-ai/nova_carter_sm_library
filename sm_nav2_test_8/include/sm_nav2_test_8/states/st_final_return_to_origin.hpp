@@ -38,18 +38,13 @@ struct StFinalReturnToOrigin
 
   // TRANSITION TABLE
   typedef mpl::list<
-      Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StSpinLeft2, SUCCESS>
-      // Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StFinalMapSaving, SUCCESS>
-      // Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, SS2::SsRadialPattern2, SUCCESS>
+      Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StFinalState, SUCCESS>
       >
       reactions;
-
 
   // STATE FUNCTIONS
   static void staticConfigure() {
     configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(); // parameterless navigates to 0,0,0
-    // configure_orthogonal<OrNavigation, CbSleepFor>(20s);
-    // configure_orthogonal<OrNavigation, CbRosStop2>();
   }
 };
 } // namespace sm_nav2_test_8

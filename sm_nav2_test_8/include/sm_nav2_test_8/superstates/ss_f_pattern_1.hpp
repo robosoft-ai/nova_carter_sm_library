@@ -48,7 +48,7 @@ public:
   typedef mpl::list<
 
       Transition<EvLoopEnd<StiFPatternStartLoop<SsFPattern1>>,
-                 StInitialReturnToOrigin, ENDLOOP> //,
+                 StFinalReturnToOrigin, ENDLOOP> //,
 
       >
       reactions;

@@ -65,7 +65,6 @@
 #include <sr_event_countdown/sr_event_countdown.hpp>
 
 // ORTHOGONALS
-//#include <sm_nav2_test_8/orthogonals/or_assigner.hpp>
 #include <sm_nav2_test_8/orthogonals/or_keyboard.hpp>
 #include <sm_nav2_test_8/orthogonals/or_navigation.hpp>
 #include <sm_nav2_test_8/orthogonals/or_perception.hpp>
@@ -73,10 +72,9 @@
 #include <sm_nav2_test_8/orthogonals/or_slam.hpp>
 #include <sm_nav2_test_8/orthogonals/or_localization.hpp>
 #include <sm_nav2_test_8/orthogonals/or_timer.hpp>
-#include <sm_nav2_test_8/orthogonals/or_mission_tracker.hpp>
 #include <sm_nav2_test_8/orthogonals/or_obstacle_perception.hpp>
 
-#include <sm_nav2_test_8/clients/cl_mission_tracker/client_behaviors/cb_battery_decission.hpp>
+// CLIENT BEHAVIORS
 #include <sm_nav2_test_8/clients/cl_nav2z/client_behaviors/cb_position_control_free_space.hpp>
 #include <sm_nav2_test_8/clients/cl_nav2z/client_behaviors/cb_track_path_slam.hpp>
 #include <sm_nav2_test_8/clients/cl_nav2z/client_behaviors/cb_track_path_odometry.hpp>
@@ -88,44 +86,33 @@ using namespace smacc2::state_reactors;
 namespace sm_nav2_test_8 {
 // STATE FORWARD DECLARATIONS
 class StLaunchNavStack;
-class StLaunchVisionPipeline;
-class StPauseToSetupVideo;
-class StPauseToAcquireFp;
 class StInitialMove;
 class StInitialMoveStop;
-class StPreSpiralPattern;
 class StSpiralPattern1;
 class StSwitchYard;
-class StRecoveryNav2;
 class StSpinRight1;
 class StSpinLeft1;
-class StSpinLeft2;
 class StWaypointSpinLeft;
 class StWaypointSpinRight;
 class StNavigateWarehouseWaypointsX;
-class StBatteryCheck;
-class StPauseSlam;
 class StFinalState;
-class StInitialReturnToOrigin;
 class StFinalReturnToOrigin;
 class StNavigateToWaypoint1;
 class StNavigateToWaypoint2;
 class StNavigateToWaypoint3;
 class StNavigateToWaypoint4;
-class StNavigateToWaypoint5;
 class StLoadingWaypointsFile;
-class StBackup1;
-class StRecoverStep1;
-class StRecoverStep2;
-class StRecoverStep3;
-class StRecoverStep4;
-class StRecoverStep5;
-class StRecoverStep6;
-class StRecoverStep7_a;
-class StRecoverStep7_b;
-class StRecoverStep8;
-class StRecoverStep9;
-class StRecoverStep10;
+//class StRecoverStep1;
+//class StRecoverStep2;
+//class StRecoverStep3;
+//class StRecoverStep4;
+//class StRecoverStep5;
+//class StRecoverStep6;
+//class StRecoverStep7_a;
+//class StRecoverStep7_b;
+//class StRecoverStep8;
+//class StRecoverStep9;
+//class StRecoverStep10;
 
 // SUPERSTATE FORWARD DECLARATIONS
 // MODE STATES FORWARD DECLARATIONS
@@ -137,17 +124,17 @@ namespace SS1 {
 class SsRadialPattern1;
 }
 
-namespace SS2 {
-class SsSPattern1;
-}
+//namespace SS2 {
+//class SsSPattern1;
+//}
 
 namespace SS3 {
 class SsFPattern1;
 }
 
-namespace SS4 {
-class SsDockingSequence1;
-}
+//namespace SS4 {
+//class SsDockingSequence1;
+//}
 
 // custom sm_nav2_test_8 event
 struct EvGlobalError : sc::event<EvGlobalError> {};
@@ -157,7 +144,7 @@ struct EvGlobalError : sc::event<EvGlobalError> {};
 using namespace sm_nav2_test_8;
 using namespace cl_ros_timer;
 using namespace smacc2;
-using namespace cl_mission_tracker;
+//using namespace cl_mission_tracker;
 
 namespace sm_nav2_test_8 {
 /// \brief Advanced example of state machine with smacc that shows multiple
@@ -174,14 +161,12 @@ struct SmNav2Test8
 
   void onInitialize() override {
     this->createOrthogonal<OrNavigation>();
-    //this->createOrthogonal<OrAssigner>();
     this->createOrthogonal<OrPerception>();
     this->createOrthogonal<OrKeyboard>();
     this->createOrthogonal<OrSlam>();
     this->createOrthogonal<OrLocalization>();
     this->createOrthogonal<OrLifecycleNode>();
     this->createOrthogonal<OrTimer>();
-    this->createOrthogonal<OrMissionTracker>();
     this->createOrthogonal<OrObstaclePerception>();
   }
 };
@@ -197,47 +182,35 @@ struct SmNav2Test8
 // SUPERSTATES
 #include <sm_nav2_test_8/superstates/ss_f_pattern_1.hpp>
 #include <sm_nav2_test_8/superstates/ss_radial_pattern_1.hpp>
-#include <sm_nav2_test_8/superstates/ss_s_pattern_1.hpp>
 
 // STATES
 #include <sm_nav2_test_8/states/st_launch_nav_stack.hpp>
-#include <sm_nav2_test_8/states/st_launch_vision_pipeline.hpp>
-#include <sm_nav2_test_8/states/st_recovery_nav2.hpp>
-#include <sm_nav2_test_8/states/st_pause_to_setup_video.hpp>
-#include <sm_nav2_test_8/states/st_pause_to_acquire_fp.hpp>
 #include <sm_nav2_test_8/states/st_initial_move.hpp>
 #include <sm_nav2_test_8/states/st_initial_move_stop.hpp>
 #include <sm_nav2_test_8/states/st_spiral_pattern_1.hpp>
-#include <sm_nav2_test_8/states/st_pre_spiral_pattern.hpp>
 #include <sm_nav2_test_8/states/st_switch_yard.hpp>
 #include <sm_nav2_test_8/states/st_final_state.hpp>
 #include <sm_nav2_test_8/states/st_spin_left_1.hpp>
-#include <sm_nav2_test_8/states/st_spin_left_2.hpp>
 #include <sm_nav2_test_8/states/st_spin_right_1.hpp> 
 #include <sm_nav2_test_8/states/st_waypoint_spin_left.hpp>
 #include <sm_nav2_test_8/states/st_waypoint_spin_right.hpp>
 #include <sm_nav2_test_8/states/st_navigate_warehouse_waypoints.x.hpp>
-#include <sm_nav2_test_8/states/st_battery_check.hpp>
-#include <sm_nav2_test_8/states/st_pause_slam.hpp>
 #include <sm_nav2_test_8/states/st_navigate_to_waypoint_1.hpp>
 #include <sm_nav2_test_8/states/st_navigate_to_waypoint_2.hpp>
 #include <sm_nav2_test_8/states/st_navigate_to_waypoint_3.hpp>
 #include <sm_nav2_test_8/states/st_navigate_to_waypoint_4.hpp>
-#include <sm_nav2_test_8/states/st_navigate_to_waypoint_5.hpp>
 #include <sm_nav2_test_8/states/st_loading_waypoints_file.hpp>
-#include <sm_nav2_test_8/states/st_initial_return_to_origin.hpp>
 #include <sm_nav2_test_8/states/st_final_return_to_origin.hpp>
-#include <sm_nav2_test_8/states/st_backup_1.hpp>
 
 
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_1.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_2.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_3.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_4.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_5.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_6.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_7_a.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_7_b.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_8.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_9.hpp>
-#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_10.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_1.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_2.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_3.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_4.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_5.hpp>
+///#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_6.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_7_a.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_7_b.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_8.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_9.hpp>
+//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_10.hpp>

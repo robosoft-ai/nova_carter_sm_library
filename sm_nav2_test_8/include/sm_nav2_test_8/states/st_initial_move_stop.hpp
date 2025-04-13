@@ -29,8 +29,6 @@ struct StInitialMoveStop
     Transition<EvKeyPressP<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMove, PREVIOUS>
   > reactions;
 
-//   CpTopicPublisher<geometry_msgs::msg::Twist> *pub;
-
   // STATE FUNCTIONS
   static void staticConfigure() {
     configure_orthogonal<OrNavigation, CbSleepFor>(2s);

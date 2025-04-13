@@ -21,40 +21,30 @@
 #pragma once
 
 #include <smacc2/smacc.hpp>
-// #include <nav2z_client/client_behavior>
 
 namespace sm_nav2_test_8 {
 using namespace smacc2::default_events;
-using smacc2::client_behaviors::CbSleepFor;
-using cl_nav2z::CbNavigateGlobalPosition;
 using namespace std::chrono_literals;
-using namespace cl_nav2z;
-using namespace cl_keyboard;
+using cl_nav2z::CbPauseSlam;
+using cl_nav2z::CbNavigateGlobalPosition;
+using smacc2::client_behaviors::CbSleepFor;
+using smacc2::client_behaviors::CbRosStop2;
 
 // STATE DECLARATION
-struct StNavigateToWaypoint5 : smacc2::SmaccState<StNavigateToWaypoint5, MsNav2Test1RunMode>
+struct StInitialReturnToOrigin
+    : smacc2::SmaccState<StInitialReturnToOrigin, MsNav2Test1RunMode> 
 {
   using SmaccState::SmaccState;
 
-   // DECLARE CUSTOM OBJECT TAGS
-  struct NEXT : SUCCESS{};
-  struct PREVIOUS : ABORT{};
-
   // TRANSITION TABLE
   typedef mpl::list<
-
-    Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, SS3::SsFPattern1, SUCCESS>,
-
-    //Keyboard events
-    Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, SS3::SsFPattern1, NEXT>
-    >reactions;
+      Transition<EvCbSuccess<CbNavigateGlobalPosition, OrNavigation>, StSpiralPattern1, SUCCESS>
+      >
+      reactions;
 
   // STATE FUNCTIONS
-  static void staticConfigure()
-  {
-    configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(-15.5, -15.0, 0.0);
-    configure_orthogonal<OrNavigation, CbResumeSlam>();
-    configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
+  static void staticConfigure() {
+    configure_orthogonal<OrNavigation, CbNavigateGlobalPosition>(); // parameterless navigates to 0,0,0
   }
 };
-}  // namespace sm_nav2_test_8
+} // namespace sm_nav2_test_8
