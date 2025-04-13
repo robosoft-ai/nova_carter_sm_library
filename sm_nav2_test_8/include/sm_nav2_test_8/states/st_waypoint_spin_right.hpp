@@ -39,8 +39,6 @@ struct StWaypointSpinRight : smacc2::SmaccState<StWaypointSpinRight, MsNav2Test1
   typedef mpl::list<
 
     Transition<EvCbSuccess<CbPureSpinning, OrNavigation>, StNavigateWarehouseWaypointsX, SUCCESS>,
-    // Commented out to prettift the demo - Transition<EvCbFailure<CbPureSpinning, OrNavigation>, StNavigateWarehouseWaypointsX, ABORT>,
-
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateWarehouseWaypointsX, NEXT>
 
     >reactions;
@@ -49,7 +47,6 @@ struct StWaypointSpinRight : smacc2::SmaccState<StWaypointSpinRight, MsNav2Test1
   static void staticConfigure()
   {
     configure_orthogonal<OrNavigation, CbPureSpinning>(2*M_PI, 1.0 /*rad_s*/);
-    //configure_orthogonal<OrNavigation, CbResumeSlam>();
   }
 };
 }  // namespace sm_nav2_test_8

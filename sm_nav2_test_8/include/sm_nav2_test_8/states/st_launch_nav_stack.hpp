@@ -53,12 +53,10 @@ struct StLaunchNavStack
   // TRANSITION TABLE
   typedef mpl::list<
 
-      Transition<EvAllGo<SrAllEventsGo, SrNavStackLaunched>, StPauseToSetupVideo, NAV2_LAUNCHED>,
-      // Commented out to prettify demo - Transition<EvCbSuccess<CbSleepFor, OrNavigation>, StRecoveryNav2, ABORT>,
+      Transition<EvAllGo<SrAllEventsGo, SrNavStackLaunched>, StInitialMove, NAV2_LAUNCHED>,
       Transition<EvGlobalError, MsNav2Test1RecoveryMode>,    
-
       //Keyboard events
-      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StPauseToSetupVideo, NEXT>  
+      Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StInitialMove, NEXT>  
     
       >
       reactions;
@@ -67,12 +65,8 @@ struct StLaunchNavStack
   static void staticConfigure() 
   {
     configure_orthogonal<OrNavigation, CbActiveStop>();
-    // configure_orthogonal<OrSlam, CbRosLaunch2>("sm_nav2_test_8", "slam_stack_launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
-
     configure_orthogonal<OrNavigation, CbRosLaunch2>("sm_nav2_test_8", "nav2_stack_launch2.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
-    // configure_orthogonal<OrNavigation, CbRosLaunch2>("sm_nav2_test_8", "nav2_stack_launch.py", smacc2::client_behaviors::RosLaunchMode::LAUNCH_DETTACHED);
     configure_orthogonal<OrNavigation, CbWaitActionServer>(10s);
-    //configure_orthogonal<OrAssigner, CbWaitNav2Nodes>();
     configure_orthogonal<OrNavigation, CbSleepFor>(12s);
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
 
@@ -82,8 +76,6 @@ struct StLaunchNavStack
         smacc2::state_reactors::EvAllGo<SrAllEventsGo, SrNavStackLaunched>,
         mpl::list<
             EvCbSuccess<CbWaitActionServer, OrNavigation>//,
-            // EvCbSuccess<CbWaitNav2Nodes, OrAssigner>
-            // EvCbSuccess<CbSleepFor, OrNavigation>>
             >>();
   }
 };

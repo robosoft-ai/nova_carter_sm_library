@@ -31,7 +31,6 @@ struct StSpiralPattern1
     Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StFinalReturnToOrigin, NEXT>
   > reactions;
 
-//   CpTopicPublisher<geometry_msgs::msg::Twist> *pub;
 
   // STATE FUNCTIONS
   static void staticConfigure() {
