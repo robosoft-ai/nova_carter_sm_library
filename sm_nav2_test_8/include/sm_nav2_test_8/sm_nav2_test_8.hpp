@@ -118,7 +118,7 @@ class StLoadingWaypointsFile;
 // MODE STATES FORWARD DECLARATIONS
 class MsNav2Test1RunMode;
 class MsNav2Test1RecoveryMode;
-class MsRecover;
+//class MsRecover;
 
 namespace SS1 {
 class SsRadialPattern1;
@@ -177,7 +177,7 @@ struct SmNav2Test8
 #include <sm_nav2_test_8/modestates/ms_nav2_test_4_run_mode.hpp>
 
 #include <sm_nav2_test_8/modestates/ms_nav2_test_4_recovery_mode.hpp>
-#include <sm_nav2_test_8/modestates/ms_recover.hpp>
+//#include <sm_nav2_test_8/modestates/ms_recover.hpp>
 
 // SUPERSTATES
 #include <sm_nav2_test_8/superstates/ss_f_pattern_1.hpp>
