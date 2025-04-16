@@ -1,6 +1,6 @@
  # State Machine Diagram
 
- ![sm_nav2_test_8](docs/SmNav2Test8_2024-12-15_22911.svg)
+ ![sm_nav2_test_8](docs/SmNav2Test8_2025-4-16_05430.svg)
 
  ## Description 
  A state machine application for the NOVA Carter using Nav2 and the SMACC nav2z Client Behavior Library.
@@ -51,6 +51,10 @@ git clone https://github.com/NVIDIA-ISAAC-ROS/nova_carter.git
 ## Start the IsaacROSDev Container (from the workspace...)
  ```
 ./src/isaac_ros_common/scripts/run_dev.sh  -d  ~/workspace/humble_ws/
+ ```
+Or if using the CMU boot disk
+  ```
+./src/isaac_ros_common/scripts/run_dev.sh  -d  ~/workspaces/isaac_ros-dev/
  ```
 Then run ls in the terminal to confirm that isaac_ros-dev is set to your host host workspace.    
   
