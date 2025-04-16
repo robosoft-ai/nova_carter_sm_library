@@ -349,6 +349,10 @@ rosdep install --ignore-src --from-paths src -y -r
  ```
 colcon build --symlink-install --cmake-args -DBUILD_TESTING=OFF
  ```
+Or, to just compile a single package...
+  ```
+colcon build --symlink-install --packages-select sm_nav2_test_8 --cmake-args -DBUILD_TESTING=OFF
+ ```
 
 ## Launch Application
 Source the workspace...  
