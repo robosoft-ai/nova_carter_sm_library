@@ -103,17 +103,6 @@ class StNavigateToWaypoint3;
 class StNavigateToWaypoint4;
 class StLoadingWaypointsFile;
 class StPauseToSetupVideo;
-//class StRecoverStep1;
-//class StRecoverStep2;
-//class StRecoverStep3;
-//class StRecoverStep4;
-//class StRecoverStep5;
-//class StRecoverStep6;
-//class StRecoverStep7_a;
-//class StRecoverStep7_b;
-//class StRecoverStep8;
-//class StRecoverStep9;
-//class StRecoverStep10;
 
 // SUPERSTATE FORWARD DECLARATIONS
 // MODE STATES FORWARD DECLARATIONS
@@ -203,16 +192,3 @@ struct SmNav2Test8
 #include <sm_nav2_test_8/states/st_loading_waypoints_file.hpp>
 #include <sm_nav2_test_8/states/st_final_return_to_origin.hpp>
 #include <sm_nav2_test_8/states/st_pause_to_setup_video.hpp>
-
-
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_1.hpp>
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_2.hpp>
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_3.hpp>
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_4.hpp>
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_5.hpp>
-///#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_6.hpp>
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_7_a.hpp>
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_7_b.hpp>
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_8.hpp>
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_9.hpp>
-//#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_10.hpp>
