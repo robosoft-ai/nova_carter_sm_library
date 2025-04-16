@@ -102,6 +102,7 @@ class StNavigateToWaypoint2;
 class StNavigateToWaypoint3;
 class StNavigateToWaypoint4;
 class StLoadingWaypointsFile;
+class StPauseToSetupVideo;
 //class StRecoverStep1;
 //class StRecoverStep2;
 //class StRecoverStep3;
@@ -201,6 +202,7 @@ struct SmNav2Test8
 #include <sm_nav2_test_8/states/st_navigate_to_waypoint_4.hpp>
 #include <sm_nav2_test_8/states/st_loading_waypoints_file.hpp>
 #include <sm_nav2_test_8/states/st_final_return_to_origin.hpp>
+#include <sm_nav2_test_8/states/st_pause_to_setup_video.hpp>
 
 
 //#include <sm_nav2_test_8/states/docking_sequence_states/st_recover_step_1.hpp>

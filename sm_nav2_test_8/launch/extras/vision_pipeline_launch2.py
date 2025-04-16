@@ -48,11 +48,11 @@ FOUDNATIONPOSE_MODELS_PATH = os.path.join(ISAAC_ROS_MODELS_PATH, 'foundationpose
 REFINE_ENGINE_PATH = os.path.join(FOUDNATIONPOSE_MODELS_PATH, 'refine_trt_engine.plan')
 SCORE_ENGINE_PATH = os.path.join(FOUDNATIONPOSE_MODELS_PATH, 'score_trt_engine.plan')
 ESS_ENGINE_PATH = os.path.join(STEREO_DISPARITY_MODELS_PATH, 'light_ess.engine')
-RTDETR_ENGINE_PATH = os.path.join(SYNTHETICA_DETR_MODELS_PATH, 'sdetr_grasp.plan')
+RTDETR_ENGINE_PATH = os.path.join(SYNTHETICA_DETR_MODELS_PATH, 'sdetr_amr.plan')
 MESH_OBJ_PATH = os.path.join(ISAAC_ROS_FP_MESHES_PATH,
-                             'Mac_and_cheese_0_1', 'Mac_and_cheese_0_1.obj')
+                             'dock', 'dock.obj')
 MESH_TEX_PATH = os.path.join(ISAAC_ROS_FP_MESHES_PATH,
-                             'Mac_and_cheese_0_1', 'materials', 'textures', 'baked_mesh_tex0.png')
+                             'dock', 'materials', 'textures', 'baked_mesh_tex0.png')
 
 
 def generate_launch_description():
