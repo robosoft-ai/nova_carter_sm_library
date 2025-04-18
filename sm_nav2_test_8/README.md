@@ -337,6 +337,19 @@ isaac_ros_nova
 isaac_ros_compression
 spatio_temporal_voxel_layer
  ```
+Then, in order to make sure we have sufficient memory (only necessary if we're building with the usb boot disk)...
+  ```
+ REMOVE THESE PKGS FROM THE WORKSPACE/SRC/NOVA_CARTER_SM_LIBRARY FOLDER BEFORE COMPILING
+sm_nav2_test_1
+sm_nav2_test_2
+sm_nav2_test_3
+sm_nav2_test_4
+sm_nav2_test_5
+sm_nav2_test_6
+sm_nav2_test_1
+ ```
+ In the end, this folder should only have one folder/package (sm_nav2_test_8) inside it.
+ 
 ## Build Workspace
 Ok, now you're ready to compile everything...
 ```
@@ -363,11 +376,22 @@ Launch the application
  ```
 ros2 launch sm_nav2_test_8 sm_nav2_test_8_launch.py 
  ```
- ## Launch Description
- The initial launch file, sm_nav2_test_8_launch.py launches a SMACC Node and a Keyboard Server. 
+## Launch Description
+The initial launch file, sm_nav2_test_8_launch.py launches a SMACC Node and a Keyboard Server. 
  
- From there, the SMACC state machine then launches (CbRosLaunch) the nav2_stack_launch.py and slam_stack_launch.py launch files, which then
- cascade and launch the nav2_launch.py nav2_bringup_launch.py scripts.
+From there, the SMACC state machine then launches (CbRosLaunch) the nav2_stack_launch.py and slam_stack_launch.py launch files, which then
+cascade and launch the nav2_launch.py nav2_bringup_launch.py scripts.
+
+## Start the Viewer
+Open another terminal, and source the install bash script...  
+ ```
+source /opt/ros/humble/setup.bash
+ ```
+Launch the application
+ ```
+ros2 run smacc2_rta smacc2_rta
+ ```
+Once the application is open, click on the state machine tab and a drop down of running state machines will appear. Select sm_nav2_test2_8.
 
  ## Test Commands
  ```
