@@ -30,17 +30,6 @@ Then, in the same Nova_Carter_ROS prim, find the transform_tree_odometry/ros2_pu
 
 In the stage menu, find the Forklift Xform in carter_warehouse_apriltags_worker/warehouse_with_forklifts/Forklift and deactivate it.
 Then find carter_warehouse_apriltags_worker/mac_and_cheese and delete/deactivate it.
-Then find carter_warehouse_apriltags_worker/Warehouse_Extras/Extras/Misc/SM_BucketPlastic_B_01 
-Scroll down to Transform/Translate and set the position to... x= -7.5, y= 64.5, x= 0.0
-Then find carter_warehouse_apriltags_worker/Warehouse_Extras/Extras/Misc/SM_BucketPlastic_B_02
-Scroll down to Transform/Translate and set the position to... x= -7.5, y= 36.5, x= 0.0
-
-
-Go to PROPS/NVIDIA and drag charging_station_galileo into the scene.
-In the Stage panel, select the charging_station_galileo Xform 
-Scroll down to Transform/Translate and set the position to... x= -10.15, y= 16.5, x= 0.007
-Scroll down to Transform/Rotate and set z= 180.0
-Scroll down to Physics/Rigid Body and check all the boxes for Disable Gravity, Locked Pos Axis & Locked Rot Axis or it will fall through the floor.
 
 ## Let's Get Started
 We begin by cloning isaac_ros_common and nova_carter repos to the src folder of our local workspace. My local workspace is ~/workspace/humble_ws
@@ -346,9 +335,13 @@ sm_nav2_test_3
 sm_nav2_test_4
 sm_nav2_test_5
 sm_nav2_test_6
-sm_nav2_test_1
+sm_nav2_test_7
  ```
  In the end, this folder should only have one folder/package (sm_nav2_test_8) inside it.
+   ```
+ REMOVE THESE PKGS FROM THE WORKSPACE/SRC/SMACC2 FOLDER BEFORE COMPILING
+sm_reference_library
+ ```
  
 ## Build Workspace
 Ok, now you're ready to compile everything...
