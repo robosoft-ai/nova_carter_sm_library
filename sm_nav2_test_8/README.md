@@ -338,6 +338,7 @@ sm_nav2_test_6
 sm_nav2_test_7
  ```
  In the end, this folder should only have one folder/package (sm_nav2_test_8) inside it.
+ Then, remove the sm_reference_library package from the SMACC2 folder.
    ```
  REMOVE THESE PKGS FROM THE WORKSPACE/SRC/SMACC2 FOLDER BEFORE COMPILING
 sm_reference_library
