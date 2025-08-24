@@ -76,7 +76,7 @@
 #include <sm_nav2_test_9/orthogonals/or_mission_tracker.hpp>
 #include <sm_nav2_test_9/orthogonals/or_obstacle_perception.hpp>
 
-#include <sm_nav2_test_9/clients/cl_mission_tracker/client_behaviors/cb_battery_decission.hpp>
+#include <sm_nav2_test_9/clients/cl_mission_tracker/client_behaviors/cb_battery_decision.hpp>
 #include <sm_nav2_test_9/clients/cl_nav2z/client_behaviors/cb_position_control_free_space.hpp>
 #include <sm_nav2_test_9/clients/cl_nav2z/client_behaviors/cb_track_path_slam.hpp>
 #include <sm_nav2_test_9/clients/cl_nav2z/client_behaviors/cb_track_path_odometry.hpp>

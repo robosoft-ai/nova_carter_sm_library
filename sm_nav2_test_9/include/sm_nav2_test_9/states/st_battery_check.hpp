@@ -47,13 +47,13 @@ struct StBatteryCheck
 
   // TRANSITION TABLE
   typedef mpl::list<
-      Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, MsRecover, TRANSITION_1>,
-      Transition<EvRadialMotion<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint2, TRANSITION_2>,
-      Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, MsRecover, TRANSITION_3>,
-      Transition<EvSPattern<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint3, TRANSITION_4>,
-      Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, MsRecover, TRANSITION_5>,
-      Transition<EvFPattern<CbBatteryDecission, OrMissionTracker>, StNavigateToWaypoint4, TRANSITION_6>,
-      Transition<EvBatteryLoad<CbBatteryDecission, OrMissionTracker>, StInitialReturnToOrigin, TRANSITION_7>,
+      Transition<EvBatteryLoad<CbBatteryDecision, OrMissionTracker>, MsRecover, TRANSITION_1>,
+      Transition<EvRadialMotion<CbBatteryDecision, OrMissionTracker>, StNavigateToWaypoint2, TRANSITION_2>,
+      Transition<EvBatteryLoad<CbBatteryDecision, OrMissionTracker>, MsRecover, TRANSITION_3>,
+      Transition<EvSPattern<CbBatteryDecision, OrMissionTracker>, StNavigateToWaypoint3, TRANSITION_4>,
+      Transition<EvBatteryLoad<CbBatteryDecision, OrMissionTracker>, MsRecover, TRANSITION_5>,
+      Transition<EvFPattern<CbBatteryDecision, OrMissionTracker>, StNavigateToWaypoint4, TRANSITION_6>,
+      Transition<EvBatteryLoad<CbBatteryDecision, OrMissionTracker>, StInitialReturnToOrigin, TRANSITION_7>,
       
       //Keyboard events    
       Transition<EvKeyPressN<CbDefaultKeyboardBehavior, OrKeyboard>, StNavigateToWaypoint2, NEXT>
@@ -63,7 +63,7 @@ struct StBatteryCheck
   // STATE FUNCTIONS
   static void staticConfigure() {
     configure_orthogonal<OrKeyboard, CbDefaultKeyboardBehavior>();
-    configure_orthogonal<OrMissionTracker, CbBatteryDecission>();
+    configure_orthogonal<OrMissionTracker, CbBatteryDecision>();
   }
 
   void onEntry() {}
