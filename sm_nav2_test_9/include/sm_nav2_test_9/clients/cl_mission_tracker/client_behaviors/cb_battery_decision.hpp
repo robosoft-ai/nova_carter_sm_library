@@ -44,15 +44,15 @@ struct EvFPattern
     : sc::event<EvFPattern<AsyncCB, Orthogonal>> {};
 
 */
-class CbBatteryDecission : public smacc2::SmaccAsyncClientBehavior {
+class CbBatteryDecision : public smacc2::SmaccAsyncClientBehavior {
 private:
     cl_mission_tracker::ClMissionTracker *missionTracker_ = nullptr;
     std::function<void()> postEventFn_;
 
 public:
-  CbBatteryDecission() {}
+  CbBatteryDecision() {}
 
-  virtual ~CbBatteryDecission() {}
+  virtual ~CbBatteryDecision() {}
 
 
   virtual void onEntry() override
@@ -68,10 +68,10 @@ public:
         postEventFn_ = [this]() 
         { 
           this->requiresClient(missionTracker_);
-          int decission_count = missionTracker_->getDecissionCounter();
-          missionTracker_->nextDecission();
+          int decision_count = missionTracker_->getDecisionCounter();
+          missionTracker_->nextDecision();
 
-          switch (decission_count) 
+          switch (decision_count) 
           {
             case 0:
             case 2:

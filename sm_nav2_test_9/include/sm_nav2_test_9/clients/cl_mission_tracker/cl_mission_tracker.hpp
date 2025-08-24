@@ -46,12 +46,12 @@ struct EvFPattern
 class ClMissionTracker : public smacc2::ISmaccClient 
 {
     private:
-        int decission_counter = 0;
+        int decision_counter = 0;
 
     public:
         ClMissionTracker() {}
-        void nextDecission () {decission_counter++;}
-        int getDecissionCounter() {return decission_counter;}
+        void nextDecision () {decision_counter++;}
+        int getDecisionCounter() {return decision_counter;}
 };
 
 } // namespace cl_apriltag_detector
