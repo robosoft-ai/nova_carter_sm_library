@@ -1,0 +1,58 @@
+SmNav2Test9:
+    ros__parameters:
+        use_sim_time: true
+        signal_detector_loop_freq: 20.0
+        clear_angular_distance_threshold: 0.05 # 0.05
+        clear_point_distance_threshold:  0.1 #0.1
+        record_angular_distance_threshold: 0.005
+        record_point_distance_threshold: 0.05
+        max_visited_points: 15 #50 
+
+        waypoints_file: $(pkg_share)/config/navigation_waypoints_1.yaml
+
+
+        # --- DOCKING PARAMETERS (verison1)-- compensate global navigation goal checking error
+        docking_pose.offset.x: -1.0 # 1.4
+        docking_pose.offset.y: 0.0
+
+        cb_battery_position_control.enable_static_forward_distance: false        
+
+        #DYNAMIC
+        # cb_battery_position_control.dynamic_forward_offset: 0.6
+        cb_battery_position_control.dynamic_forward_offset: 0.0
+
+        #STATIC
+        cb_battery_position_control.forward_distance: 0.35
+
+
+        #BOTH
+        cb_battery_position_control.threshold_distance: 0.16
+        cb_battery_position_control.max_linear_velocity: 0.1
+        cb_battery_position_control.max_angular_velocity: 2.0
+        cb_battery_position_control.command_timeout_sec: 25.0
+
+        cb_battery_position_control.kp_linear: 0.5
+        cb_battery_position_control.kp_lateral: 5.0
+
+        cb_battery_position_control.kp_angular: 2.0
+        cb_battery_position_control.kd_angular: 0.0
+        cb_battery_position_control.ki_angular: 0.0
+
+        cb_battery_position_control.kp_angular_betta: 1.0
+        cb_battery_position_control.kd_angular_betta: 0.0
+        cb_battery_position_control.ki_angular_betta: 0.5
+
+        cb_battery_position_control.backwardDistance: 1.5
+
+        # docking_pose.offset.x: -0.3
+        # docking_pose.offset.y: -0.075
+
+        # cb_battery_position_control.forward_distance: 0.32
+        # cb_battery_position_control.threshold_distance: 0.02
+        # cb_battery_position_control.max_linear_velocity: 0.1
+        # cb_battery_position_control.command_timeout_sec: 9.0
+
+        # cb_battery_position_control.kp_angular: 0.0
+        # cb_battery_position_control.kd_angular: 0.0
+
+        # cb_battery_position_control.backwardDistance: 1.5
