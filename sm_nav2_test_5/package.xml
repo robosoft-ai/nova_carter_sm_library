@@ -18,7 +18,6 @@
   <depend>nav2_bringup</depend>
 
   <depend>robot_state_publisher</depend>
-  <depend>ros_publisher_client</depend>
   <depend>ros_timer_client</depend>
   <depend>slam_toolbox</depend>
   <depend>smacc2</depend>

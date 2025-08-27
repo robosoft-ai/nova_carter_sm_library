@@ -49,13 +49,6 @@
 #include <nav2z_client/client_behaviors/cb_pure_spinning.hpp>
 #include <nav2z_client/client_behaviors/cb_save_slam_map.hpp>
 
-
-#include <ros_publisher_client/client_behaviors/cb_default_publish_loop.hpp>
-#include <ros_publisher_client/client_behaviors/cb_muted_behavior.hpp>
-#include <ros_publisher_client/client_behaviors/cb_publish_once.hpp>
-
-#include <ros_publisher_client/cl_ros_publisher.hpp>
-
 // STATE REACTORS
 #include <sr_all_events_go/sr_all_events_go.hpp>
 #include <sr_conditional/sr_conditional.hpp>
