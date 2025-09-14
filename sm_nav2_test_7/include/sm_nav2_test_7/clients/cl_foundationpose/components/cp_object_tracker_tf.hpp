@@ -25,7 +25,7 @@
 namespace cl_foundationpose 
 {
 
-using namespace smacc2::components;
+using namespace smacc2::client_core_components;
 
 
 class CpObjectTrackerTf : public smacc2::ISmaccComponent , public smacc2::ISmaccUpdatable

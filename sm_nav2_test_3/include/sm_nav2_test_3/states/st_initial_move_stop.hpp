@@ -2,7 +2,7 @@
 
 #include <smacc2/smacc.hpp>
 #include <geometry_msgs/msg/twist.hpp>
-#include <smacc2/client_base_components/cp_topic_publisher.hpp>
+#include <smacc2/client_core_components/cp_topic_publisher.hpp>
 
 namespace sm_nav2_test_3 {
 using namespace smacc2::default_events;
@@ -42,7 +42,7 @@ struct StInitialMoveStop
   void onEntry() {
     cl_nav2z::ClNav2Z* clNav;
     this->requiresClient(clNav);
-    auto pub = clNav->getComponent<smacc2::components::CpTopicPublisher<geometry_msgs::msg::Twist>>();
+    auto pub = clNav->getComponent<smacc2::client_core_components::CpTopicPublisher<geometry_msgs::msg::Twist>>();
     auto twist_msg = std::make_shared<geometry_msgs::msg::Twist>();
     twist_msg->linear.x = 0.0; 
     twist_msg->angular.z = 0.0; 
