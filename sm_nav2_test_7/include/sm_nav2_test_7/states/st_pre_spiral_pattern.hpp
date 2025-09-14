@@ -2,7 +2,7 @@
 
 #include <smacc2/smacc.hpp>
 #include <geometry_msgs/msg/twist.hpp>
-#include <smacc2/client_base_components/cp_topic_publisher.hpp>
+#include <smacc2/client_core_components/cp_topic_publisher.hpp>
 
 namespace sm_nav2_test_7 {
 using namespace smacc2::default_events;

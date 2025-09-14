@@ -22,11 +22,11 @@
 #include <smacc2/smacc_client.hpp>
 #include <vision_msgs/msg/detection3_d_array.hpp>
 
-#include <smacc2/client_base_components/cp_topic_subscriber.hpp>
+#include <smacc2/client_core_components/cp_topic_subscriber.hpp>
 
 namespace cl_foundationpose 
 {
-  using namespace smacc2::components;
+  using namespace smacc2::client_core_components;
 
 class ClFoundationPose : public smacc2::ISmaccClient 
 {

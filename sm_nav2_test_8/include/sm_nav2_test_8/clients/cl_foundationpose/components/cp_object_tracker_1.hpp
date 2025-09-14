@@ -15,13 +15,13 @@
 #pragma once
 #include <smacc2/component.hpp>
 #include <vision_msgs/msg/detection3_d_array.hpp>
-#include <smacc2/client_base_components/cp_topic_subscriber.hpp>
+#include <smacc2/client_core_components/cp_topic_subscriber.hpp>
 #include <sm_nav2_test_8/clients/cl_foundationpose/components/tracker_utils.hpp>
 
 namespace cl_foundationpose 
 {
 
-using namespace smacc2::components;
+using namespace smacc2::client_core_components;
 
 class CpObjectTracker1 : public smacc2::ISmaccComponent 
 {

@@ -34,7 +34,7 @@
 
 #include <smacc2/client_bases/smacc_ros_launch_client_2.hpp>
 
-#include <smacc2/client_base_components/cp_topic_publisher.hpp>
+#include <smacc2/client_core_components/cp_topic_publisher.hpp>
 
 namespace sm_nav2_test_1 {
 using namespace cl_nav2z;
@@ -66,7 +66,7 @@ public:
     // create odom tracker
     nav2zClient->createComponent<cl_nav2z::CpSlamToolbox>();
 
-    nav2zClient->createComponent<smacc2::components::CpTopicPublisher<geometry_msgs::msg::Twist>>("/cmd_vel");
+    nav2zClient->createComponent<smacc2::client_core_components::CpTopicPublisher<geometry_msgs::msg::Twist>>("/cmd_vel");
 
     // create waypoints navigator component
     auto waypointsNavigator =
