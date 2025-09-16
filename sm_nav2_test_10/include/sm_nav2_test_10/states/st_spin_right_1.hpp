@@ -21,7 +21,7 @@
 
 #include <smacc2/client_behaviors/cb_ros_launch_2.hpp>
 #include <smacc2/smacc.hpp>
-#include <keyboard_client/client_behaviors/cb_default_keyboard_behavior.hpp>
+#include <cl_keyboard/client_behaviors/cb_default_keyboard_behavior.hpp>
 
 namespace sm_nav2_test_10 {
 using namespace smacc2::default_events;
