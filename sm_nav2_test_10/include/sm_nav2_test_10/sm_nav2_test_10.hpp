@@ -29,8 +29,8 @@
 #include <sensor_msgs/msg/laser_scan.hpp>
 
 // CLIENT BEHAVIORS
-#include <ros_timer_client/client_behaviors/cb_ros_timer.hpp>
-#include <ros_timer_client/client_behaviors/cb_timer_countdown_once.hpp>
+#include <client_behaviors/cb_ros2_timer.hpp>
+#include <client_behaviors/cb_timer_countdown_once.hpp>
 
 #include <cl_keyboard/cl_keyboard.hpp>
 #include <cl_keyboard/client_behaviors/cb_default_keyboard_behavior.hpp>
@@ -149,7 +149,7 @@ struct EvGlobalError : sc::event<EvGlobalError> {};
 } // namespace sm_nav2_test_10
 
 using namespace sm_nav2_test_10;
-using namespace cl_ros_timer;
+using namespace cl_ros2_timer;
 using namespace smacc2;
 using namespace cl_mission_tracker;
 

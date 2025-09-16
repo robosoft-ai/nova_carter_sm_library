@@ -19,7 +19,7 @@
  ******************************************************************************************************************/
 
 #pragma once
-#include <ros_timer_client/cl_ros_timer.hpp>
+#include <cl_ros2_timer.hpp>
 #include <smacc2/smacc_orthogonal.hpp>
 
 namespace sm_nav2_test_10
@@ -29,7 +29,7 @@ class OrTimer : public smacc2::Orthogonal<OrTimer>
 public:
   void onInitialize() override
   {
-    auto actionclient = this->createClient<cl_ros_timer::ClRosTimer>(
+    auto actionclient = this->createClient<cl_ros2_timer::ClRos2Timer>(
       rclcpp::Duration(std::chrono::milliseconds(500)));
   }
 };
