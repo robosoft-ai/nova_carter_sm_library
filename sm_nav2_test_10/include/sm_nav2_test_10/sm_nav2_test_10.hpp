@@ -32,8 +32,8 @@
 #include <ros_timer_client/client_behaviors/cb_ros_timer.hpp>
 #include <ros_timer_client/client_behaviors/cb_timer_countdown_once.hpp>
 
-#include <keyboard_client/cl_keyboard.hpp>
-#include <keyboard_client/client_behaviors/cb_default_keyboard_behavior.hpp>
+#include <cl_keyboard/cl_keyboard.hpp>
+#include <cl_keyboard/client_behaviors/cb_default_keyboard_behavior.hpp>
 
 #include <nav2z_client/client_behaviors.hpp>
 #include <nav2z_client/components/odom_tracker/cp_odom_tracker.hpp>

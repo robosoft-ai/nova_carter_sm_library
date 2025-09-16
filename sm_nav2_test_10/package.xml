@@ -45,7 +45,7 @@
 
   <depend>pointcloud_to_laserscan</depend>
   <depend>isaac_ros_apriltag_interfaces</depend>
-  <depend>keyboard_client</depend>
+  <depend>cl_keyboard</depend>
   <depend>lifecyclenode_client</depend>
 
   <depend>vision_msgs</depend>

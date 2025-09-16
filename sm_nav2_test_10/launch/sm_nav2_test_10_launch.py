@@ -159,9 +159,9 @@ def generate_launch_description():
     )
 
     keyboard_client_node = Node(
-        package="keyboard_client",
+        package="cl_keyboard",
         executable="keyboard_server_node.py",
-        name="keyboard_client",
+        name="cl_keyboard",
         output="screen",
         prefix="xterm -hold -e",
         arguments=["--ros-args", "--log-level", "INFO"],

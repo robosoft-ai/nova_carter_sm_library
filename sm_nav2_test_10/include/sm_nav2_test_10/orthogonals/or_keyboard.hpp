@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include <keyboard_client/cl_keyboard.hpp>
+#include <cl_keyboard/cl_keyboard.hpp>
 #include <smacc2/smacc.hpp>
 
 namespace sm_nav2_test_10 {

@@ -355,25 +355,8 @@ cd /workspaces/isaac_ros-dev
 vcs import --recursive src < src/nova_carter/nova_carter.repos
  ```
 A ton of beta ish dependencies are added in this step to make the original perceptor demo work.  
-This has now led to build problems involving building the following packages from source. So, after completing the previous vcs import command, remove the following packages form workspace/src
+But these appear to be fixed in Release 3.2 of IsaacROS.
 
- ```
- REMOVE THESE PKGS FROM THE WORKSPACE/SRC FOLDER BEFORE COMPILING
-isaac_ros_nitros
-isaac_ros_image_segmentation
-isaac_ros_dnn_inference
-isaac_ros_image_pipeline
-isaac_ros_freespace_segmentation
-isaac_ros_map_localization
-isaac_perceptor
-isaac_ros_depth_segmentation
-isaac_ros_dnn_stereo_depth
-isaac_ros_mission_client
-isaac_ros_apriltag
-isaac_ros_nova
-isaac_ros_compression
-spatio_temporal_voxel_layer
- ```
 ## Build Workspace
 Ok, now you're ready to compile everything...
 ```
