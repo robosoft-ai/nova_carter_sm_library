@@ -19,7 +19,7 @@
  ******************************************************************************************************************/
 
 #pragma once
-#include <cl_ros2_timer.hpp>
+#include <cl_ros2_timer/cl_ros2_timer.hpp>
 #include <smacc2/smacc_orthogonal.hpp>
 
 namespace sm_nav2_test_10
